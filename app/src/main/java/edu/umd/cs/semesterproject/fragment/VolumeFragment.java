@@ -9,16 +9,16 @@ import android.view.ViewGroup;
 
 import edu.umd.cs.semesterproject.R;
 
-public class ActionsFragment extends Fragment {
+public class VolumeFragment extends Fragment {
 
-    private static final String TITLE = "ACTIONS";
+    private static final String TITLE = "VOLUME";
     private static final String FRAGMENT_ACTIONS = "fragment_actions";
 
-    public ActionsFragment() {}
+    public VolumeFragment() {}
 
-    public static ActionsFragment newInstance() {
+    public static VolumeFragment newInstance() {
 
-        ActionsFragment actionsFragment = new ActionsFragment();
+        VolumeFragment actionsFragment = new VolumeFragment();
 
         return actionsFragment;
     }
