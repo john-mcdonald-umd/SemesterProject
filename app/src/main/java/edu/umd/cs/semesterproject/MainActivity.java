@@ -31,6 +31,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         viewPagerAdapter.addFragment(RulesFragment.newInstance(), RulesFragment.getTitle());
         viewPagerAdapter.addFragment(ConditionsFragment.newInstance(), ConditionsFragment.getTitle());
         viewPagerAdapter.addFragment(ActionsFragment.newInstance(), ActionsFragment.getTitle());
+        viewPagerAdapter.addFragment(ActionsFragment.newInstance(), ActionsFragment.getTitle());
+        viewPagerAdapter.addFragment(ActionsFragment.newInstance(), ActionsFragment.getTitle());
         mViewPager.setAdapter(viewPagerAdapter);
 
         mTabLayout = (TabLayout) findViewById(R.id.tabLayout);
