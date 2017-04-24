@@ -1,17 +1,18 @@
 package edu.umd.cs.semesterproject.model;
 
 import java.util.List;
+import java.util.UUID;
 
 public class Rule {
 
     private String mId;
     private String mName;
-    // TODO: Add geofence field.
-    private List<TimeRange> mTimeRanges;
-    private List<Day> mDays;
-    private Boolean mIsEnabled;
+    private List<Condition> mConditions;
+    private List<Action> mActions;
+    private boolean isEnabled;
 
     public Rule() {
+        mId = UUID.randomUUID().toString();
     }
 
     public String getId() {
@@ -30,31 +31,27 @@ public class Rule {
         mName = name;
     }
 
-    public List<TimeRange> getTimeRanges() {
-        return mTimeRanges;
+    public List<Condition> getConditions() {
+        return mConditions;
     }
 
-    public void setTimeRanges(List<TimeRange> timeRanges) {
-        mTimeRanges = timeRanges;
+    public void setConditions(List<Condition> conditions) {
+        mConditions = conditions;
     }
 
-    public List<Day> getDays() {
-        return mDays;
+    public List<Action> getActions() {
+        return mActions;
     }
 
-    public void setDays(List<Day> days) {
-        mDays = days;
+    public void setActions(List<Action> actions) {
+        mActions = actions;
     }
 
-    public Boolean getEnabled() {
-        return mIsEnabled;
+    public boolean isEnabled() {
+        return isEnabled;
     }
 
-    public void setEnabled(Boolean enabled) {
-        mIsEnabled = enabled;
-    }
-
-    public enum Day {
-        MON, TUES, WED, THURS, FRI, SAT, SUN
+    public void setEnabled(boolean enabled) {
+        isEnabled = enabled;
     }
 }
