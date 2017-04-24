@@ -8,9 +8,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import edu.umd.cs.semesterproject.adapter.ViewPagerAdapter;
-import edu.umd.cs.semesterproject.fragment.ActionsFragment;
 import edu.umd.cs.semesterproject.fragment.ConditionsFragment;
 import edu.umd.cs.semesterproject.fragment.RulesFragment;
+import edu.umd.cs.semesterproject.fragment.VolumeFragment;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -30,9 +30,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPagerAdapter.addFragment(RulesFragment.newInstance(), RulesFragment.getTitle());
         viewPagerAdapter.addFragment(ConditionsFragment.newInstance(), ConditionsFragment.getTitle());
-        viewPagerAdapter.addFragment(ActionsFragment.newInstance(), ActionsFragment.getTitle());
-        viewPagerAdapter.addFragment(ActionsFragment.newInstance(), ActionsFragment.getTitle());
-        viewPagerAdapter.addFragment(ActionsFragment.newInstance(), ActionsFragment.getTitle());
+        viewPagerAdapter.addFragment(VolumeFragment.newInstance(), VolumeFragment.getTitle());
+        viewPagerAdapter.addFragment(VolumeFragment.newInstance(), VolumeFragment.getTitle());
+        viewPagerAdapter.addFragment(VolumeFragment.newInstance(), VolumeFragment.getTitle());
         mViewPager.setAdapter(viewPagerAdapter);
 
         mTabLayout = (TabLayout) findViewById(R.id.tabLayout);
