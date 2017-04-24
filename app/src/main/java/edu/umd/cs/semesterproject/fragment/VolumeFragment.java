@@ -1,6 +1,6 @@
 package edu.umd.cs.semesterproject.fragment;
 
-
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,20 +11,19 @@ import android.view.ViewGroup;
 
 import edu.umd.cs.semesterproject.R;
 
-public class RulesFragment extends Fragment {
+public class VolumeFragment extends Fragment {
 
-    private static final String TITLE = "RULES";
-    private static final String FRAGMENT_RULES = "fragment_rule";
+    private static String TITLE = "Volume";
 
     private RecyclerView mRuleRecyclerView;
 
-    public RulesFragment() {}
+    public VolumeFragment() {}
 
-    public static RulesFragment newInstance() {
+    public static VolumeFragment newInstance() {
 
-        RulesFragment rulesFragment = new RulesFragment();
+        VolumeFragment volumeFragment = new VolumeFragment();
 
-        return rulesFragment;
+        return volumeFragment;
     }
 
     public static String getTitle() {
