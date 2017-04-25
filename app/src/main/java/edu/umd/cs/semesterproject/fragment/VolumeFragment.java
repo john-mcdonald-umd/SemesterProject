@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import edu.umd.cs.semesterproject.R;
+import edu.umd.cs.semesterproject.dialog.RuleTypeDialog;
 
 public class VolumeFragment extends Fragment implements View.OnClickListener {
 
@@ -33,7 +34,7 @@ public class VolumeFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_volume, container, false);
+        View view = inflater.inflate(R.layout.fragment_rule, container, false);
 
         mFloatingActionButton = (FloatingActionButton) view.findViewById(R.id.fab);
         mFloatingActionButton.setOnClickListener(this);
@@ -46,7 +47,9 @@ public class VolumeFragment extends Fragment implements View.OnClickListener {
         int id = v.getId();
 
         switch (id) {
-            case R.id.
+            case R.id.fab:
+                RuleTypeDialog.newInstance().show(getActivity().getSupportFragmentManager(), "TAG");
+                break;
         }
     }
 }

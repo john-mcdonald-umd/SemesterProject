@@ -16,5 +16,8 @@
     <string name="vibrate_label">Vibrate</string>
     <string name="volume_label">Volume</string>
 
-    <string name="end_volume_label">Set the Volume for when the Rule is Inactive:</string>
+    <string name="end_volume_label">Set the Volume for when the Rule is Inactive</string>
+
+    <string name="time_rule">Time Rule</string>
+    <string name="location_rule">Location Rule</string>
 </resources>

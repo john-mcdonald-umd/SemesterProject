@@ -26,10 +26,7 @@ public class RuleTypeDialog extends DialogFragment implements View.OnClickListen
     }
 
     public static RuleTypeDialog newInstance() {
-        Bundle args = new Bundle();
-
         RuleTypeDialog fragment = new RuleTypeDialog();
-        fragment.setArguments(args);
 
         return fragment;
     }
