@@ -1,18 +1,21 @@
 package edu.umd.cs.semesterproject.model;
 
-import java.util.List;
 import java.util.UUID;
 
-public class Rule {
+public abstract class Rule {
 
     private String mId;
     private String mName;
-    private List<Condition> mConditions;
-    private List<Action> mActions;
-    private boolean isEnabled;
+    private boolean mIsEnabled;
 
     public Rule() {
         mId = UUID.randomUUID().toString();
+    }
+
+    public Rule(String name, boolean isEnabled) {
+        mId = UUID.randomUUID().toString();
+        mName = name;
+        mIsEnabled = isEnabled;
     }
 
     public String getId() {
@@ -31,27 +34,11 @@ public class Rule {
         mName = name;
     }
 
-    public List<Condition> getConditions() {
-        return mConditions;
-    }
-
-    public void setConditions(List<Condition> conditions) {
-        mConditions = conditions;
-    }
-
-    public List<Action> getActions() {
-        return mActions;
-    }
-
-    public void setActions(List<Action> actions) {
-        mActions = actions;
-    }
-
     public boolean isEnabled() {
-        return isEnabled;
+        return mIsEnabled;
     }
 
     public void setEnabled(boolean enabled) {
-        isEnabled = enabled;
+        mIsEnabled = enabled;
     }
 }

@@ -2,6 +2,7 @@ package edu.umd.cs.semesterproject.fragment;
 
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,9 +10,12 @@ import android.view.ViewGroup;
 
 import edu.umd.cs.semesterproject.R;
 
-public class VolumeFragment extends Fragment {
+public class VolumeFragment extends Fragment implements View.OnClickListener {
 
-    private static final String TITLE = "Volume";
+    private static final String TITLE = "VOLUME";
+    private static final String FRAGMENT_VOLUME = "fragment_volume";
+
+    private FloatingActionButton mFloatingActionButton;
 
     public VolumeFragment() {}
 
@@ -29,6 +33,20 @@ public class VolumeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_actions, container, false);
+        View view = inflater.inflate(R.layout.fragment_volume, container, false);
+
+        mFloatingActionButton = (FloatingActionButton) view.findViewById(R.id.fab);
+        mFloatingActionButton.setOnClickListener(this);
+
+        return view;
+    }
+
+    @Override
+    public void onClick(View v) {
+        int id = v.getId();
+
+        switch (id) {
+            case R.id.
+        }
     }
 }
