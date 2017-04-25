@@ -1,21 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin">
     
     <TextView
         android:id="@+id/text_view_time_rule"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/time_rule"
-        android:padding="@dimen/view_padding"/>
+        android:padding="@dimen/view_padding"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
 
     <TextView
         android:id="@+id/text_view_location_rule"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/location_rule"
-        android:padding="@dimen/view_padding"/>
+        android:padding="@dimen/view_padding"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
 
 </LinearLayout>
