@@ -12,11 +12,15 @@ import android.view.ViewGroup;
 import edu.umd.cs.semesterproject.R;
 import edu.umd.cs.semesterproject.dialog.RuleTypeDialogFragment;
 
+// Fragment for the volume tab of the main activity
+
 public class VolumeFragment extends Fragment implements View.OnClickListener {
 
     private static final String TITLE = "Volume";
 
+    // Recycler view for the list of rules.
     private RecyclerView mRuleRecyclerView;
+    // Floating action button is the (+) button for adding a rule.
     private FloatingActionButton mFloatingActionButton;
 
     public VolumeFragment() {}
@@ -47,6 +51,7 @@ public class VolumeFragment extends Fragment implements View.OnClickListener {
         return view;
     }
 
+    // For clicking the (+) button. Will open up a dialogue box to choose what type of rule to open.
     @Override
     public void onClick(View v) {
         int id = v.getId();

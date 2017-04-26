@@ -1,5 +1,9 @@
 package edu.umd.cs.semesterproject.fragment;
 
+/**
+ * Created by James on 4/25/2017.
+ */
+
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
@@ -16,18 +20,33 @@ import java.util.Calendar;
 
 import edu.umd.cs.semesterproject.R;
 
-public class VolumeTimeFragment extends Fragment {
+/**
+ * Test fragment for testing a fragment in the tabs without having to go through dialogue boxes to get through
+ * Mainly for testing UI and basic functionality.
+ */
 
+public class TestFragment extends Fragment {
 
-    public static Fragment newInstance(){
-        return new VolumeTimeFragment();
+    private static final String TITLE = "TEST";
+
+    public TestFragment() {
     }
 
+    public static TestFragment newInstance() {
+
+        TestFragment testFragment = new TestFragment();
+
+        return testFragment;
+    }
+
+    public static String getTitle() {
+        return TITLE;
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Call to super
         super.onCreateView(inflater, container, savedInstanceState);
 
-        // Set content view
         View view = inflater.inflate(R.layout.fragment_volume_time, container, false);
         Button setTimeButton = (Button) view.findViewById(R.id.set_time_button);
 
@@ -43,12 +62,14 @@ public class VolumeTimeFragment extends Fragment {
             }
         });
 
+
         return view;
     }
 
 
+
     public void showTimePickerDialog(View v) {
-        DialogFragment newFragment = new TimePickerFragment();
+        DialogFragment newFragment = new VolumeTimeFragment.TimePickerFragment();
         newFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
     }
 
