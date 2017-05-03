@@ -1,7 +1,9 @@
 package edu.umd.cs.semesterproject.dialog;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
@@ -10,12 +12,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import java.io.Serializable;
+
 import edu.umd.cs.semesterproject.R;
+import edu.umd.cs.semesterproject.VolumeTimeActivity;
+import edu.umd.cs.semesterproject.fragment.VolumeTimeFragment;
+import edu.umd.cs.semesterproject.model.TimeRule2;
 
 public class RuleTypeDialogFragment extends DialogFragment implements View.OnClickListener {
 
     private TextView mTimeRuleTextView;
     private TextView mLocationRuleTextView;
+
+    public static final int REQUEST_CODE_CREATE_RULE = 0;
 
     public RuleTypeDialogFragment() {
     }
@@ -61,9 +70,24 @@ public class RuleTypeDialogFragment extends DialogFragment implements View.OnCli
 
         switch (id) {
             case R.id.text_view_time_rule:
-                break;
+                Intent intent = new Intent(getActivity(), VolumeTimeActivity.class);
+                startActivityForResult(intent, REQUEST_CODE_CREATE_RULE);
             case R.id.text_view_location_rule:
                 break;
         }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == REQUEST_CODE_CREATE_RULE && resultCode == Activity.RESULT_OK) {
+            Serializable result = data.getSerializableExtra(VolumeTimeFragment.RULE_CREATED);
+            TimeRule2 timeRule = (TimeRule2) result;
+            /* TODO */
+            /* Add timeRule to database. Maybe find a way to pipe this rule back to the fragment using parameters */
+
+        }
+
+        dismiss();
     }
 }

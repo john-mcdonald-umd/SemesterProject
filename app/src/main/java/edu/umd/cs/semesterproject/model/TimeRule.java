@@ -4,8 +4,8 @@ import java.util.List;
 
 public class TimeRule extends Rule {
 
-    private long mStartTime;
-    private long mEndTime;
+    private long mStartHour;
+    private long mEndHour;
     private List<Day> mDays;
 
     public TimeRule() {
@@ -15,25 +15,25 @@ public class TimeRule extends Rule {
     public TimeRule(String name, boolean isEnabled, long startTime, long endTime, List<Day> days) {
         super(name, isEnabled);
 
-        mStartTime = startTime;
-        mEndTime = endTime;
+        mStartHour = startTime;
+        mEndHour = endTime;
         mDays = days;
     }
 
     public long getStartTime() {
-        return mStartTime;
+        return mStartHour;
     }
 
     public void setStartTime(long startTime) {
-        mStartTime = startTime;
+        mStartHour = startTime;
     }
 
     public long getEndTime() {
-        return mEndTime;
+        return mEndHour;
     }
 
     public void setEndTime(long endTime) {
-        mEndTime = endTime;
+        mEndHour = endTime;
     }
 
     public List<Day> getDays() {

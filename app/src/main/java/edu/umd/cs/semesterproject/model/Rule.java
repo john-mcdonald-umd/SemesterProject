@@ -1,8 +1,9 @@
 package edu.umd.cs.semesterproject.model;
 
+import java.io.Serializable;
 import java.util.UUID;
 
-public abstract class Rule {
+public abstract class Rule implements Serializable{
 
     private String mId;
     private String mName;

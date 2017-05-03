@@ -1,23 +1,36 @@
 package edu.umd.cs.semesterproject.fragment;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.util.Calendar;
 
 import edu.umd.cs.semesterproject.R;
+import edu.umd.cs.semesterproject.model.TimeRule2;
 
 public class VolumeTimeFragment extends Fragment {
 
+    private final String TAG = "VolumeTimeFragment";
+
+    public static final String RULE_CREATED = "RULE_CREATED";
+    private TimeRule2 timeRule;
+    /* Some parameters used for setting the start and end times */
+    private boolean startTimeSet = false;
+    private boolean endTimeSet = false;
 
     public static Fragment newInstance(){
         return new VolumeTimeFragment();
@@ -29,16 +42,91 @@ public class VolumeTimeFragment extends Fragment {
 
         // Set content view
         View view = inflater.inflate(R.layout.fragment_volume_time, container, false);
-        Button setTimeButton = (Button) view.findViewById(R.id.set_time_button);
+        EditText ruleName = (EditText) view.findViewById(R.id.rule_name);
+        Button startTimeButton = (Button) view.findViewById(R.id.set_start_time_button);
+        Button endTimeButton = (Button) view.findViewById(R.id.set_end_time_button);
+        Button saveButton = (Button) view.findViewById(R.id.save_button);
+        Button cancelButton = (Button) view.findViewById(R.id.cancel_button);
+
+        // Set up time rule
+        timeRule = new TimeRule2(ruleName.getText().toString(), false, 0, 0, 0, 0, null);
 
         // Link UI elements
-        setTimeButton.setOnClickListener(new Button.OnClickListener() {
+        startTimeButton.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v){
                 try{
-                    showTimePickerDialog(v);
-                } catch (Exception e){
+                    Calendar mcurrentTime = Calendar.getInstance();
+                    int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+                    int minute = mcurrentTime.get(Calendar.MINUTE);
+                    TimePickerDialog mTimePicker;
+                    mTimePicker = new TimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener() {
+                        @Override
+                        public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                            timeRule.setStartTime(selectedHour, selectedMinute);
+                        }
+                    }, hour, minute, false);
+                    mTimePicker.setTitle("Select Start Time");
+                    mTimePicker.show();
 
+                    startTimeSet = true;
+                } catch (Exception e){
+                    Log.e(TAG, e.toString());
+                }
+            }
+        });
+        endTimeButton.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                try{
+                    Calendar mcurrentTime = Calendar.getInstance();
+                    int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+                    int minute = mcurrentTime.get(Calendar.MINUTE);
+                    TimePickerDialog mTimePicker;
+                    mTimePicker = new TimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener() {
+                        @Override
+                        public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                            timeRule.setEndTime(selectedHour, selectedMinute);
+                        }
+                    }, hour, minute, false);
+                    mTimePicker.setTitle("Select End Time");
+                    mTimePicker.show();
+
+                    endTimeSet = true;
+                } catch (Exception e){
+                    Log.e(TAG, e.toString());
+                }
+            }
+        });
+        saveButton.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                try{
+                    /* If they've set both times */
+                    if (startTimeSet && endTimeSet) {
+                        Intent intent = new Intent();
+                        intent.putExtra(RULE_CREATED, timeRule);
+                        getActivity().setResult(Activity.RESULT_OK, intent);
+                        getActivity().finish();
+                    }
+                    else{
+                        Toast toast = Toast.makeText(getActivity(), "Please set both the start and end times before saving.", Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
+                } catch (Exception e){
+                    Log.e(TAG, e.toString());
+                }
+            }
+        });
+        cancelButton.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                try{
+                    Intent returnIntent = new Intent();
+                    getActivity().setResult(Activity.RESULT_CANCELED, returnIntent);
+                    getActivity().finish();
+                } catch (Exception e){
+                    Log.e(TAG, e.toString());
                 }
             }
         });
@@ -46,13 +134,17 @@ public class VolumeTimeFragment extends Fragment {
         return view;
     }
 
-
-    public void showTimePickerDialog(View v) {
-        DialogFragment newFragment = new TimePickerFragment();
+    public void showStartTimePickerDialog(View v) {
+        DialogFragment newFragment = new StartTimePickerFragment();
         newFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
     }
 
-    public static class TimePickerFragment extends DialogFragment
+    public void showEndTimePickerDialog(View v) {
+        DialogFragment newFragment = new EndTimePickerFragment();
+        newFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
+    }
+
+    public static class StartTimePickerFragment extends DialogFragment
             implements TimePickerDialog.OnTimeSetListener {
 
         @Override
@@ -69,6 +161,27 @@ public class VolumeTimeFragment extends Fragment {
 
         public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
             // Do something with the time chosen by the user
+        }
+    }
+
+    public static class EndTimePickerFragment extends DialogFragment
+            implements TimePickerDialog.OnTimeSetListener {
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            // Use the current time as the default values for the picker
+            final Calendar c = Calendar.getInstance();
+            int hour = c.get(Calendar.HOUR_OF_DAY);
+            int minute = c.get(Calendar.MINUTE);
+
+            // Create a new instance of TimePickerDialog and return it
+            return new TimePickerDialog(getActivity(), this, hour, minute,
+                    DateFormat.is24HourFormat(getActivity()));
+        }
+
+        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+            // Do something with the time chosen by the user
+
         }
     }
 }

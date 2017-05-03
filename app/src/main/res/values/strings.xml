@@ -13,6 +13,12 @@
     <string name="choose_start_time">Start Time</string>
     <string name="choose_end_time">End Time</string>
 
+    <!-- Basic Fragment Stuff -->
+    <string name="save_button">Save</string>
+    <string name="cancel_button">Cancel</string>
+    <string name="rule_name">Rule Name</string>
+    <string name="rule_name_hint">My Rule</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
