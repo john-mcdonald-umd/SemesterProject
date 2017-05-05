@@ -30,4 +30,8 @@
 
     <string name="time_rule">Time Rule</string>
     <string name="location_rule">Location Rule</string>
+
+    <string name="add_location_button">Add Location</string>
+
+    <string name="display_location_label">Selected Location: </string>
 </resources>

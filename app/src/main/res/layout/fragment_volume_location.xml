@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/fragment_rule_name"/>
+
+    <include layout="@layout/fragment_volume"/>
+
+
+    <Button
+        android:id="@+id/button_add_location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/add_location_button" />
+
+    <TextView
+        android:id="@+id/text_view_display_location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/display_location_label"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:visibility="invisible" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/save_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/save_button" />
+
+        <Button
+            android:id="@+id/cancel_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/cancel_button" />
+
+    </LinearLayout>
+
+
+</LinearLayout>
