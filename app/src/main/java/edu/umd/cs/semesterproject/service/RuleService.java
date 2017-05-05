@@ -6,9 +6,8 @@ import edu.umd.cs.semesterproject.model.Rule;
 
 public interface RuleService {
 
-    void addRule();
+    void addRule(Rule rule);
     Rule getRuleById(String id);
-    List<Rule> getAllRules();
+    List<Rule> getVolumeRules();
     void deleteRule(String id);
-    void updateRule();
 }

@@ -17,7 +17,7 @@ public class TimeRule2 extends Rule {
     }
 
     public TimeRule2(String name, boolean isEnabled, int startHour, int startMinute, int endHour, int endMinute, List<Day> days) {
-        super(name, isEnabled);
+        super(name, Rule.TYPE_TIME, isEnabled);
 
         mStartHour = startHour;
         mStartMinute = startMinute;

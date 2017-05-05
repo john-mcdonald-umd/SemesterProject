@@ -8,17 +8,22 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 
 import java.io.Serializable;
 
+import edu.umd.cs.semesterproject.DependencyFactory;
 import edu.umd.cs.semesterproject.R;
 import edu.umd.cs.semesterproject.VolumeLocationActivity;
 import edu.umd.cs.semesterproject.VolumeTimeActivity;
 import edu.umd.cs.semesterproject.fragment.VolumeTimeFragment;
+import edu.umd.cs.semesterproject.model.Rule;
 import edu.umd.cs.semesterproject.model.TimeRule2;
+import edu.umd.cs.semesterproject.service.RuleService;
+import edu.umd.cs.semesterproject.util.Codes;
 
 public class RuleTypeDialogFragment extends DialogFragment implements View.OnClickListener {
 
@@ -73,7 +78,7 @@ public class RuleTypeDialogFragment extends DialogFragment implements View.OnCli
 
         switch (id) {
             case R.id.text_view_time_rule:
-                Intent intent = new Intent(getActivity(), VolumeTimeActivity.class);
+                Intent intent = VolumeTimeActivity.newIntent(getActivity(), null);
                 startActivityForResult(intent, REQUEST_CODE_CREATE_RULE_TIME);
                 break;
             // Started an activity for Place Picker to select a location
@@ -88,12 +93,12 @@ public class RuleTypeDialogFragment extends DialogFragment implements View.OnCli
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        if (requestCode == REQUEST_CODE_CREATE_RULE_TIME && resultCode == Activity.RESULT_OK) {
+        if (requestCode == Codes.REQUEST_CODE_CREATE_RULE && resultCode == Activity.RESULT_OK) {
             Serializable result = data.getSerializableExtra(VolumeTimeFragment.RULE_CREATED);
-            TimeRule2 timeRule = (TimeRule2) result;
-            /* TODO */
-            /* Add timeRule to database. Maybe find a way to pipe this rule back to the fragment using parameters */
-
+            Rule timeRule = (Rule) result;
+            RuleService ruleService = DependencyFactory.getRuleService(getActivity());
+            ruleService.addRule(timeRule);
+            Log.d("RuleTypeDialogFragment", "Created rule " + timeRule.getName() + " with rule type " + timeRule.getRuleType());
         }
 
 

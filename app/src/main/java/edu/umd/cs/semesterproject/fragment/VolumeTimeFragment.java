@@ -19,21 +19,48 @@ import android.widget.Toast;
 
 import java.util.Calendar;
 
+import edu.umd.cs.semesterproject.DependencyFactory;
 import edu.umd.cs.semesterproject.R;
+import edu.umd.cs.semesterproject.model.Rule;
 import edu.umd.cs.semesterproject.model.TimeRule2;
+import edu.umd.cs.semesterproject.service.RuleService;
+import edu.umd.cs.semesterproject.util.Codes;
 
 public class VolumeTimeFragment extends Fragment {
 
     private final String TAG = "VolumeTimeFragment";
 
     public static final String RULE_CREATED = "RULE_CREATED";
+    private Rule rule;
     private TimeRule2 timeRule;
     /* Some parameters used for setting the start and end times */
     private boolean startTimeSet = false;
     private boolean endTimeSet = false;
 
-    public static Fragment newInstance(){
-        return new VolumeTimeFragment();
+    EditText ruleName;
+
+    public static Fragment newInstance(String storyID){
+        Bundle bundle = new Bundle();
+        bundle.putString(Codes.RULE_ID, storyID);
+        VolumeTimeFragment storyFragment = new VolumeTimeFragment();
+        storyFragment.setArguments(bundle);
+        return storyFragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        // Call to super
+        super.onCreate(savedInstanceState);
+
+
+        Log.d("VolumeTimeFragment", "starting get args");
+        // Get Arguemnts
+        Bundle args = getArguments();
+        String ruleID = args.getString(Codes.RULE_ID);
+        RuleService ruleService = DependencyFactory.getRuleService(getActivity());
+        Log.d("VolumeTimeFragment", "getting rule");
+        rule = ruleService.getRuleById(ruleID);
+        Log.d("VolumeTimeFragment", "ending get args");
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -42,14 +69,21 @@ public class VolumeTimeFragment extends Fragment {
 
         // Set content view
         View view = inflater.inflate(R.layout.fragment_volume_time, container, false);
-        EditText ruleName = (EditText) view.findViewById(R.id.rule_name);
+        ruleName = (EditText) view.findViewById(R.id.rule_name);
         Button startTimeButton = (Button) view.findViewById(R.id.set_start_time_button);
         Button endTimeButton = (Button) view.findViewById(R.id.set_end_time_button);
         Button saveButton = (Button) view.findViewById(R.id.save_button);
         Button cancelButton = (Button) view.findViewById(R.id.cancel_button);
 
-        // Set up time rule
-        timeRule = new TimeRule2(ruleName.getText().toString(), false, 0, 0, 0, 0, null);
+        if (rule == null) {
+            // Set up time rule
+            timeRule = new TimeRule2(ruleName.getText().toString(), false, 0, 0, 0, 0, null);
+        }
+        else{
+            startTimeSet = (endTimeSet = true);
+            ruleName.setText(rule.getName());
+            timeRule = (TimeRule2) rule;
+        }
 
         // Link UI elements
         startTimeButton.setOnClickListener(new Button.OnClickListener() {
@@ -105,6 +139,8 @@ public class VolumeTimeFragment extends Fragment {
                     /* If they've set both times */
                     if (startTimeSet && endTimeSet) {
                         Intent intent = new Intent();
+                        timeRule.setRuleType(Rule.RULE_TYPE_VOLUME);
+                        timeRule.setName(ruleName.getText().toString());
                         intent.putExtra(RULE_CREATED, timeRule);
                         getActivity().setResult(Activity.RESULT_OK, intent);
                         getActivity().finish();

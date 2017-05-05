@@ -13,7 +13,7 @@ public class TimeRule extends Rule {
     }
 
     public TimeRule(String name, boolean isEnabled, long startTime, long endTime, List<Day> days) {
-        super(name, isEnabled);
+        super(name, Rule.TYPE_TIME, isEnabled);
 
         mStartHour = startTime;
         mEndHour = endTime;
