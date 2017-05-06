@@ -8,6 +8,10 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+
+        <service android:name=".service.impl.GeofenceTransitionIntentService" />
+
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
@@ -32,7 +36,6 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyD7BCwIUBQkcVho5lbPu6vZ5w89C5y1kIE"/>
 
-        <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
         <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
         <uses-permission android:name="android.permission.INTERNET" />
     </application>
