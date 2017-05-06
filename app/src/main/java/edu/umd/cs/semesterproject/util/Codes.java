@@ -8,5 +8,6 @@ public class Codes {
 
     public static final int REQUEST_CODE_CREATE_RULE = 0;
     public static final String RULE_ID = "RULEID";
+    public static final String RULE_CREATED = "RULE_CREATED";
 
 }

@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
 import edu.umd.cs.semesterproject.DependencyFactory;
@@ -30,7 +31,6 @@ public class VolumeTimeFragment extends Fragment {
 
     private final String TAG = "VolumeTimeFragment";
 
-    public static final String RULE_CREATED = "RULE_CREATED";
     private Rule rule;
     private TimeRule2 timeRule;
     /* Some parameters used for setting the start and end times */
@@ -42,9 +42,9 @@ public class VolumeTimeFragment extends Fragment {
     public static Fragment newInstance(String storyID){
         Bundle bundle = new Bundle();
         bundle.putString(Codes.RULE_ID, storyID);
-        VolumeTimeFragment storyFragment = new VolumeTimeFragment();
-        storyFragment.setArguments(bundle);
-        return storyFragment;
+        VolumeTimeFragment ruleFragment = new VolumeTimeFragment();
+        ruleFragment.setArguments(bundle);
+        return ruleFragment;
     }
 
     @Override
@@ -54,7 +54,7 @@ public class VolumeTimeFragment extends Fragment {
 
 
         Log.d("VolumeTimeFragment", "starting get args");
-        // Get Arguemnts
+        // Get Arguments
         Bundle args = getArguments();
         String ruleID = args.getString(Codes.RULE_ID);
         RuleService ruleService = DependencyFactory.getRuleService(getActivity());
@@ -77,7 +77,7 @@ public class VolumeTimeFragment extends Fragment {
 
         if (rule == null) {
             // Set up time rule
-            timeRule = new TimeRule2(ruleName.getText().toString(), false, 0, 0, 0, 0, null);
+            timeRule = new TimeRule2(ruleName.getText().toString(), true, 0, 0, 0, 0, null);
         }
         else{
             startTimeSet = (endTimeSet = true);
@@ -141,7 +141,7 @@ public class VolumeTimeFragment extends Fragment {
                         Intent intent = new Intent();
                         timeRule.setRuleType(Rule.RULE_TYPE_VOLUME);
                         timeRule.setName(ruleName.getText().toString());
-                        intent.putExtra(RULE_CREATED, timeRule);
+                        intent.putExtra(Codes.RULE_CREATED, timeRule);
                         getActivity().setResult(Activity.RESULT_OK, intent);
                         getActivity().finish();
                     }
@@ -219,5 +219,11 @@ public class VolumeTimeFragment extends Fragment {
             // Do something with the time chosen by the user
 
         }
+    }
+
+    public static Rule getRuleCreated(Intent data){
+        Serializable result = data.getSerializableExtra(Codes.RULE_CREATED);
+        Rule rule = (Rule) result;
+        return rule;
     }
 }

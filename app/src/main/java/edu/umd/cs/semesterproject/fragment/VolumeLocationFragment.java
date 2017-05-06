@@ -17,22 +17,53 @@ import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
+import com.google.android.gms.maps.model.LatLng;
 
+import edu.umd.cs.semesterproject.DependencyFactory;
 import edu.umd.cs.semesterproject.R;
+import edu.umd.cs.semesterproject.model.LocationRule;
+import edu.umd.cs.semesterproject.model.Rule;
+import edu.umd.cs.semesterproject.model.TimeRule2;
+import edu.umd.cs.semesterproject.service.RuleService;
+import edu.umd.cs.semesterproject.util.Codes;
 
 public class VolumeLocationFragment extends Fragment {
 
     private final String TAG = "VolumeLocationFragment";
+    private Rule rule;
+    private LocationRule locationRule;
 
-    public static final String RULE_CREATED = "RULE_CREATED";
+    private boolean locationSet = false;
+
     private static final int PLACE_PICKER_REQUEST = 199;
 
     private Button addLocationButton;
     private Place place;
     private TextView locationLabel;
 
-    public static Fragment newInstance() {
-        return new VolumeLocationFragment();
+    public static Fragment newInstance(String storyID){
+        Bundle bundle = new Bundle();
+        bundle.putString(Codes.RULE_ID, storyID);
+        VolumeLocationFragment ruleFragment = new VolumeLocationFragment();
+        ruleFragment.setArguments(bundle);
+        return ruleFragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        // Call to super
+        super.onCreate(savedInstanceState);
+
+
+        Log.d("VolumeTimeFragment", "starting get args");
+
+        // Get Arguments
+        Bundle args = getArguments();
+        String ruleID = args.getString(Codes.RULE_ID);
+        RuleService ruleService = DependencyFactory.getRuleService(getActivity());
+        Log.d("VolumeTimeFragment", "getting rule");
+        rule = ruleService.getRuleById(ruleID);
+        Log.d("VolumeTimeFragment", "ending get args");
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -46,6 +77,16 @@ public class VolumeLocationFragment extends Fragment {
         Button cancelButton = (Button) view.findViewById(R.id.cancel_button);
         addLocationButton = (Button) view.findViewById(R.id.button_add_location);
         locationLabel = (TextView) view.findViewById(R.id.text_view_display_location);
+
+        if (rule == null) {
+            // Set up location rule
+            locationRule = new LocationRule(ruleName.getText().toString(), true, 0, 0, 0);
+        }
+        else{
+            locationSet = true;
+            ruleName.setText(rule.getName());
+            locationRule = (LocationRule) rule;
+        }
 
         // Link UI elements
         addLocationButton.setOnClickListener(new Button.OnClickListener() {
@@ -74,9 +115,9 @@ public class VolumeLocationFragment extends Fragment {
                 try{
 
 
-                    if (place != null) {
+                    if (locationSet) {
                         Intent intent = new Intent();
-                        intent.putExtra(RULE_CREATED, "asdf");
+                        intent.putExtra(Codes.RULE_CREATED, locationRule);
                         getActivity().setResult(Activity.RESULT_OK, intent);
                         getActivity().finish();
                     }
@@ -111,12 +152,16 @@ public class VolumeLocationFragment extends Fragment {
         // Retrieves the location selected by the user through Place Picker
         if (requestCode == PLACE_PICKER_REQUEST) {
             if (resultCode == Activity.RESULT_OK) {
-
                 addLocationButton.setVisibility(View.GONE);
                 Place p = PlacePicker.getPlace(data, getActivity());
                 String toastMsg = String.format("Place: %s", p.getName());
                 Toast.makeText(getActivity(), toastMsg, Toast.LENGTH_LONG).show();
                 place = p;
+                LatLng latLng = place.getLatLng();
+                locationRule.setLatitude(latLng.latitude);
+                locationRule.setLatitude(latLng.longitude);
+                /* set radius */
+                locationSet = true;
                 locationLabel.setText("Selected Location: " + p.getName());
                 locationLabel.setVisibility(View.VISIBLE);
             }

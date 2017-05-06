@@ -94,8 +94,7 @@ public class RuleTypeDialogFragment extends DialogFragment implements View.OnCli
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         if (requestCode == Codes.REQUEST_CODE_CREATE_RULE && resultCode == Activity.RESULT_OK) {
-            Serializable result = data.getSerializableExtra(VolumeTimeFragment.RULE_CREATED);
-            Rule timeRule = (Rule) result;
+            Rule timeRule = VolumeTimeFragment.getRuleCreated(data);
             RuleService ruleService = DependencyFactory.getRuleService(getActivity());
             ruleService.addRule(timeRule);
             Log.d("RuleTypeDialogFragment", "Created rule " + timeRule.getName() + " with rule type " + timeRule.getRuleType());

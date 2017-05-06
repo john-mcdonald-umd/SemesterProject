@@ -95,8 +95,7 @@ public class VolumeFragment extends Fragment implements View.OnClickListener {
 
         if (requestCode == Codes.REQUEST_CODE_CREATE_RULE) {
             if(resultCode == Activity.RESULT_OK){
-                Serializable result = data.getSerializableExtra(VolumeTimeFragment.RULE_CREATED);
-                Rule rule = (Rule) result;
+                Rule rule = VolumeTimeFragment.getRuleCreated(data);
                 ruleService.addRule(rule);
             }
         }
