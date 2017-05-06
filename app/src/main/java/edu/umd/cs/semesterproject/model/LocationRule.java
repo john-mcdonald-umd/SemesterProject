@@ -12,6 +12,11 @@ public class LocationRule extends Rule {
         super();
     }
 
+    @Override
+    public String getConditions() {
+        return mLatitude + "," + mLongitude;
+    }
+
     public LocationRule(String name, boolean isEnabled, double latitude, double longitude, double radius) {
         super(name, Rule.TYPE_LOCATION, isEnabled);
 

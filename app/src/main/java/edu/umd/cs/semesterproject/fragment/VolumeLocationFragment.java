@@ -40,10 +40,11 @@ public class VolumeLocationFragment extends Fragment {
     private Button addLocationButton;
     private Place place;
     private TextView locationLabel;
+    private EditText ruleName;
 
-    public static Fragment newInstance(String storyID){
+    public static Fragment newInstance(String userID){
         Bundle bundle = new Bundle();
-        bundle.putString(Codes.RULE_ID, storyID);
+        bundle.putString(Codes.RULE_ID, userID);
         VolumeLocationFragment ruleFragment = new VolumeLocationFragment();
         ruleFragment.setArguments(bundle);
         return ruleFragment;
@@ -72,7 +73,7 @@ public class VolumeLocationFragment extends Fragment {
 
         // Set content view
         View view = inflater.inflate(R.layout.fragment_volume_location, container, false);
-        EditText ruleName = (EditText) view.findViewById(R.id.rule_name);
+        ruleName = (EditText) view.findViewById(R.id.rule_name);
         Button saveButton = (Button) view.findViewById(R.id.save_button);
         Button cancelButton = (Button) view.findViewById(R.id.cancel_button);
         addLocationButton = (Button) view.findViewById(R.id.button_add_location);
@@ -117,6 +118,8 @@ public class VolumeLocationFragment extends Fragment {
 
                     if (locationSet) {
                         Intent intent = new Intent();
+                        locationRule.setRuleType(Rule.RULE_TYPE_VOLUME);
+                        locationRule.setName(ruleName.getText().toString());
                         intent.putExtra(Codes.RULE_CREATED, locationRule);
                         getActivity().setResult(Activity.RESULT_OK, intent);
                         getActivity().finish();

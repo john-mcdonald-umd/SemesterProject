@@ -11,6 +11,7 @@ public abstract class Rule implements Serializable{
     public static final String RULE_TYPE_VOLUME = "VOLUME";
     public static final String RULE_TYPE_WIFI = "WIFI";
     public static final String RULE_TYPE_BLUETOOTH = "BLUETOOTH";
+    public static final String RULE_TYPE_HEADPHONE = "HEADPHONE";
 
     private String mId;
     private String mName;
@@ -40,9 +41,7 @@ public abstract class Rule implements Serializable{
         mId = id;
     }
 
-    public String getConditions() { return "NEED TO IMPLEMENT CONDITIONS"; }
-
-    public void setConditions(String conditions) { mConditions = conditions; };
+    public abstract String getConditions();
 
     public String getType(){ return mType; }
 

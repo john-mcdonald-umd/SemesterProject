@@ -30,7 +30,6 @@ public class InMemoryRuleService implements RuleService {
             rules.add(rule);
         } else {
             currRule.setName(rule.getName());
-            currRule.setConditions(rule.getConditions());
             currRule.setEnabled(rule.isEnabled());
             currRule.setType(rule.getType());
         }
@@ -47,17 +46,35 @@ public class InMemoryRuleService implements RuleService {
         return null;
     }
 
-    public List<Rule> getVolumeRules() {
-
-        List<Rule> volumeRules = new ArrayList<Rule>();
+    private List<Rule> getRulesHelper(String ruleType){
+        List<Rule> newRules = new ArrayList<Rule>();
 
         for (Rule rule : rules){
-            if (rule.getRuleType().equals(Rule.RULE_TYPE_VOLUME)){
-                volumeRules.add(rule);
+            if (rule.getRuleType().equals(ruleType)){
+                newRules.add(rule);
             }
         }
 
-        return volumeRules;
+        return newRules;
+    }
+
+    public List<Rule> getVolumeRules() {
+        return getRulesHelper(Rule.RULE_TYPE_VOLUME);
+    }
+
+    @Override
+    public List<Rule> getBluetoothRules() {
+        return getRulesHelper(Rule.RULE_TYPE_BLUETOOTH);
+    }
+
+    @Override
+    public List<Rule> getWifiRules() {
+        return getRulesHelper(Rule.RULE_TYPE_WIFI);
+    }
+
+    @Override
+    public List<Rule> getHeadphoneRules() {
+        return getRulesHelper(Rule.RULE_TYPE_HEADPHONE);
     }
 
     public void deleteRule(String id){

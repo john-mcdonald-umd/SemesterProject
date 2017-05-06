@@ -16,6 +16,11 @@ public class TimeRule2 extends Rule {
         super();
     }
 
+    @Override
+    public String getConditions() {
+        return mStartHour + ":" + mStartMinute + " - " + mEndHour + ":" + mEndMinute;
+    }
+
     public TimeRule2(String name, boolean isEnabled, int startHour, int startMinute, int endHour, int endMinute, List<Day> days) {
         super(name, Rule.TYPE_TIME, isEnabled);
 

@@ -13,7 +13,7 @@
     <string name="choose_start_time">Start Time</string>
     <string name="choose_end_time">End Time</string>
 
-    <!-- Basic Fragment Stuff -->
+    <!-- Basic Fragment -->
     <string name="save_button">Save</string>
     <string name="cancel_button">Cancel</string>
     <string name="rule_name">Rule Name</string>
@@ -22,12 +22,17 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <string name="start_volume_label">Set the Volume for when the Rule is Active:</string>
+    <!-- Volume Fragment -->
+    <string name="start_volume_label">Set the Volume for when the rule is Active:</string>
     <string name="vibrate_label">Vibrate</string>
     <string name="volume_label">Volume</string>
+    <string name="end_volume_label">Set the Volume for when the rule is Inactive</string>
 
-    <string name="end_volume_label">Set the Volume for when the Rule is Inactive</string>
+    <!-- Bluetooth Fragment -->
+    <string name="start_blutooth_label">Set Bluetooth when the rule is activated:</string>
+    <string name="end_bluetooth_label">Set Bluetooth when the rule is deactivated:</string>
 
+    <!-- Dialog -->
     <string name="time_rule">Time Rule</string>
     <string name="location_rule">Location Rule</string>
 

@@ -18,6 +18,7 @@ import java.util.List;
 
 import edu.umd.cs.semesterproject.DependencyFactory;
 import edu.umd.cs.semesterproject.R;
+import edu.umd.cs.semesterproject.VolumeLocationActivity;
 import edu.umd.cs.semesterproject.VolumeTimeActivity;
 import edu.umd.cs.semesterproject.dialog.RuleTypeDialogFragment;
 import edu.umd.cs.semesterproject.model.Rule;
@@ -53,6 +54,13 @@ public class VolumeFragment extends Fragment implements View.OnClickListener {
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
+
+        setRetainInstance(true);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
@@ -65,6 +73,9 @@ public class VolumeFragment extends Fragment implements View.OnClickListener {
         mFloatingActionButton.setOnClickListener(this);
 
         ruleService = DependencyFactory.getRuleService(getActivity());
+
+        ruleAdapter = new RuleAdapter(ruleService.getVolumeRules());
+        mRuleRecyclerView.setAdapter(ruleAdapter);
 
         updateUI();
 
@@ -85,7 +96,7 @@ public class VolumeFragment extends Fragment implements View.OnClickListener {
 
         switch (id) {
             case R.id.fab:
-                RuleTypeDialogFragment.newInstance().show(getActivity().getSupportFragmentManager(), "RULE_TYPE_DIALOG");
+                RuleTypeDialogFragment.newInstance().show(getActivity().getSupportFragmentManager(), TITLE);
                 break;
         }
     }
@@ -94,12 +105,13 @@ public class VolumeFragment extends Fragment implements View.OnClickListener {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         if (requestCode == Codes.REQUEST_CODE_CREATE_RULE) {
-            if(resultCode == Activity.RESULT_OK){
-                Rule rule = VolumeTimeFragment.getRuleCreated(data);
+            if (resultCode == Activity.RESULT_OK) {
+                Rule rule = Codes.getRuleCreated(data);
                 ruleService.addRule(rule);
+
+                updateUI();
             }
         }
-        updateUI();
     }
 
     private class RuleHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
@@ -129,7 +141,10 @@ public class VolumeFragment extends Fragment implements View.OnClickListener {
                 intent = VolumeTimeActivity.newIntent(getContext(), rule.getId());
                 startActivityForResult(intent, Codes.REQUEST_CODE_CREATE_RULE);
             }
-            startActivityForResult(intent, Codes.REQUEST_CODE_CREATE_RULE);
+            else if (type.equals(Rule.TYPE_LOCATION)){
+                intent = VolumeLocationActivity.newIntent(getContext(), rule.getId());
+                startActivityForResult(intent, Codes.REQUEST_CODE_CREATE_RULE);
+            }
         }
     }
 
@@ -147,7 +162,7 @@ public class VolumeFragment extends Fragment implements View.OnClickListener {
 
         @Override
         public RuleHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            LayoutInflater layoutInflater = LayoutInflater.from(getContext());
+            LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
             return new RuleHolder(layoutInflater.inflate(R.layout.list_item_rule, parent, false));
         }
 
@@ -173,6 +188,7 @@ public class VolumeFragment extends Fragment implements View.OnClickListener {
         if (ruleAdapter == null){
             ruleAdapter = new RuleAdapter(list);
             mRuleRecyclerView.setAdapter(ruleAdapter);
+            Log.d("VolumeFragment", "ruleAdapter = null");
         }
         else{
             ruleAdapter.setRules(list);

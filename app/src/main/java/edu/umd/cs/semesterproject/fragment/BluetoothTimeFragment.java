@@ -1,13 +1,10 @@
 package edu.umd.cs.semesterproject.fragment;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
-import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,9 +24,9 @@ import edu.umd.cs.semesterproject.model.TimeRule2;
 import edu.umd.cs.semesterproject.service.RuleService;
 import edu.umd.cs.semesterproject.util.Codes;
 
-public class VolumeTimeFragment extends Fragment {
+public class BluetoothTimeFragment extends Fragment {
 
-    private final String TAG = "VolumeTimeFragment";
+    private final String TAG = "BluetoothTimeFragment";
 
     private Rule rule;
     private TimeRule2 timeRule;
@@ -42,7 +39,7 @@ public class VolumeTimeFragment extends Fragment {
     public static Fragment newInstance(String userID){
         Bundle bundle = new Bundle();
         bundle.putString(Codes.RULE_ID, userID);
-        VolumeTimeFragment ruleFragment = new VolumeTimeFragment();
+        BluetoothTimeFragment ruleFragment = new BluetoothTimeFragment();
         ruleFragment.setArguments(bundle);
         return ruleFragment;
     }
@@ -68,7 +65,7 @@ public class VolumeTimeFragment extends Fragment {
         super.onCreateView(inflater, container, savedInstanceState);
 
         // Set content view
-        View view = inflater.inflate(R.layout.fragment_volume_time, container, false);
+        View view = inflater.inflate(R.layout.fragment_bluetooth_time, container, false);
         ruleName = (EditText) view.findViewById(R.id.rule_name);
         Button startTimeButton = (Button) view.findViewById(R.id.set_start_time_button);
         Button endTimeButton = (Button) view.findViewById(R.id.set_end_time_button);
@@ -139,7 +136,7 @@ public class VolumeTimeFragment extends Fragment {
                     /* If they've set both times */
                     if (startTimeSet && endTimeSet) {
                         Intent intent = new Intent();
-                        timeRule.setRuleType(Rule.RULE_TYPE_VOLUME);
+                        timeRule.setRuleType(Rule.RULE_TYPE_BLUETOOTH);
                         timeRule.setName(ruleName.getText().toString());
                         intent.putExtra(Codes.RULE_CREATED, timeRule);
                         getActivity().setResult(Activity.RESULT_OK, intent);
@@ -169,4 +166,5 @@ public class VolumeTimeFragment extends Fragment {
 
         return view;
     }
+
 }
