@@ -20,6 +20,7 @@ import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.gms.maps.model.LatLng;
 
 import edu.umd.cs.semesterproject.DependencyFactory;
+import edu.umd.cs.semesterproject.GeofenceActivity;
 import edu.umd.cs.semesterproject.R;
 import edu.umd.cs.semesterproject.model.Action;
 import edu.umd.cs.semesterproject.model.LocationRule;
@@ -105,8 +106,16 @@ public abstract class BaseLocationFragment extends Fragment {
             public void onClick(View v){
                 try{
 
-
                     if (locationSet) {
+
+                        Intent geofenceIntent = new Intent(getActivity(), GeofenceActivity.class);
+                        geofenceIntent.putExtra("lat", place.getLatLng().latitude);
+                        geofenceIntent.putExtra("lng", place.getLatLng().longitude);
+                        geofenceIntent.putExtra("id", ruleName.getText().toString());
+                        geofenceIntent.putExtra("radius", 50);
+                        startActivity(geofenceIntent);
+
+
                         Intent intent = new Intent();
                         locationRule.setActionType(getActionType());
                         locationRule.setAction(getAction());
@@ -158,6 +167,9 @@ public abstract class BaseLocationFragment extends Fragment {
                 locationSet = true;
                 locationLabel.setText("Selected Location: " + p.getName());
                 locationLabel.setVisibility(View.VISIBLE);
+
+
+
             }
         }
     }
