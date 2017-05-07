@@ -3,24 +3,14 @@ package edu.umd.cs.semesterproject.model;
 import java.io.Serializable;
 import java.util.UUID;
 
-public abstract class Rule implements Serializable{
-
-    public static final String TYPE_TIME = "TIME";
-    public static final String TYPE_LOCATION = "LOCATION";
-
-    public static final String RULE_TYPE_VOLUME = "VOLUME";
-    public static final String RULE_TYPE_WIFI = "WIFI";
-    public static final String RULE_TYPE_BLUETOOTH = "BLUETOOTH";
-    public static final String RULE_TYPE_HEADPHONE = "HEADPHONE";
+public abstract class Rule implements Serializable {
 
     private String mId;
     private String mName;
-    private String mConditions;
+    private RuleType mRuleType;
+    private ActionType mActionType;
+    private Action mAction;
     private boolean mIsEnabled;
-    // Time, Location, Hardware, ...
-    private String mType;
-    // Volume, Wifi, Bluetooth, ...
-    private String mRuleType;
 
     public Rule() {
         mId = UUID.randomUUID().toString();
@@ -29,7 +19,9 @@ public abstract class Rule implements Serializable{
     public Rule(String name, String type, boolean isEnabled) {
         mId = UUID.randomUUID().toString();
         mName = name;
-        mType = type;
+        mRuleType = ruleType;
+        mActionType = actionType;
+        mAction = action;
         mIsEnabled = isEnabled;
     }
 
@@ -55,9 +47,29 @@ public abstract class Rule implements Serializable{
         mName = name;
     }
 
-    public void setRuleType(String rule_type){ mRuleType = rule_type; }
+    public RuleType getRuleType() {
+        return mRuleType;
+    }
 
-    public String getRuleType() { return mRuleType; }
+    public void setRuleType(RuleType ruleType) {
+        mRuleType = ruleType;
+    }
+
+    public ActionType getActionType() {
+        return mActionType;
+    }
+
+    public void setActionType(ActionType actionType) {
+        mActionType = actionType;
+    }
+
+    public Action getAction() {
+        return mAction;
+    }
+
+    public void setAction(Action action) {
+        mAction = action;
+    }
 
     public boolean isEnabled() {
         return mIsEnabled;
@@ -65,5 +77,13 @@ public abstract class Rule implements Serializable{
 
     public void setEnabled(boolean enabled) {
         mIsEnabled = enabled;
+    }
+
+    public enum RuleType {
+        TIME, LOCATION
+    }
+
+    public enum ActionType {
+        VOLUME, WIFI, BLUETOOTH
     }
 }

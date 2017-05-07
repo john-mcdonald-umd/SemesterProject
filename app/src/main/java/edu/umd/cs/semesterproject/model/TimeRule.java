@@ -4,41 +4,53 @@ import java.util.List;
 
 public class TimeRule extends Rule {
 
-    private long mStartHour;
-    private long mEndHour;
+    private Time mStartTime;
+    private Time mEndTime;
     private List<Day> mDays;
 
     public TimeRule() {
         super();
     }
 
+    public TimeRule(String id, String name, RuleType ruleType, ActionType actionType, Action action, boolean isEnabled, Time startTime, Time endTime, List<Day> days) {
+        super(id, name, ruleType, actionType, isEnabled);
+    }
+
     @Override
     public String getConditions() {
-        return mStartHour + " - " + mEndHour;
+        return mStartTime.getHour() + " - " + mEndTime.getHour();
     }
 
     public TimeRule(String name, boolean isEnabled, long startTime, long endTime, List<Day> days) {
         super(name, Rule.TYPE_TIME, isEnabled);
 
-        mStartHour = startTime;
-        mEndHour = endTime;
+        mStartTime = startTime;
+        mEndTime = endTime;
         mDays = days;
     }
 
-    public long getStartTime() {
-        return mStartHour;
+    public TimeRule(String name, RuleType ruleType, ActionType actionType, Action action, boolean isEnabled, Time startTime, Time endTime, List<Day> days) {
+        super(name, ruleType, actionType, action, isEnabled);
+
+        mStartTime = startTime;
+        mEndTime = endTime;
+        mDays = days;
     }
 
-    public void setStartTime(long startTime) {
-        mStartHour = startTime;
+    public Time getStartTime() {
+        return mStartTime;
     }
 
-    public long getEndTime() {
-        return mEndHour;
+    public void setStartTime(Time startTime) {
+        mStartTime = startTime;
     }
 
-    public void setEndTime(long endTime) {
-        mEndHour = endTime;
+    public Time getEndTime() {
+        return mEndTime;
+    }
+
+    public void setEndTime(Time endTime) {
+        mEndTime = endTime;
     }
 
     public List<Day> getDays() {
@@ -49,7 +61,11 @@ public class TimeRule extends Rule {
         mDays = days;
     }
 
+    public String getRuleId() {
+        return super.getId();
+    }
+
     public enum Day {
-        MON, TUE, WED, THUR, FRI, SAT, SUN
+        SUN, MON, TUE, WED, THUR, FRI, SAT
     }
 }
