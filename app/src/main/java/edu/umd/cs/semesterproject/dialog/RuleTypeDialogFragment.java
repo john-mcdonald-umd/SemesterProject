@@ -19,8 +19,11 @@ import edu.umd.cs.semesterproject.DependencyFactory;
 import edu.umd.cs.semesterproject.R;
 import edu.umd.cs.semesterproject.VolumeLocationActivity;
 import edu.umd.cs.semesterproject.VolumeTimeActivity;
+import edu.umd.cs.semesterproject.WifiLocationActivity;
+import edu.umd.cs.semesterproject.WifiTimeActivity;
 import edu.umd.cs.semesterproject.fragment.BluetoothFragment;
 import edu.umd.cs.semesterproject.fragment.VolumeFragment;
+import edu.umd.cs.semesterproject.fragment.WifiFragment;
 import edu.umd.cs.semesterproject.model.Rule;
 import edu.umd.cs.semesterproject.service.RuleService;
 import edu.umd.cs.semesterproject.util.Codes;
@@ -83,6 +86,8 @@ public class RuleTypeDialogFragment extends DialogFragment implements View.OnCli
                     intent = VolumeTimeActivity.newIntent(getActivity(), null);
                 if (this.getTag().equals(BluetoothFragment.getTitle()))
                     intent = BluetoothTimeActivity.newIntent(getActivity(), null);
+                if (this.getTag().equals(WifiFragment.getTitle()))
+                    intent = WifiTimeActivity.newIntent(getActivity(), null);
                 startActivityForResult(intent, Codes.REQUEST_CODE_CREATE_RULE);
                 break;
             // Started an activity for Place Picker to select a location
@@ -91,6 +96,8 @@ public class RuleTypeDialogFragment extends DialogFragment implements View.OnCli
                     intent = VolumeLocationActivity.newIntent(getActivity(), null);
                 if (this.getTag().equals(BluetoothFragment.getTitle()))
                     intent = BluetoothLocationActivity.newIntent(getActivity(), null);
+                if (this.getTag().equals(WifiFragment.getTitle()))
+                    intent = WifiLocationActivity.newIntent(getActivity(), null);
                 startActivityForResult(intent, Codes.REQUEST_CODE_CREATE_RULE);
                 break;
         }

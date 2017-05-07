@@ -46,7 +46,7 @@ public class InMemoryRuleService implements RuleService {
         List<Rule> newRules = new ArrayList<Rule>();
 
         for (Rule rule : rules){
-            if (rule.getRuleType().equals(actionType)){
+            if (rule.getActionType().equals(actionType)){
                 newRules.add(rule);
             }
         }

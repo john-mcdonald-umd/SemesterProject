@@ -32,6 +32,10 @@
     <string name="start_blutooth_label">Set Bluetooth when the rule is activated:</string>
     <string name="end_bluetooth_label">Set Bluetooth when the rule is deactivated:</string>
 
+    <!-- Wifi Fragment -->
+    <string name="start_wifi_label">Set Wifi when the rule is activated:</string>
+    <string name="end_wifi_label">Set Wifi when the rule is deactivated:</string>
+
     <!-- Dialog -->
     <string name="time_rule">Time Rule</string>
     <string name="location_rule">Location Rule</string>

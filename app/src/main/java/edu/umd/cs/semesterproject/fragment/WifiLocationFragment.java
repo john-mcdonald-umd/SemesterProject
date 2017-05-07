@@ -26,9 +26,13 @@ import edu.umd.cs.semesterproject.model.Rule;
 import edu.umd.cs.semesterproject.service.RuleService;
 import edu.umd.cs.semesterproject.util.Codes;
 
-public class BluetoothLocationFragment extends Fragment {
+/**
+ * Created by James on 5/7/2017.
+ */
 
-    private final String TAG = "BluetoothTimeFragment";
+public class WifiLocationFragment extends Fragment {
+
+    private final String TAG = "WifiTimeFragment";
 
     private Rule rule;
     private LocationRule locationRule;
@@ -43,7 +47,7 @@ public class BluetoothLocationFragment extends Fragment {
     public static Fragment newInstance(String userID){
         Bundle bundle = new Bundle();
         bundle.putString(Codes.RULE_ID, userID);
-        BluetoothLocationFragment ruleFragment = new BluetoothLocationFragment();
+        WifiLocationFragment ruleFragment = new WifiLocationFragment();
         ruleFragment.setArguments(bundle);
         return ruleFragment;
     }
@@ -52,6 +56,7 @@ public class BluetoothLocationFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         // Call to super
         super.onCreate(savedInstanceState);
+
 
         // Get Arguments
         Bundle args = getArguments();
@@ -65,7 +70,7 @@ public class BluetoothLocationFragment extends Fragment {
         super.onCreateView(inflater, container, savedInstanceState);
 
         // Set content view
-        View view = inflater.inflate(R.layout.fragment_bluetooth_location, container, false);
+        View view = inflater.inflate(R.layout.fragment_wifi_location, container, false);
         ruleName = (EditText) view.findViewById(R.id.rule_name);
         addLocationButton = (Button) view.findViewById(R.id.button_add_location);
         locationLabel = (TextView) view.findViewById(R.id.text_view_display_location);
@@ -111,7 +116,7 @@ public class BluetoothLocationFragment extends Fragment {
 
                     if (locationSet) {
                         Intent intent = new Intent();
-                        locationRule.setActionType(Rule.ActionType.BLUETOOTH);
+                        locationRule.setActionType(Rule.ActionType.WIFI);
                         locationRule.setName(ruleName.getText().toString());
                         intent.putExtra(Codes.RULE_CREATED, locationRule);
                         getActivity().setResult(Activity.RESULT_OK, intent);

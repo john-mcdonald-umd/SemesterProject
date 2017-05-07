@@ -31,6 +31,15 @@
         <activity android:name=".BluetoothTimeActivity">
         </activity>
 
+        <activity android:name=".BluetoothLocationActivity">
+        </activity>
+
+        <activity android:name=".WifiTimeActivity">
+        </activity>
+
+        <activity android:name=".WifiLocationActivity">
+        </activity>
+
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

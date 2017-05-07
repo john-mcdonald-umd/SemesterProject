@@ -48,15 +48,11 @@ public class BluetoothTimeFragment extends Fragment {
         // Call to super
         super.onCreate(savedInstanceState);
 
-
-        Log.d("VolumeTimeFragment", "starting get args");
         // Get Arguments
         Bundle args = getArguments();
         String ruleID = args.getString(Codes.RULE_ID);
         RuleService ruleService = DependencyFactory.getRuleService(getActivity());
-        Log.d("VolumeTimeFragment", "getting rule");
         rule = ruleService.getRuleById(ruleID);
-        Log.d("VolumeTimeFragment", "ending get args");
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

@@ -12,13 +12,13 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/start_blutooth_label"
+            android:text="@string/start_wifi_label"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
         <Switch
-            android:id="@+id/start_bluetooth_switch"
+            android:id="@+id/start_wifi_switch"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 
@@ -30,13 +30,13 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/end_bluetooth_label"
+            android:text="@string/end_wifi_label"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
         <Switch
-            android:id="@+id/end_bluetooth_switch"
+            android:id="@+id/end_wifi_switch"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 

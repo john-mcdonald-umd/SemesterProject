@@ -10,7 +10,6 @@ import android.view.View;
 import edu.umd.cs.semesterproject.adapter.ViewPagerAdapter;
 import edu.umd.cs.semesterproject.fragment.BluetoothFragment;
 import edu.umd.cs.semesterproject.fragment.HeadphoneFragment;
-import edu.umd.cs.semesterproject.fragment.TestFragment;
 import edu.umd.cs.semesterproject.fragment.VolumeFragment;
 import edu.umd.cs.semesterproject.fragment.WifiFragment;
 
@@ -34,7 +33,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         viewPagerAdapter.addFragment(WifiFragment.newInstance(), WifiFragment.getTitle());
         viewPagerAdapter.addFragment(BluetoothFragment.newInstance(), BluetoothFragment.getTitle());
         viewPagerAdapter.addFragment(HeadphoneFragment.newInstance(), HeadphoneFragment.getTitle());
-        viewPagerAdapter.addFragment(TestFragment.newInstance(), TestFragment.getTitle());
 
         mViewPager.setAdapter(viewPagerAdapter);
 

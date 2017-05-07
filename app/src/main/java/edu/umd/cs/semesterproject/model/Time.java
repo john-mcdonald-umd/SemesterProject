@@ -1,6 +1,8 @@
 package edu.umd.cs.semesterproject.model;
 
-public class Time {
+import java.io.Serializable;
+
+public class Time implements Serializable{
 
     private int mHour;
     private int mMinute;

@@ -82,4 +82,5 @@ public class TimeRule extends Rule {
     public enum Day {
         SUN, MON, TUE, WED, THUR, FRI, SAT
     }
+
 }

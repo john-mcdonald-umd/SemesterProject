@@ -23,9 +23,9 @@ import edu.umd.cs.semesterproject.model.TimeRule;
 import edu.umd.cs.semesterproject.service.RuleService;
 import edu.umd.cs.semesterproject.util.Codes;
 
-public class VolumeTimeFragment extends Fragment {
+public class WifiTimeFragment extends Fragment {
 
-    private final String TAG = "VolumeTimeFragment";
+    private final String TAG = "WifiTimeFragment";
 
     private Rule rule;
     private TimeRule timeRule;
@@ -38,7 +38,7 @@ public class VolumeTimeFragment extends Fragment {
     public static Fragment newInstance(String userID){
         Bundle bundle = new Bundle();
         bundle.putString(Codes.RULE_ID, userID);
-        VolumeTimeFragment ruleFragment = new VolumeTimeFragment();
+        WifiTimeFragment ruleFragment = new WifiTimeFragment();
         ruleFragment.setArguments(bundle);
         return ruleFragment;
     }
@@ -47,6 +47,7 @@ public class VolumeTimeFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         // Call to super
         super.onCreate(savedInstanceState);
+
         // Get Arguments
         Bundle args = getArguments();
         String ruleID = args.getString(Codes.RULE_ID);
@@ -59,7 +60,7 @@ public class VolumeTimeFragment extends Fragment {
         super.onCreateView(inflater, container, savedInstanceState);
 
         // Set content view
-        View view = inflater.inflate(R.layout.fragment_volume_time, container, false);
+        View view = inflater.inflate(R.layout.fragment_wifi_time, container, false);
         ruleName = (EditText) view.findViewById(R.id.rule_name);
         Button startTimeButton = (Button) view.findViewById(R.id.set_start_time_button);
         Button endTimeButton = (Button) view.findViewById(R.id.set_end_time_button);
@@ -130,7 +131,7 @@ public class VolumeTimeFragment extends Fragment {
                     /* If they've set both times */
                     if (startTimeSet && endTimeSet) {
                         Intent intent = new Intent();
-                        timeRule.setActionType(Rule.ActionType.VOLUME);
+                        timeRule.setActionType(Rule.ActionType.WIFI);
                         timeRule.setName(ruleName.getText().toString());
                         intent.putExtra(Codes.RULE_CREATED, timeRule);
                         getActivity().setResult(Activity.RESULT_OK, intent);
