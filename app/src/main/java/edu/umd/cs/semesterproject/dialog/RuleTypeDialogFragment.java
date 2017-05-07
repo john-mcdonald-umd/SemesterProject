@@ -19,6 +19,7 @@ import com.google.android.gms.location.places.ui.PlacePicker;
 
 import java.io.Serializable;
 
+import edu.umd.cs.semesterproject.BluetoothLocationActivity;
 import edu.umd.cs.semesterproject.BluetoothTimeActivity;
 import edu.umd.cs.semesterproject.DependencyFactory;
 import edu.umd.cs.semesterproject.R;
@@ -94,8 +95,10 @@ public class RuleTypeDialogFragment extends DialogFragment implements View.OnCli
                 break;
             // Started an activity for Place Picker to select a location
             case R.id.text_view_location_rule:
-
-                intent = VolumeLocationActivity.newIntent(getActivity(), null);
+                if (this.getTag().equals(VolumeFragment.getTitle()))
+                    intent = VolumeLocationActivity.newIntent(getActivity(), null);
+                if (this.getTag().equals(BluetoothFragment.getTitle()))
+                    intent = BluetoothLocationActivity.newIntent(getActivity(), null);
                 startActivityForResult(intent, Codes.REQUEST_CODE_CREATE_RULE);
                 break;
         }

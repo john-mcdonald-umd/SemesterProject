@@ -1,6 +1,7 @@
 package edu.umd.cs.semesterproject.fragment;
 
 import android.app.Activity;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
@@ -18,6 +20,8 @@ import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.gms.maps.model.LatLng;
+
+import java.util.Calendar;
 
 import edu.umd.cs.semesterproject.DependencyFactory;
 import edu.umd.cs.semesterproject.R;
@@ -27,23 +31,24 @@ import edu.umd.cs.semesterproject.model.TimeRule2;
 import edu.umd.cs.semesterproject.service.RuleService;
 import edu.umd.cs.semesterproject.util.Codes;
 
-public class VolumeLocationFragment extends Fragment {
+public class BluetoothLocationFragment extends Fragment {
 
-    private final String TAG = "VolumeLocationFragment";
+    private final String TAG = "BluetoothTimeFragment";
+
     private Rule rule;
     private LocationRule locationRule;
+    /* Some parameters used for setting the start and end times */
+    private boolean locationSet;
 
-    private boolean locationSet = false;
-
-    private Button addLocationButton;
+    EditText ruleName;
+    Button addLocationButton;
+    TextView locationLabel;
     private Place place;
-    private TextView locationLabel;
-    private EditText ruleName;
 
     public static Fragment newInstance(String userID){
         Bundle bundle = new Bundle();
         bundle.putString(Codes.RULE_ID, userID);
-        VolumeLocationFragment ruleFragment = new VolumeLocationFragment();
+        BluetoothLocationFragment ruleFragment = new BluetoothLocationFragment();
         ruleFragment.setArguments(bundle);
         return ruleFragment;
     }
@@ -55,7 +60,6 @@ public class VolumeLocationFragment extends Fragment {
 
 
         Log.d("VolumeTimeFragment", "starting get args");
-
         // Get Arguments
         Bundle args = getArguments();
         String ruleID = args.getString(Codes.RULE_ID);
@@ -70,12 +74,12 @@ public class VolumeLocationFragment extends Fragment {
         super.onCreateView(inflater, container, savedInstanceState);
 
         // Set content view
-        View view = inflater.inflate(R.layout.fragment_volume_location, container, false);
+        View view = inflater.inflate(R.layout.fragment_bluetooth_location, container, false);
         ruleName = (EditText) view.findViewById(R.id.rule_name);
-        Button saveButton = (Button) view.findViewById(R.id.save_button);
-        Button cancelButton = (Button) view.findViewById(R.id.cancel_button);
         addLocationButton = (Button) view.findViewById(R.id.button_add_location);
         locationLabel = (TextView) view.findViewById(R.id.text_view_display_location);
+        Button saveButton = (Button) view.findViewById(R.id.save_button);
+        Button cancelButton = (Button) view.findViewById(R.id.cancel_button);
 
         if (rule == null) {
             // Set up location rule
@@ -116,7 +120,7 @@ public class VolumeLocationFragment extends Fragment {
 
                     if (locationSet) {
                         Intent intent = new Intent();
-                        locationRule.setRuleType(Rule.RULE_TYPE_VOLUME);
+                        locationRule.setRuleType(Rule.RULE_TYPE_BLUETOOTH);
                         locationRule.setName(ruleName.getText().toString());
                         intent.putExtra(Codes.RULE_CREATED, locationRule);
                         getActivity().setResult(Activity.RESULT_OK, intent);

@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import edu.umd.cs.semesterproject.BluetoothLocationActivity;
 import edu.umd.cs.semesterproject.BluetoothTimeActivity;
 import edu.umd.cs.semesterproject.DependencyFactory;
 import edu.umd.cs.semesterproject.R;
@@ -127,6 +128,10 @@ public class BluetoothFragment extends Fragment implements View.OnClickListener 
             String type = rule.getType();
             if (type.equals(Rule.TYPE_TIME)){
                 intent = BluetoothTimeActivity.newIntent(getContext(), rule.getId());
+                startActivityForResult(intent, Codes.REQUEST_CODE_CREATE_RULE);
+            }
+            if (type.equals(Rule.TYPE_LOCATION)){
+                intent = BluetoothLocationActivity.newIntent(getContext(), rule.getId());
                 startActivityForResult(intent, Codes.REQUEST_CODE_CREATE_RULE);
             }
         }
