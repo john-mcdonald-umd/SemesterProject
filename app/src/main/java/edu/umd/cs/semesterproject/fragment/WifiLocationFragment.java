@@ -32,7 +32,7 @@ public class WifiLocationFragment extends BaseLocationFragment {
 
     @Override
     protected Action getAction() {
-        return null;
+        return WifiFragment.getAction(view);
     }
 
 }

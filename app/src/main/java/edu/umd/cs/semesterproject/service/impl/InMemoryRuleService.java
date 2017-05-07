@@ -42,7 +42,7 @@ public class InMemoryRuleService implements RuleService {
         return null;
     }
 
-    private List<Rule> getRulesHelper(Rule.ActionType actionType){
+    private List<Rule> getRulesByAction(Rule.ActionType actionType){
         List<Rule> newRules = new ArrayList<Rule>();
 
         for (Rule rule : rules){
@@ -54,23 +54,45 @@ public class InMemoryRuleService implements RuleService {
         return newRules;
     }
 
+    private List<Rule> getRulesByType(Rule.RuleType ruleType){
+        List<Rule> newRules = new ArrayList<Rule>();
+
+        for (Rule rule : rules){
+            if (rule.getRuleType().equals(ruleType)){
+                newRules.add(rule);
+            }
+        }
+
+        return newRules;
+    }
+
     public List<Rule> getVolumeRules() {
-        return getRulesHelper(Rule.ActionType.VOLUME);
+        return getRulesByAction(Rule.ActionType.VOLUME);
     }
 
     @Override
     public List<Rule> getBluetoothRules() {
-        return getRulesHelper(Rule.ActionType.BLUETOOTH);
+        return getRulesByAction(Rule.ActionType.BLUETOOTH);
     }
 
     @Override
     public List<Rule> getWifiRules() {
-        return getRulesHelper(Rule.ActionType.WIFI);
+        return getRulesByAction(Rule.ActionType.WIFI);
+    }
+
+    @Override
+    public List<Rule> getLocationRules() {
+        return getRulesByType(Rule.RuleType.LOCATION);
+    }
+
+    @Override
+    public List<Rule> getTimeRules() {
+        return getRulesByType(Rule.RuleType.TIME);
     }
 
     @Override
     public List<Rule> getHeadphoneRules() {
-        return getRulesHelper(Rule.ActionType.HEADPHONE);
+        return getRulesByAction(Rule.ActionType.HEADPHONE);
     }
 
     public void deleteRule(String id){

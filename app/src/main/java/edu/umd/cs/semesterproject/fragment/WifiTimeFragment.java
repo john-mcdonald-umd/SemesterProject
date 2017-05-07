@@ -32,6 +32,6 @@ public class WifiTimeFragment extends BaseTimeFragment {
 
     @Override
     protected Action getAction() {
-        return null;
+        return WifiFragment.getAction(view);
     }
 }

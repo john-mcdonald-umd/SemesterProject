@@ -35,16 +35,6 @@ public class VolumeTimeFragment extends BaseTimeFragment {
 
     @Override
     protected Action getAction() {
-        SeekBar startVolume = (SeekBar) view.findViewById(R.id.seek_bar_start_volume);
-        SeekBar endVolume = (SeekBar) view.findViewById(R.id.seek_bar_end_volume);
-        Switch startVibrate = (Switch) view.findViewById(R.id.start_volume_vibrate_switch);
-        Switch endVibrate = (Switch) view.findViewById(R.id.end_volume_vibrate_switch);
-
-        VolumeAction volumeAction = new VolumeAction();
-        volumeAction.setStartVolume(startVolume.getProgress());
-        volumeAction.setEndVolume(endVolume.getProgress());
-        /* Set modes too, gotta ask john what the modes mean */
-
-        return volumeAction;
+        return VolumeFragment.getAction(view);
     }
 }

@@ -32,7 +32,7 @@ public class BluetoothLocationFragment extends BaseLocationFragment {
 
     @Override
     protected Action getAction() {
-        return null;
+        return BluetoothFragment.getAction(view);
     }
 
 }

@@ -11,6 +11,8 @@ public interface RuleService {
     List<Rule> getVolumeRules();
     List<Rule> getBluetoothRules();
     List<Rule> getWifiRules();
+    List<Rule> getLocationRules();
+    List<Rule> getTimeRules();
     List<Rule> getHeadphoneRules();
     void deleteRule(String id);
 }

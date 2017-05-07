@@ -1,12 +1,16 @@
 package edu.umd.cs.semesterproject.fragment;
 
 import android.view.View;
+import android.widget.Switch;
 
 import java.util.List;
 
 import edu.umd.cs.semesterproject.R;
 import edu.umd.cs.semesterproject.dialog.RuleTypeDialogFragment;
+import edu.umd.cs.semesterproject.model.Action;
+import edu.umd.cs.semesterproject.model.BluetoothAction;
 import edu.umd.cs.semesterproject.model.Rule;
+import edu.umd.cs.semesterproject.model.WifiAction;
 
 public class WifiFragment extends BaseFragment {
 
@@ -39,5 +43,12 @@ public class WifiFragment extends BaseFragment {
                 RuleTypeDialogFragment.newInstance().show(getActivity().getSupportFragmentManager(), getTitle());
                 break;
         }
+    }
+
+    public static Action getAction(View view){
+        Switch startSwitch = (Switch) view.findViewById(R.id.start_wifi_switch);
+        Switch endSwitch = (Switch) view.findViewById(R.id.end_wifi_switch);
+
+        return new WifiAction(startSwitch.isChecked(), endSwitch.isChecked());
     }
 }

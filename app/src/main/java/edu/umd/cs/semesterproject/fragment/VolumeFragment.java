@@ -3,12 +3,16 @@ package edu.umd.cs.semesterproject.fragment;
 // Fragment for the volume tab of the main activity
 
 import android.view.View;
+import android.widget.SeekBar;
+import android.widget.Switch;
 
 import java.util.List;
 
 import edu.umd.cs.semesterproject.R;
 import edu.umd.cs.semesterproject.dialog.RuleTypeDialogFragment;
+import edu.umd.cs.semesterproject.model.Action;
 import edu.umd.cs.semesterproject.model.Rule;
+import edu.umd.cs.semesterproject.model.VolumeAction;
 
 public class VolumeFragment extends BaseFragment {
 
@@ -40,5 +44,19 @@ public class VolumeFragment extends BaseFragment {
                 RuleTypeDialogFragment.newInstance().show(getActivity().getSupportFragmentManager(), getTitle());
                 break;
         }
+    }
+
+    public static Action getAction(View view){
+        SeekBar startVolume = (SeekBar) view.findViewById(R.id.seek_bar_start_volume);
+        SeekBar endVolume = (SeekBar) view.findViewById(R.id.seek_bar_end_volume);
+        Switch startVibrate = (Switch) view.findViewById(R.id.start_volume_vibrate_switch);
+        Switch endVibrate = (Switch) view.findViewById(R.id.end_volume_vibrate_switch);
+
+        VolumeAction volumeAction = new VolumeAction();
+        volumeAction.setStartVolume(startVolume.getProgress());
+        volumeAction.setEndVolume(endVolume.getProgress());
+        /* Set modes too, gotta ask john what the modes mean */
+
+        return volumeAction;
     }
 }

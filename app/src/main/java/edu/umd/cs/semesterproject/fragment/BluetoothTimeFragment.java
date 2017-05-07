@@ -32,6 +32,6 @@ public class BluetoothTimeFragment extends BaseTimeFragment {
 
     @Override
     protected Action getAction() {
-        return null;
+        return BluetoothFragment.getAction(view);
     }
 }

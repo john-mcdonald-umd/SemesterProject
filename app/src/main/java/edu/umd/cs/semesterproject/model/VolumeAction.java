@@ -8,9 +8,12 @@ public class VolumeAction extends Action {
     private VolumeMode mEndMode;
 
     public VolumeAction() {
+        super();
     }
 
     public VolumeAction(int startVolume, int endVolume, VolumeMode startMode, VolumeMode endMode) {
+        super();
+
         mStartVolume = startVolume;
         mEndVolume = endVolume;
         mStartMode = startMode;

@@ -32,7 +32,7 @@ public class VolumeLocationFragment extends BaseLocationFragment {
 
     @Override
     protected Action getAction() {
-        return null;
+        return VolumeFragment.getAction(view);
     }
 
 }
