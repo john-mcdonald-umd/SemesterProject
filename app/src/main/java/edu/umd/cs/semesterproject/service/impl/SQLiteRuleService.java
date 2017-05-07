@@ -1,11 +1,9 @@
 package edu.umd.cs.semesterproject.service.impl;
 
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
 
 import java.util.List;
 
-import edu.umd.cs.semesterproject.DependencyFactory;
 import edu.umd.cs.semesterproject.model.Rule;
 import edu.umd.cs.semesterproject.service.RuleService;
 
@@ -45,5 +43,25 @@ public class SQLiteRuleService implements RuleService {
     @Override
     public void deleteRule(String id) {
         mDatabase.deleteRule(id);
+    }
+
+    @Override
+    public List<Rule> getVolumeRules() {
+        return getAllRulesByActionType(Rule.ActionType.VOLUME);
+    }
+
+    @Override
+    public List<Rule> getBluetoothRules() {
+        return null;
+    }
+
+    @Override
+    public List<Rule> getWifiRules() {
+        return null;
+    }
+
+    @Override
+    public List<Rule> getHeadphoneRules() {
+        return null;
     }
 }
