@@ -11,6 +11,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import java.util.List;
@@ -92,22 +94,31 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
         }
     }
 
-    private class RuleHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    private class RuleHolder extends RecyclerView.ViewHolder implements View.OnClickListener, CompoundButton.OnCheckedChangeListener{
 
         private Rule rule;
         private TextView name, conditions;
+        private Switch mSwitch;
 
         public RuleHolder(View v){
             super(v);
             v.setOnClickListener(this);
             name = (TextView) v.findViewById(R.id.list_item_rule_name);
             conditions = (TextView) v.findViewById(R.id.list_item_rule_conditions);
+            mSwitch = (Switch) v.findViewById(R.id.list_item_rule_enabled);
         }
 
         public void bindRule(Rule r) {
             rule = r;
             name.setText(r.getName());
             conditions.setText(r.getConditions());
+            if (rule.isEnabled()){
+                mSwitch.setChecked(true);
+            }
+            else{
+                mSwitch.setChecked(false);
+            }
+            mSwitch.setOnCheckedChangeListener(this);
         }
 
         @Override
@@ -122,6 +133,15 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
             else if (type.equals(Rule.RuleType.LOCATION)){
                 intent = VolumeLocationActivity.newIntent(getContext(), rule.getId());
                 startActivityForResult(intent, Codes.REQUEST_CODE_CREATE_RULE);
+            }
+        }
+
+        @Override
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            if(isChecked) {
+                rule.setEnabled(true);
+            } else {
+                rule.setEnabled(false);
             }
         }
     }
@@ -163,7 +183,6 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
         if (ruleAdapter == null){
             ruleAdapter = new RuleAdapter(list);
             mRuleRecyclerView.setAdapter(ruleAdapter);
-            Log.d("VolumeFragment", "ruleAdapter = null");
         }
         else{
             ruleAdapter.setRules(list);
