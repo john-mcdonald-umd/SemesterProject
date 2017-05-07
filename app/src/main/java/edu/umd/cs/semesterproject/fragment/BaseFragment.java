@@ -178,7 +178,7 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
     protected void updateUI(){
         List<Rule> list = this.getRules();
 
-        Log.d("VolumeFragment", "UpdateUI(): getVolumeRules(): " + list.toString());
+        Log.d("BaseFragment", "UpdateUI(): getRules(): " + list.toString());
 
         if (ruleAdapter == null){
             ruleAdapter = new RuleAdapter(list);

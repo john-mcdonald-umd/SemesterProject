@@ -40,7 +40,7 @@
         android:text="@string/vibrate_label"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/end_volume_switch" />
+        android:id="@+id/end_volume_vibrate_switch" />
 
     <TextView
         android:text="@string/volume_label"

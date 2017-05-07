@@ -1,8 +1,9 @@
 package edu.umd.cs.semesterproject.model;
 
+import java.io.Serializable;
 import java.util.UUID;
 
-public abstract class Action {
+public abstract class Action implements Serializable {
 
     private String mId;
 
