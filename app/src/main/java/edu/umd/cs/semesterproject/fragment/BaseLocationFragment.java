@@ -108,12 +108,7 @@ public abstract class BaseLocationFragment extends Fragment {
 
                     if (locationSet) {
 
-                        Intent geofenceIntent = new Intent(getActivity(), GeofenceActivity.class);
-                        geofenceIntent.putExtra("lat", place.getLatLng().latitude);
-                        geofenceIntent.putExtra("lng", place.getLatLng().longitude);
-                        geofenceIntent.putExtra("id", ruleName.getText().toString());
-                        geofenceIntent.putExtra("radius", 50);
-                        startActivity(geofenceIntent);
+
 
 
                         Intent intent = new Intent();
@@ -121,6 +116,14 @@ public abstract class BaseLocationFragment extends Fragment {
                         locationRule.setAction(getAction());
                         locationRule.setName(ruleName.getText().toString());
                         intent.putExtra(Codes.RULE_CREATED, locationRule);
+
+                        Intent geofenceIntent = new Intent(getActivity(), GeofenceActivity.class);
+                        geofenceIntent.putExtra("lat", place.getLatLng().latitude);
+                        geofenceIntent.putExtra("lng", place.getLatLng().longitude);
+                        geofenceIntent.putExtra("id", locationRule.getId());
+                        geofenceIntent.putExtra("radius", 50);
+                        startActivity(geofenceIntent);
+
                         getActivity().setResult(Activity.RESULT_OK, intent);
                         getActivity().finish();
                     }
