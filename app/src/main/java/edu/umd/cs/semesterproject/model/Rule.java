@@ -16,7 +16,13 @@ public abstract class Rule implements Serializable {
         mId = UUID.randomUUID().toString();
     }
 
-    public Rule(String name, String type, boolean isEnabled) {
+    public Rule(String name, boolean isEnabled) {
+        mId = UUID.randomUUID().toString();
+        mName = name;
+        mIsEnabled = isEnabled;
+    }
+
+    public Rule(String name, boolean isEnabled, ActionType actionType, RuleType ruleType, Action action) {
         mId = UUID.randomUUID().toString();
         mName = name;
         mRuleType = ruleType;
@@ -34,10 +40,6 @@ public abstract class Rule implements Serializable {
     }
 
     public abstract String getConditions();
-
-    public String getType(){ return mType; }
-
-    public void setType(String type){ mType = type; }
 
     public String getName() {
         return mName;
@@ -84,6 +86,6 @@ public abstract class Rule implements Serializable {
     }
 
     public enum ActionType {
-        VOLUME, WIFI, BLUETOOTH
+        VOLUME, WIFI, BLUETOOTH, HEADPHONE
     }
 }

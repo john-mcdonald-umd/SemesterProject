@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.io.Serializable;
 import java.util.List;
 
 import edu.umd.cs.semesterproject.DependencyFactory;
@@ -22,7 +21,6 @@ import edu.umd.cs.semesterproject.VolumeLocationActivity;
 import edu.umd.cs.semesterproject.VolumeTimeActivity;
 import edu.umd.cs.semesterproject.dialog.RuleTypeDialogFragment;
 import edu.umd.cs.semesterproject.model.Rule;
-import edu.umd.cs.semesterproject.model.TimeRule2;
 import edu.umd.cs.semesterproject.service.RuleService;
 import edu.umd.cs.semesterproject.util.Codes;
 
@@ -136,12 +134,12 @@ public class VolumeFragment extends Fragment implements View.OnClickListener {
         public void onClick(View v) {
             // Get intent for the correct acivity based on the type of rule, then start that activity for result
             Intent intent = null;
-            String type = rule.getType();
-            if (type.equals(Rule.TYPE_TIME)){
+            Rule.RuleType type = rule.getRuleType();
+            if (type.equals(Rule.RuleType.TIME)){
                 intent = VolumeTimeActivity.newIntent(getContext(), rule.getId());
                 startActivityForResult(intent, Codes.REQUEST_CODE_CREATE_RULE);
             }
-            else if (type.equals(Rule.TYPE_LOCATION)){
+            else if (type.equals(Rule.RuleType.LOCATION)){
                 intent = VolumeLocationActivity.newIntent(getContext(), rule.getId());
                 startActivityForResult(intent, Codes.REQUEST_CODE_CREATE_RULE);
             }

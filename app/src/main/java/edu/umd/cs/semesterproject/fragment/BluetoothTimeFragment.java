@@ -14,13 +14,12 @@ import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import java.io.Serializable;
 import java.util.Calendar;
 
 import edu.umd.cs.semesterproject.DependencyFactory;
 import edu.umd.cs.semesterproject.R;
 import edu.umd.cs.semesterproject.model.Rule;
-import edu.umd.cs.semesterproject.model.TimeRule2;
+import edu.umd.cs.semesterproject.model.TimeRule;
 import edu.umd.cs.semesterproject.service.RuleService;
 import edu.umd.cs.semesterproject.util.Codes;
 
@@ -29,7 +28,7 @@ public class BluetoothTimeFragment extends Fragment {
     private final String TAG = "BluetoothTimeFragment";
 
     private Rule rule;
-    private TimeRule2 timeRule;
+    private TimeRule timeRule;
     /* Some parameters used for setting the start and end times */
     private boolean startTimeSet = false;
     private boolean endTimeSet = false;
@@ -74,12 +73,12 @@ public class BluetoothTimeFragment extends Fragment {
 
         if (rule == null) {
             // Set up time rule
-            timeRule = new TimeRule2(ruleName.getText().toString(), true, 0, 0, 0, 0, null);
+            timeRule = new TimeRule(ruleName.getText().toString(), true, 0, 0, 0, 0, null);
         }
         else{
             startTimeSet = (endTimeSet = true);
             ruleName.setText(rule.getName());
-            timeRule = (TimeRule2) rule;
+            timeRule = (TimeRule) rule;
         }
 
         // Link UI elements
@@ -136,7 +135,7 @@ public class BluetoothTimeFragment extends Fragment {
                     /* If they've set both times */
                     if (startTimeSet && endTimeSet) {
                         Intent intent = new Intent();
-                        timeRule.setRuleType(Rule.RULE_TYPE_BLUETOOTH);
+                        timeRule.setActionType(Rule.ActionType.BLUETOOTH);
                         timeRule.setName(ruleName.getText().toString());
                         intent.putExtra(Codes.RULE_CREATED, timeRule);
                         getActivity().setResult(Activity.RESULT_OK, intent);

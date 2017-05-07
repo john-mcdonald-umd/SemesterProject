@@ -1,7 +1,6 @@
 package edu.umd.cs.semesterproject.fragment;
 
 import android.app.Activity;
-import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
@@ -21,13 +19,10 @@ import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.gms.maps.model.LatLng;
 
-import java.util.Calendar;
-
 import edu.umd.cs.semesterproject.DependencyFactory;
 import edu.umd.cs.semesterproject.R;
 import edu.umd.cs.semesterproject.model.LocationRule;
 import edu.umd.cs.semesterproject.model.Rule;
-import edu.umd.cs.semesterproject.model.TimeRule2;
 import edu.umd.cs.semesterproject.service.RuleService;
 import edu.umd.cs.semesterproject.util.Codes;
 
@@ -120,7 +115,7 @@ public class BluetoothLocationFragment extends Fragment {
 
                     if (locationSet) {
                         Intent intent = new Intent();
-                        locationRule.setRuleType(Rule.RULE_TYPE_BLUETOOTH);
+                        locationRule.setActionType(Rule.ActionType.BLUETOOTH);
                         locationRule.setName(ruleName.getText().toString());
                         intent.putExtra(Codes.RULE_CREATED, locationRule);
                         getActivity().setResult(Activity.RESULT_OK, intent);

@@ -1,7 +1,5 @@
 package edu.umd.cs.semesterproject.model;
 
-import java.util.List;
-
 public class LocationRule extends Rule {
 
     private double mLatitude;
@@ -18,8 +16,9 @@ public class LocationRule extends Rule {
     }
 
     public LocationRule(String name, boolean isEnabled, double latitude, double longitude, double radius) {
-        super(name, Rule.TYPE_LOCATION, isEnabled);
+        super(name, isEnabled);
 
+        this.setRuleType(RuleType.LOCATION);
         mLatitude = latitude;
         mLongitude = longitude;
         mRadius = radius;

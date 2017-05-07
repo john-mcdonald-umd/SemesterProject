@@ -7,17 +7,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-
-import com.google.android.gms.location.places.Place;
-import com.google.android.gms.location.places.ui.PlacePicker;
-
-import java.io.Serializable;
 
 import edu.umd.cs.semesterproject.BluetoothLocationActivity;
 import edu.umd.cs.semesterproject.BluetoothTimeActivity;
@@ -27,9 +21,7 @@ import edu.umd.cs.semesterproject.VolumeLocationActivity;
 import edu.umd.cs.semesterproject.VolumeTimeActivity;
 import edu.umd.cs.semesterproject.fragment.BluetoothFragment;
 import edu.umd.cs.semesterproject.fragment.VolumeFragment;
-import edu.umd.cs.semesterproject.fragment.VolumeTimeFragment;
 import edu.umd.cs.semesterproject.model.Rule;
-import edu.umd.cs.semesterproject.model.TimeRule2;
 import edu.umd.cs.semesterproject.service.RuleService;
 import edu.umd.cs.semesterproject.util.Codes;
 

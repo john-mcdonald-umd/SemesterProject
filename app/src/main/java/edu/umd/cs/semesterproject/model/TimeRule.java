@@ -12,25 +12,31 @@ public class TimeRule extends Rule {
         super();
     }
 
-    public TimeRule(String id, String name, RuleType ruleType, ActionType actionType, Action action, boolean isEnabled, Time startTime, Time endTime, List<Day> days) {
-        super(id, name, ruleType, actionType, isEnabled);
-    }
-
     @Override
     public String getConditions() {
-        return mStartTime.getHour() + " - " + mEndTime.getHour();
+        return mStartTime.getHour() + ":" + mStartTime.getMinute() + " - " + mEndTime.getHour() + ":" + mEndTime.getMinute();
     }
 
-    public TimeRule(String name, boolean isEnabled, long startTime, long endTime, List<Day> days) {
-        super(name, Rule.TYPE_TIME, isEnabled);
+    public TimeRule(String name, boolean isEnabled, Time startTime, Time endTime, List<Day> days) {
+        super(name, isEnabled);
 
+        this.setRuleType(RuleType.TIME);
         mStartTime = startTime;
         mEndTime = endTime;
         mDays = days;
     }
 
-    public TimeRule(String name, RuleType ruleType, ActionType actionType, Action action, boolean isEnabled, Time startTime, Time endTime, List<Day> days) {
-        super(name, ruleType, actionType, action, isEnabled);
+    public TimeRule(String name, boolean isEnabled, int startMinute, int startHour, int endMinute, int endHour, List<Day> days) {
+        super(name, isEnabled);
+
+        this.setRuleType(RuleType.TIME);
+        mStartTime = new Time(startHour, startMinute);
+        mEndTime = new Time(startHour, startMinute);
+        mDays = days;
+    }
+
+    public TimeRule(String name, boolean isEnabled, ActionType actionType, Action action, Time startTime, Time endTime, List<Day> days) {
+        super(name, isEnabled, actionType, RuleType.TIME, action);
 
         mStartTime = startTime;
         mEndTime = endTime;
@@ -45,12 +51,20 @@ public class TimeRule extends Rule {
         mStartTime = startTime;
     }
 
+    public void setStartTime(int hour, int minute) {
+        mStartTime = new Time(hour, minute);
+    }
+
     public Time getEndTime() {
         return mEndTime;
     }
 
     public void setEndTime(Time endTime) {
         mEndTime = endTime;
+    }
+
+    public void setEndTime(int hour, int minute) {
+        mEndTime = new Time(hour, minute);
     }
 
     public List<Day> getDays() {

@@ -1,13 +1,10 @@
 package edu.umd.cs.semesterproject.fragment;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
-import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,13 +14,12 @@ import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import java.io.Serializable;
 import java.util.Calendar;
 
 import edu.umd.cs.semesterproject.DependencyFactory;
 import edu.umd.cs.semesterproject.R;
 import edu.umd.cs.semesterproject.model.Rule;
-import edu.umd.cs.semesterproject.model.TimeRule2;
+import edu.umd.cs.semesterproject.model.TimeRule;
 import edu.umd.cs.semesterproject.service.RuleService;
 import edu.umd.cs.semesterproject.util.Codes;
 
@@ -32,7 +28,7 @@ public class VolumeTimeFragment extends Fragment {
     private final String TAG = "VolumeTimeFragment";
 
     private Rule rule;
-    private TimeRule2 timeRule;
+    private TimeRule timeRule;
     /* Some parameters used for setting the start and end times */
     private boolean startTimeSet = false;
     private boolean endTimeSet = false;
@@ -77,12 +73,12 @@ public class VolumeTimeFragment extends Fragment {
 
         if (rule == null) {
             // Set up time rule
-            timeRule = new TimeRule2(ruleName.getText().toString(), true, 0, 0, 0, 0, null);
+            timeRule = new TimeRule(ruleName.getText().toString(), true, 0, 0, 0, 0, null);
         }
         else{
             startTimeSet = (endTimeSet = true);
             ruleName.setText(rule.getName());
-            timeRule = (TimeRule2) rule;
+            timeRule = (TimeRule) rule;
         }
 
         // Link UI elements
@@ -139,7 +135,7 @@ public class VolumeTimeFragment extends Fragment {
                     /* If they've set both times */
                     if (startTimeSet && endTimeSet) {
                         Intent intent = new Intent();
-                        timeRule.setRuleType(Rule.RULE_TYPE_VOLUME);
+                        timeRule.setActionType(Rule.ActionType.VOLUME);
                         timeRule.setName(ruleName.getText().toString());
                         intent.putExtra(Codes.RULE_CREATED, timeRule);
                         getActivity().setResult(Activity.RESULT_OK, intent);

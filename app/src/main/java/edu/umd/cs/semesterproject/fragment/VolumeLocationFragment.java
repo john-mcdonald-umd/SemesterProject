@@ -23,7 +23,6 @@ import edu.umd.cs.semesterproject.DependencyFactory;
 import edu.umd.cs.semesterproject.R;
 import edu.umd.cs.semesterproject.model.LocationRule;
 import edu.umd.cs.semesterproject.model.Rule;
-import edu.umd.cs.semesterproject.model.TimeRule2;
 import edu.umd.cs.semesterproject.service.RuleService;
 import edu.umd.cs.semesterproject.util.Codes;
 
@@ -116,7 +115,7 @@ public class VolumeLocationFragment extends Fragment {
 
                     if (locationSet) {
                         Intent intent = new Intent();
-                        locationRule.setRuleType(Rule.RULE_TYPE_VOLUME);
+                        locationRule.setActionType(Rule.ActionType.VOLUME);
                         locationRule.setName(ruleName.getText().toString());
                         intent.putExtra(Codes.RULE_CREATED, locationRule);
                         getActivity().setResult(Activity.RESULT_OK, intent);

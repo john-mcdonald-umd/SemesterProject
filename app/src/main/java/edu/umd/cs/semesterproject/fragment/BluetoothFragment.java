@@ -2,9 +2,9 @@ package edu.umd.cs.semesterproject.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -19,7 +19,6 @@ import edu.umd.cs.semesterproject.BluetoothLocationActivity;
 import edu.umd.cs.semesterproject.BluetoothTimeActivity;
 import edu.umd.cs.semesterproject.DependencyFactory;
 import edu.umd.cs.semesterproject.R;
-import edu.umd.cs.semesterproject.VolumeTimeActivity;
 import edu.umd.cs.semesterproject.dialog.RuleTypeDialogFragment;
 import edu.umd.cs.semesterproject.model.Rule;
 import edu.umd.cs.semesterproject.service.RuleService;
@@ -125,12 +124,12 @@ public class BluetoothFragment extends Fragment implements View.OnClickListener 
         public void onClick(View v) {
             // Get intent for the correct acivity based on the type of rule, then start that activity for result
             Intent intent = null;
-            String type = rule.getType();
-            if (type.equals(Rule.TYPE_TIME)){
+            Rule.RuleType type = rule.getRuleType();
+            if (type.equals(Rule.RuleType.TIME)){
                 intent = BluetoothTimeActivity.newIntent(getContext(), rule.getId());
                 startActivityForResult(intent, Codes.REQUEST_CODE_CREATE_RULE);
             }
-            if (type.equals(Rule.TYPE_LOCATION)){
+            if (type.equals(Rule.RuleType.LOCATION)){
                 intent = BluetoothLocationActivity.newIntent(getContext(), rule.getId());
                 startActivityForResult(intent, Codes.REQUEST_CODE_CREATE_RULE);
             }
