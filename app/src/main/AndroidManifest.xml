@@ -46,6 +46,7 @@
             android:value="AIzaSyD7BCwIUBQkcVho5lbPu6vZ5w89C5y1kIE"/>
 
         <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+        <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
         <uses-permission android:name="android.permission.INTERNET" />
     </application>
 
