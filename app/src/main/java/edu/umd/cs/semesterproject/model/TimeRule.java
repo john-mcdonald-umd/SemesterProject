@@ -1,5 +1,7 @@
 package edu.umd.cs.semesterproject.model;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class TimeRule extends Rule {

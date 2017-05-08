@@ -12,8 +12,14 @@ import edu.umd.cs.semesterproject.fragment.BluetoothFragment;
 import edu.umd.cs.semesterproject.fragment.HeadphoneFragment;
 import edu.umd.cs.semesterproject.fragment.VolumeFragment;
 import edu.umd.cs.semesterproject.fragment.WifiFragment;
+import edu.umd.cs.semesterproject.service.impl.TimeBackgroundService;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+    private final int ONE_MINUTE = 60000;
+    private final int TWO_MINUTES = 120000;
+    private final int FIVE_MINUTES = 300000;
+    private final int TEN_MINUTES = 600000;
 
     private Toolbar mToolbar;
     private TabLayout mTabLayout;
@@ -22,7 +28,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
+
+        TimeBackgroundService.setTimeAlarm(this, ONE_MINUTE);
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);

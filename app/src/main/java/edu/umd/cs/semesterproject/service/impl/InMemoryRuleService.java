@@ -10,12 +10,10 @@ import edu.umd.cs.semesterproject.service.RuleService;
 
 public class InMemoryRuleService implements RuleService {
 
-    private Context context;
     private List<Rule> rules;
 
-    public InMemoryRuleService(Context context) {
-        this.context = context;
-        this.rules = new ArrayList<Rule>();
+    public InMemoryRuleService() {
+        this.rules = new ArrayList<>();
     }
 
     public void addRule(Rule rule) {
@@ -42,7 +40,13 @@ public class InMemoryRuleService implements RuleService {
         return null;
     }
 
-    private List<Rule> getRulesByAction(Rule.ActionType actionType){
+    @Override
+    public List<Rule> getAllRules() {
+        return rules;
+    }
+
+    @Override
+    public List<Rule> getAllRulesByActionType(Rule.ActionType actionType) {
         List<Rule> newRules = new ArrayList<Rule>();
 
         for (Rule rule : rules){
@@ -67,17 +71,17 @@ public class InMemoryRuleService implements RuleService {
     }
 
     public List<Rule> getVolumeRules() {
-        return getRulesByAction(Rule.ActionType.VOLUME);
+        return getAllRulesByActionType(Rule.ActionType.VOLUME);
     }
 
     @Override
     public List<Rule> getBluetoothRules() {
-        return getRulesByAction(Rule.ActionType.BLUETOOTH);
+        return getAllRulesByActionType(Rule.ActionType.BLUETOOTH);
     }
 
     @Override
     public List<Rule> getWifiRules() {
-        return getRulesByAction(Rule.ActionType.WIFI);
+        return getAllRulesByActionType(Rule.ActionType.WIFI);
     }
 
     @Override
@@ -92,7 +96,7 @@ public class InMemoryRuleService implements RuleService {
 
     @Override
     public List<Rule> getHeadphoneRules() {
-        return getRulesByAction(Rule.ActionType.HEADPHONE);
+        return getAllRulesByActionType(Rule.ActionType.HEADPHONE);
     }
 
     public void deleteRule(String id){

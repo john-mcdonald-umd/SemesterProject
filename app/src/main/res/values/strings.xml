@@ -12,6 +12,14 @@
     <!-- Time Fragment -->
     <string name="choose_start_time">Start Time</string>
     <string name="choose_end_time">End Time</string>
+    <string name="sun_label">S</string>
+    <string name="mon_label">M</string>
+    <string name="tues_label">T</string>
+    <string name="wed_label">W</string>
+    <string name="thurs_label">Th</string>
+    <string name="fri_label">F</string>
+    <string name="sat_label">Sa</string>
+
 
     <!-- Basic Fragment -->
     <string name="save_button">Save</string>

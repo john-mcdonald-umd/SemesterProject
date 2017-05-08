@@ -10,11 +10,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import edu.umd.cs.semesterproject.DependencyFactory;
 import edu.umd.cs.semesterproject.R;
@@ -35,6 +38,7 @@ public abstract class BaseTimeFragment extends Fragment {
     private boolean endTimeSet = false;
 
     EditText ruleName;
+    CheckBox S, M, T, W, Th, F, Sa;
     protected View view;
 
     protected abstract Rule.ActionType getActionType();
@@ -64,6 +68,13 @@ public abstract class BaseTimeFragment extends Fragment {
         Button endTimeButton = (Button) view.findViewById(R.id.set_end_time_button);
         Button saveButton = (Button) view.findViewById(R.id.save_button);
         Button cancelButton = (Button) view.findViewById(R.id.cancel_button);
+        S = (CheckBox) view.findViewById(R.id.checkbox_sun);
+        M = (CheckBox) view.findViewById(R.id.checkbox_mon);
+        T = (CheckBox) view.findViewById(R.id.checkbox_tues);
+        W = (CheckBox) view.findViewById(R.id.checkbox_wed);
+        Th = (CheckBox) view.findViewById(R.id.checkbox_thurs);
+        F = (CheckBox) view.findViewById(R.id.checkbox_fri);
+        Sa = (CheckBox) view.findViewById(R.id.checkbox_sat);
 
         if (rule == null) {
             // Set up time rule
@@ -131,6 +142,7 @@ public abstract class BaseTimeFragment extends Fragment {
                         Intent intent = new Intent();
                         timeRule.setActionType(getActionType());
                         timeRule.setAction(getAction());
+                        timeRule.setDays(parseCheckBoxes());
                         timeRule.setName(ruleName.getText().toString());
                         intent.putExtra(Codes.RULE_CREATED, timeRule);
                         getActivity().setResult(Activity.RESULT_OK, intent);
@@ -159,5 +171,32 @@ public abstract class BaseTimeFragment extends Fragment {
         });
 
         return view;
+    }
+
+    protected List<TimeRule.Day> parseCheckBoxes(){
+        ArrayList<TimeRule.Day> al = new ArrayList<>();
+        if (S.isChecked()){
+            al.add(TimeRule.Day.SUN);
+        }
+        if (M.isChecked()){
+            al.add(TimeRule.Day.MON);
+        }
+        if (T.isChecked()){
+            al.add(TimeRule.Day.TUE);
+        }
+        if (W.isChecked()){
+            al.add(TimeRule.Day.WED);
+        }
+        if (Th.isChecked()){
+            al.add(TimeRule.Day.THUR);
+        }
+        if (F.isChecked()){
+            al.add(TimeRule.Day.FRI);
+        }
+        if (Sa.isChecked()){
+            al.add(TimeRule.Day.SAT);
+        }
+
+        return al;
     }
 }

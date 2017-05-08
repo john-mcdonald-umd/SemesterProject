@@ -10,7 +10,6 @@ public interface RuleService {
     Rule getRuleById(String id);
     List<Rule> getAllRules();
     List<Rule> getAllRulesByActionType(Rule.ActionType actionType);
-    void updateRule(Rule rule);
     List<Rule> getVolumeRules();
     List<Rule> getBluetoothRules();
     List<Rule> getWifiRules();

@@ -12,7 +12,7 @@ public class DependencyFactory {
 
     public static RuleService getRuleService(Context context) {
         if (mRuleService == null) {
-            mRuleService = new InMemoryRuleService(context);
+            mRuleService = new InMemoryRuleService();
         }
         return mRuleService;
     }
