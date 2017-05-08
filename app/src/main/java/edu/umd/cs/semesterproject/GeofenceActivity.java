@@ -123,6 +123,7 @@ public class GeofenceActivity extends AppCompatActivity implements
     }
 
     public void addGeofencesButtonHandler(View view) {
+        Log.d(TAG, "started addGeofencesButtonHandler()");
         if (!googleApiClient.isConnected()) {
             Toast.makeText(this, "not connected", Toast.LENGTH_SHORT).show();
             return;
@@ -147,6 +148,7 @@ public class GeofenceActivity extends AppCompatActivity implements
             logSecurityException(securityException);
         }
         Log.d(TAG, "added geofence");
+        Log.d(TAG, LocationServices.GeofencingApi.toString());
 
         finish();
 

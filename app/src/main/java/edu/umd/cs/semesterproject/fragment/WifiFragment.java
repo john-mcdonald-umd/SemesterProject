@@ -53,4 +53,13 @@ public class WifiFragment extends BaseFragment {
 
         return new WifiAction(startSwitch.isChecked(), endSwitch.isChecked());
     }
+
+    public static void setupSpecificLayout(View view, Rule rule){
+        Switch startSwitch = (Switch) view.findViewById(R.id.start_wifi_switch);
+        Switch endSwitch = (Switch) view.findViewById(R.id.end_wifi_switch);
+
+        WifiAction wifiAction = (WifiAction) rule.getAction();
+        startSwitch.setChecked(wifiAction.getStartAction());
+        endSwitch.setChecked(wifiAction.getEndAction());
+    }
 }

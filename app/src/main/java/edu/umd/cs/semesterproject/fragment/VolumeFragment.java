@@ -2,6 +2,7 @@ package edu.umd.cs.semesterproject.fragment;
 
 // Fragment for the volume tab of the main activity
 
+import android.util.Log;
 import android.view.View;
 import android.widget.SeekBar;
 import android.widget.Switch;
@@ -18,6 +19,7 @@ import edu.umd.cs.semesterproject.model.VolumeAction;
 public class VolumeFragment extends BaseFragment {
 
     private static final String TITLE = "Volume";
+    private static final String TAG = VolumeFragment.class.getSimpleName();
 
     public static VolumeFragment newInstance() {
 
@@ -58,10 +60,38 @@ public class VolumeFragment extends BaseFragment {
         Switch endVibrate = (Switch) view.findViewById(R.id.end_volume_vibrate_switch);
 
         VolumeAction volumeAction = new VolumeAction();
-        volumeAction.setStartVolume(startVolume.getMax() / startVolume.getProgress());
-        volumeAction.setEndVolume(endVolume.getMax() / endVolume.getProgress());
-        /* Set modes too, gotta ask john what the modes mean */
+        Log.d(TAG, "created VolumeAction");
+        if (startVolume.getProgress() == 0) {
+            volumeAction.setStartVolume(startVolume.getMax());
+        }
+        else {
+            volumeAction.setStartVolume(startVolume.getMax() / startVolume.getProgress());
+        }
+        if (endVolume.getProgress() == 0) {
+            volumeAction.setEndVolume(endVolume.getMax());
+        }
+        else {
+            volumeAction.setEndVolume(endVolume.getMax() / endVolume.getProgress());
+        }
+
+        // set modes
+        volumeAction.setStartVibrate(startVibrate.isChecked());
+        volumeAction.setEndVibrate(endVibrate.isChecked());
 
         return volumeAction;
+    }
+
+    public static void setupSpecificLayout(View view, Rule rule){
+        SeekBar startVolume = (SeekBar) view.findViewById(R.id.seek_bar_start_volume);
+        SeekBar endVolume = (SeekBar) view.findViewById(R.id.seek_bar_end_volume);
+        Switch startVibrate = (Switch) view.findViewById(R.id.start_volume_vibrate_switch);
+        Switch endVibrate = (Switch) view.findViewById(R.id.end_volume_vibrate_switch);
+
+        VolumeAction volumeAction = (VolumeAction) rule.getAction();
+
+        startVolume.setProgress((int) (startVolume.getMax() / volumeAction.getStartVolume()));
+        endVolume.setProgress((int) (endVolume.getMax() / volumeAction.getEndVolume()));
+        startVibrate.setChecked(volumeAction.getStartVibrate());
+        endVibrate.setChecked(volumeAction.getEndVibrate());
     }
 }

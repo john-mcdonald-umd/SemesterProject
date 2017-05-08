@@ -2,9 +2,11 @@ package edu.umd.cs.semesterproject.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.View;
 
 import edu.umd.cs.semesterproject.R;
 import edu.umd.cs.semesterproject.model.Action;
+import edu.umd.cs.semesterproject.model.LocationRule;
 import edu.umd.cs.semesterproject.model.Rule;
 import edu.umd.cs.semesterproject.util.Codes;
 
@@ -29,6 +31,11 @@ public class WifiLocationFragment extends BaseLocationFragment {
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_wifi_location;
+    }
+
+    @Override
+    protected void setupSpecificLayout(View view, LocationRule rule) {
+        WifiFragment.setupSpecificLayout(view, rule);
     }
 
     @Override

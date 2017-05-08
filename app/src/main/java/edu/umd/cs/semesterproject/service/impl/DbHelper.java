@@ -432,8 +432,6 @@ public class DbHelper extends SQLiteOpenHelper {
                 break;
             case BLUETOOTH:
                 break;
-            case HEADPHONE:
-                break;
         }
     }
 

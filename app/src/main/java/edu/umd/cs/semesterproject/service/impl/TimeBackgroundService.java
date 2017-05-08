@@ -32,6 +32,7 @@ import edu.umd.cs.semesterproject.util.DateUtil;
 public class TimeBackgroundService extends IntentService {
 
     private static final int CHECK_CONDITIONS_REQUEST = 1;
+    private static final String TAG = TimeBackgroundService.class.getSimpleName();
 
     public TimeBackgroundService(String name) {
         super(name);
@@ -136,13 +137,15 @@ public class TimeBackgroundService extends IntentService {
             AudioManager audioManager = (AudioManager) getSystemService(AUDIO_SERVICE);
             if (start_end){
                 // execute start action
+                Log.d(TAG, "execute start volume");
                 audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
-                audioManager.setStreamVolume(AudioManager.STREAM_RING, audioManager.getStreamMaxVolume(AudioManager.STREAM_RING) / volumeAction.getStartVolume(),0);
+                audioManager.setStreamVolume(AudioManager.STREAM_RING, (int) (audioManager.getStreamMaxVolume(AudioManager.STREAM_RING) / volumeAction.getStartVolume()),0);
             }
             else{
                 // execute end action
+                Log.d(TAG, "execute end volume");
                 audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
-                audioManager.setStreamVolume(AudioManager.STREAM_RING, audioManager.getStreamMaxVolume(AudioManager.STREAM_RING) /  volumeAction.getEndVolume(), 0);
+                audioManager.setStreamVolume(AudioManager.STREAM_RING, (int) (audioManager.getStreamMaxVolume(AudioManager.STREAM_RING) /  volumeAction.getEndVolume()), 0);
             }
         }
         else if (a.getType() == Action.Type.BLUETOOTH){
@@ -165,9 +168,11 @@ public class TimeBackgroundService extends IntentService {
             WifiAction wifiAction = (WifiAction) a;
             WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
             if (start_end){
+                Log.d(TAG, "execute start wifi");
                 wifiManager.setWifiEnabled(wifiAction.getStartAction());
             }
             else{
+                Log.d(TAG, "execute end wifi");
                 wifiManager.setWifiEnabled(wifiAction.getEndAction());
             }
         }

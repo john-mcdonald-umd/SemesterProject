@@ -47,6 +47,8 @@ public abstract class BaseLocationFragment extends Fragment {
     protected abstract Rule.ActionType getActionType();
     // gets the layout id. VolumeLocationRules and WifiLocationRules have different layouts, for example.
     protected abstract int getLayoutId();
+    // set up specific layout for the ActionType
+    protected abstract void setupSpecificLayout(View view, LocationRule rule);
     // gets the action of the Rule
     protected abstract Action getAction();
 
@@ -84,6 +86,7 @@ public abstract class BaseLocationFragment extends Fragment {
             locationSet = true;
             ruleName.setText(rule.getName());
             locationRule = (LocationRule) rule;
+            setupSpecificLayout(view, locationRule);
         }
 
         // Link UI elements

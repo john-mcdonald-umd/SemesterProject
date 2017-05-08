@@ -1,6 +1,6 @@
 package edu.umd.cs.semesterproject.model;
 
-// An action that changes the volume settings of the device.
+// An action that changes the volume settib
 public class VolumeAction extends Action {
 
     private int mStartVolume;
@@ -54,6 +54,49 @@ public class VolumeAction extends Action {
     }
 
     public enum VolumeMode {
-        FULL, SILENT, ALARM, PRIORITY
+        VIBRATE, NOVIBRATE
     }
+
+    public void setStartVibrate(boolean vib){
+        if (vib){
+            mStartMode = VolumeMode.VIBRATE;
+        }
+        else{
+            mStartMode = VolumeMode.NOVIBRATE;
+        }
+    }
+
+    public void setEndVibrate(boolean vib){
+        if (vib){
+            mEndMode = VolumeMode.VIBRATE;
+        }
+        else{
+            mEndMode = VolumeMode.NOVIBRATE;
+        }
+    }
+
+    public boolean getStartVibrate(){
+        if (mStartMode.equals(VolumeMode.VIBRATE)){
+            return true;
+        }
+        else if (mStartMode.equals(VolumeMode.NOVIBRATE)){
+            return false;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public boolean getEndVibrate(){
+        if (mEndMode.equals(VolumeMode.VIBRATE)){
+            return true;
+        }
+        else if (mEndMode.equals(VolumeMode.NOVIBRATE)){
+            return false;
+        }
+        else{
+            return false;
+        }
+    }
+
 }

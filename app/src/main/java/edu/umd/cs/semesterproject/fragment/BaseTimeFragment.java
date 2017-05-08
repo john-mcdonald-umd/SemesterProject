@@ -30,7 +30,7 @@ import edu.umd.cs.semesterproject.util.Codes;
 // Base fragment for creating Time Rules.
 public abstract class BaseTimeFragment extends Fragment {
 
-    private final String TAG = "BluetoothTimeFragment";
+    private final String TAG = BaseTimeFragment.class.getSimpleName();
 
     private Rule rule;
     private TimeRule timeRule;
@@ -46,6 +46,8 @@ public abstract class BaseTimeFragment extends Fragment {
     protected abstract Rule.ActionType getActionType();
     // gets the layout id. VolumeLocationRules and WifiLocationRules have different layouts, for example.
     protected abstract int getLayoutId();
+    // set up specific layout for the ActionType
+    protected abstract void setupSpecificLayout(View view, TimeRule rule);
     // gets the action of the Rule
     protected abstract Action getAction();
 
@@ -91,6 +93,8 @@ public abstract class BaseTimeFragment extends Fragment {
             startTimeSet = (endTimeSet = true);
             ruleName.setText(rule.getName());
             timeRule = (TimeRule) rule;
+            setCheckBoxes(timeRule);
+            setupSpecificLayout(view, timeRule);
         }
 
         // Link UI elements
@@ -146,13 +150,18 @@ public abstract class BaseTimeFragment extends Fragment {
                 try{
                     /* If they've set both times */
                     if (startTimeSet && endTimeSet) {
+                        Log.d(TAG, "saveButtonStarted");
                         Intent intent = new Intent();
                         timeRule.setActionType(getActionType());
+                        Log.d(TAG, "got action type");
                         timeRule.setAction(getAction());
+                        Log.d(TAG, "got action");
                         timeRule.setDays(parseCheckBoxes());
                         timeRule.setName(ruleName.getText().toString());
                         intent.putExtra(Codes.RULE_CREATED, timeRule);
+                        Log.d(TAG, "about to set result");
                         getActivity().setResult(Activity.RESULT_OK, intent);
+                        Log.d(TAG, "about to finish");
                         getActivity().finish();
                     }
                     else{
@@ -181,7 +190,7 @@ public abstract class BaseTimeFragment extends Fragment {
     }
 
     // returns a List<TimeRule.Day> based on the state of the checkboxes.
-    protected List<TimeRule.Day> parseCheckBoxes(){
+    private List<TimeRule.Day> parseCheckBoxes(){
         ArrayList<TimeRule.Day> al = new ArrayList<>();
         if (S.isChecked()){
             al.add(TimeRule.Day.SUN);
@@ -206,5 +215,24 @@ public abstract class BaseTimeFragment extends Fragment {
         }
 
         return al;
+    }
+
+    private void setCheckBoxes(TimeRule r){
+        for (TimeRule.Day day : r.getDays()){
+            if (day.equals(TimeRule.Day.SUN))
+                S.setChecked(true);
+            if (day.equals(TimeRule.Day.MON))
+                M.setChecked(true);
+            if (day.equals(TimeRule.Day.TUE))
+                T.setChecked(true);
+            if (day.equals(TimeRule.Day.WED))
+                W.setChecked(true);
+            if (day.equals(TimeRule.Day.THUR))
+                Th.setChecked(true);
+            if (day.equals(TimeRule.Day.FRI))
+                F.setChecked(true);
+            if (day.equals(TimeRule.Day.SAT))
+                Sa.setChecked(true);
+        }
     }
 }

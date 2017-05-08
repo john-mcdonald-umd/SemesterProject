@@ -52,4 +52,13 @@ public class BluetoothFragment extends BaseFragment{
 
         return new BluetoothAction(startSwitch.isChecked(), endSwitch.isChecked());
     }
+
+    public static void setupSpecificLayout(View view, Rule rule){
+        Switch startSwitch = (Switch) view.findViewById(R.id.start_bluetooth_switch);
+        Switch endSwitch = (Switch) view.findViewById(R.id.end_bluetooth_switch);
+
+        BluetoothAction bluetoothAction = (BluetoothAction) rule.getAction();
+        startSwitch.setChecked(bluetoothAction.getStartAction());
+        endSwitch.setChecked(bluetoothAction.getEndAction());
+    }
 }
