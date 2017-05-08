@@ -40,6 +40,9 @@
         <activity android:name=".WifiLocationActivity">
         </activity>
 
+        <activity android:name=".GeofenceActivity">
+        </activity>
+
 
         <service
             android:name=".service.impl.TimeBackgroundService"

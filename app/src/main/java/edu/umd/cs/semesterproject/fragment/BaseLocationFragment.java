@@ -121,8 +121,10 @@ public abstract class BaseLocationFragment extends Fragment {
                         geofenceIntent.putExtra("lat", place.getLatLng().latitude);
                         geofenceIntent.putExtra("lng", place.getLatLng().longitude);
                         geofenceIntent.putExtra("id", locationRule.getId());
-                        geofenceIntent.putExtra("radius", 50);
+                        geofenceIntent.putExtra("radius", 5000);
                         startActivity(geofenceIntent);
+
+                        getActivity().setResult(Activity.RESULT_OK, geofenceIntent);
 
                         getActivity().setResult(Activity.RESULT_OK, intent);
                         getActivity().finish();
