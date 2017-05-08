@@ -34,11 +34,20 @@ public class GeofenceTransitionIntentService extends IntentService {
         }
 
         int geoFenceTransition = geofencingEvent.getGeofenceTransition();
+
+        List<Geofence> triggeringGeofences = geofencingEvent.getTriggeringGeofences();
+
+        String geofenceID = triggeringGeofences.get(0).getRequestId();
+
         // Check if the transition type is of interest
-        if ( geoFenceTransition == Geofence.GEOFENCE_TRANSITION_ENTER ||
-                geoFenceTransition == Geofence.GEOFENCE_TRANSITION_EXIT ) {
+        if ( geoFenceTransition == Geofence.GEOFENCE_TRANSITION_ENTER) {
+
+
+        }
+        else if ( geoFenceTransition == Geofence.GEOFENCE_TRANSITION_EXIT ) {
             // Get the geofence that were triggered
-            List<Geofence> triggeringGeofences = geofencingEvent.getTriggeringGeofences();
+
+
 
             String geofenceTransitionDetails = getGeofenceTrasitionDetails(geoFenceTransition, triggeringGeofences );
 
