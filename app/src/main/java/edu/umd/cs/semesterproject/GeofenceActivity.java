@@ -1,10 +1,17 @@
 package edu.umd.cs.semesterproject;
 
+import android.Manifest;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -22,12 +29,13 @@ public class GeofenceActivity extends AppCompatActivity implements
         ResultCallback<Status> {
 
 
-    private static final String TAG = MainActivity.class.getSimpleName();
+    private static final String TAG = GeofenceActivity.class.getSimpleName();
 
     private GoogleApiClient googleApiClient;
 
     private boolean mGeofencesAdded;
 
+    private Button button;
     /**
      * Used when requesting to add or remove geofences.
      */
@@ -42,11 +50,13 @@ public class GeofenceActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_geofence);
 
 
         // create GoogleApiClient
         createGoogleApi();
 
+        button = (Button) findViewById(R.id.geofence_button);
 
         Intent intent = getIntent();
 
@@ -78,7 +88,49 @@ public class GeofenceActivity extends AppCompatActivity implements
                 // Create the geofence.
                 .build();
 
+/*
+        try {
+            LocationServices.GeofencingApi.addGeofences(
+                    googleApiClient,
+                    // The GeofenceRequest object.
+                    getGeofencingRequest(),
+                    // A pending intent that that is reused when calling removeGeofences(). This
+                    // pending intent is used to generate an intent when a matched geofence
+                    // transition is observed.
+                    getGeofencePendingIntent()
+            ).setResultCallback(this); // Result processed in onResult().
+        } catch (SecurityException securityException) {
+            // Catch exception generated if the app does not use ACCESS_FINE_LOCATION permission.
+            logSecurityException(securityException);
+        }*/
+    }
 
+    private void logSecurityException(SecurityException securityException) {
+        Log.e(TAG, "Invalid location permission. " +
+                "You need to use ACCESS_FINE_LOCATION with geofences", securityException);
+    }
+
+    // Create GoogleApiClient instance
+    private void createGoogleApi() {
+        Log.d(TAG, "createGoogleApi()");
+        //if ( googleApiClient == null ) {
+            googleApiClient = new GoogleApiClient.Builder( this )
+                    .addConnectionCallbacks( this )
+                    .addOnConnectionFailedListener( this )
+                    .addApi( LocationServices.API )
+                    .build();
+        //}
+    }
+
+    public void addGeofencesButtonHandler(View view) {
+        if (!googleApiClient.isConnected()) {
+            Toast.makeText(this, "not connected", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        //if (!checkPermission()) {
+            askPermission();
+        //}
 
         try {
             LocationServices.GeofencingApi.addGeofences(
@@ -94,23 +146,10 @@ public class GeofenceActivity extends AppCompatActivity implements
             // Catch exception generated if the app does not use ACCESS_FINE_LOCATION permission.
             logSecurityException(securityException);
         }
-    }
+        Log.d(TAG, "added geofence");
 
-    private void logSecurityException(SecurityException securityException) {
-        Log.e(TAG, "Invalid location permission. " +
-                "You need to use ACCESS_FINE_LOCATION with geofences", securityException);
-    }
+        finish();
 
-    // Create GoogleApiClient instance
-    private void createGoogleApi() {
-        Log.d(TAG, "createGoogleApi()");
-        if ( googleApiClient == null ) {
-            googleApiClient = new GoogleApiClient.Builder( this )
-                    .addConnectionCallbacks( this )
-                    .addOnConnectionFailedListener( this )
-                    .addApi( LocationServices.API )
-                    .build();
-        }
     }
 
     private GeofencingRequest getGeofencingRequest() {
@@ -159,20 +198,20 @@ public class GeofenceActivity extends AppCompatActivity implements
     public void onConnectionFailed(ConnectionResult result) {
         // Refer to the javadoc for ConnectionResult to see what error codes might be returned in
         // onConnectionFailed.
-        Log.i(TAG, "Connection failed: ConnectionResult.getErrorCode() = " + result.getErrorCode());
+        Log.d(TAG, "Connection failed: ConnectionResult.getErrorCode() = " + result.getErrorCode());
     }
 
     @Override
     public void onConnectionSuspended(int cause) {
         // The connection to Google Play services was lost for some reason.
-        Log.i(TAG, "Connection suspended");
+        Log.d(TAG, "Connection suspended");
 
         // onConnected() will be called again automatically when the service reconnects
     }
 
     @Override
     public void onConnected(Bundle connectionHint) {
-        Log.i(TAG, "Connected to GoogleApiClient");
+        Log.d(TAG, "Connected to GoogleApiClient");
     }
 
     public void onResult(Status status) {
@@ -188,4 +227,22 @@ public class GeofenceActivity extends AppCompatActivity implements
     }
 
 
+
+    // Check for permission to access Location
+    private boolean checkPermission() {
+        Log.d(TAG, "checkPermission()");
+        // Ask for permission if it wasn't granted yet
+        return (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED );
+    }
+
+    // Asks for permission
+    private void askPermission() {
+        Log.d(TAG, "askPermission()");
+        ActivityCompat.requestPermissions(
+                this,
+                new String[] { Manifest.permission.ACCESS_FINE_LOCATION },
+                999
+        );
+    }
 }

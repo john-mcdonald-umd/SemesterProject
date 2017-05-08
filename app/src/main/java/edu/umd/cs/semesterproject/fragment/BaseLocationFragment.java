@@ -34,7 +34,6 @@ public abstract class BaseLocationFragment extends Fragment {
     private final String TAG = "BaseLocationFragment";
     private Rule rule;
     private LocationRule locationRule;
-    private static final int RADIUS = 50;
 
     private boolean locationSet = false;
 
@@ -124,8 +123,10 @@ public abstract class BaseLocationFragment extends Fragment {
                         geofenceIntent.putExtra("lat", place.getLatLng().latitude);
                         geofenceIntent.putExtra("lng", place.getLatLng().longitude);
                         geofenceIntent.putExtra("id", locationRule.getId());
-                        geofenceIntent.putExtra("radius", RADIUS);
+                        geofenceIntent.putExtra("radius", 5000);
                         startActivity(geofenceIntent);
+
+                        getActivity().setResult(Activity.RESULT_OK, geofenceIntent);
 
                         getActivity().setResult(Activity.RESULT_OK, intent);
                         getActivity().finish();
@@ -169,10 +170,13 @@ public abstract class BaseLocationFragment extends Fragment {
                 LatLng latLng = place.getLatLng();
                 locationRule.setLatitude(latLng.latitude);
                 locationRule.setLatitude(latLng.longitude);
-                locationRule.setRadius(RADIUS);
+                /* set radius */
                 locationSet = true;
                 locationLabel.setText("Selected Location: " + p.getName());
                 locationLabel.setVisibility(View.VISIBLE);
+
+
+
             }
         }
     }
