@@ -3,6 +3,7 @@ package edu.umd.cs.semesterproject.model;
 import java.io.Serializable;
 import java.util.UUID;
 
+// A Rule has conditions that when met execute an action on the device.
 public abstract class Rule implements Serializable {
 
     private String mId;
@@ -86,6 +87,6 @@ public abstract class Rule implements Serializable {
     }
 
     public enum ActionType {
-        VOLUME, WIFI, BLUETOOTH, HEADPHONE
+        VOLUME, WIFI, BLUETOOTH, REMINDME
     }
 }

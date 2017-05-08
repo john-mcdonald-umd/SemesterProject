@@ -28,11 +28,13 @@ import edu.umd.cs.semesterproject.model.Rule;
 import edu.umd.cs.semesterproject.service.RuleService;
 import edu.umd.cs.semesterproject.util.Codes;
 
+// Base fragment for creating a Location Rule.
 public abstract class BaseLocationFragment extends Fragment {
 
     private final String TAG = "BaseLocationFragment";
     private Rule rule;
     private LocationRule locationRule;
+    private static final int RADIUS = 50;
 
     private boolean locationSet = false;
 
@@ -42,8 +44,11 @@ public abstract class BaseLocationFragment extends Fragment {
     private EditText ruleName;
     protected View view;
 
+    // Gets the action type of the Location Rule. Volume Rules would return Rule.ActionType.VOLUME
     protected abstract Rule.ActionType getActionType();
+    // gets the layout id. VolumeLocationRules and WifiLocationRules have different layouts, for example.
     protected abstract int getLayoutId();
+    // gets the action of the Rule
     protected abstract Action getAction();
 
     @Override
@@ -70,10 +75,12 @@ public abstract class BaseLocationFragment extends Fragment {
         addLocationButton = (Button) view.findViewById(R.id.button_add_location);
         locationLabel = (TextView) view.findViewById(R.id.text_view_display_location);
 
+        // if creating new rule.
         if (rule == null) {
             // Set up location rule
             locationRule = new LocationRule(ruleName.getText().toString(), true, 0, 0, 0);
         }
+        // if editing a pre-existing rule.
         else{
             locationSet = true;
             ruleName.setText(rule.getName());
@@ -105,12 +112,8 @@ public abstract class BaseLocationFragment extends Fragment {
             @Override
             public void onClick(View v){
                 try{
-
+                    // if the location has been set, then save it and add it to the geofence.
                     if (locationSet) {
-
-
-
-
                         Intent intent = new Intent();
                         locationRule.setActionType(getActionType());
                         locationRule.setAction(getAction());
@@ -121,7 +124,7 @@ public abstract class BaseLocationFragment extends Fragment {
                         geofenceIntent.putExtra("lat", place.getLatLng().latitude);
                         geofenceIntent.putExtra("lng", place.getLatLng().longitude);
                         geofenceIntent.putExtra("id", locationRule.getId());
-                        geofenceIntent.putExtra("radius", 50);
+                        geofenceIntent.putExtra("radius", RADIUS);
                         startActivity(geofenceIntent);
 
                         getActivity().setResult(Activity.RESULT_OK, intent);
@@ -166,13 +169,10 @@ public abstract class BaseLocationFragment extends Fragment {
                 LatLng latLng = place.getLatLng();
                 locationRule.setLatitude(latLng.latitude);
                 locationRule.setLatitude(latLng.longitude);
-                /* set radius */
+                locationRule.setRadius(RADIUS);
                 locationSet = true;
                 locationLabel.setText("Selected Location: " + p.getName());
                 locationLabel.setVisibility(View.VISIBLE);
-
-
-
             }
         }
     }

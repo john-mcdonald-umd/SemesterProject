@@ -11,6 +11,7 @@ import edu.umd.cs.semesterproject.model.Action;
 import edu.umd.cs.semesterproject.model.BluetoothAction;
 import edu.umd.cs.semesterproject.model.Rule;
 
+// Fragment for Bluetooth Tab of the TabLayout
 public class BluetoothFragment extends BaseFragment{
 
     private static final String TITLE = "Bluetooth";
@@ -44,6 +45,7 @@ public class BluetoothFragment extends BaseFragment{
         }
     }
 
+    // Checks the start and end switches for the Bluetooth rule to see what they should be switched to when it starts and ends.
     public static Action getAction(View view){
         Switch startSwitch = (Switch) view.findViewById(R.id.start_bluetooth_switch);
         Switch endSwitch = (Switch) view.findViewById(R.id.end_bluetooth_switch);

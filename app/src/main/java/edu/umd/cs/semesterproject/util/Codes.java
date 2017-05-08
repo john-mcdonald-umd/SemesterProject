@@ -1,7 +1,7 @@
 package edu.umd.cs.semesterproject.util;
 
-/* The codes for creating intents is going to get a little messy since we have a lot of different intents using similar rule names.
-   I just put some of the rules in here to keep it organized.
+/*
+   This class holds codes and a few functions that are used across classes.
  */
 
 import android.content.Intent;

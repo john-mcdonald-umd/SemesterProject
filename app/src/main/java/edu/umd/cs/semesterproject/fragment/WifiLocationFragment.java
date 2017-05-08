@@ -8,6 +8,7 @@ import edu.umd.cs.semesterproject.model.Action;
 import edu.umd.cs.semesterproject.model.Rule;
 import edu.umd.cs.semesterproject.util.Codes;
 
+// The Fragment used to create Wifi Location Rules.
 public class WifiLocationFragment extends BaseLocationFragment {
 
     private final String TAG = "WifiTimeFragment";

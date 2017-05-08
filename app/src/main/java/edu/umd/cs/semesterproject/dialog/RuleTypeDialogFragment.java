@@ -81,7 +81,9 @@ public class RuleTypeDialogFragment extends DialogFragment implements View.OnCli
         Intent intent = null;
         Log.d("RuleTypeDialogFragment", "Tag = " + this.getTag());
         switch (id) {
+            // if creating a time rule.
             case R.id.text_view_time_rule:
+                // get the correct intent based on the RuleA.ActionType (simply checks the Title of the tab it came from.)
                 if (this.getTag().equals(VolumeFragment.getTitle()))
                     intent = VolumeTimeActivity.newIntent(getActivity(), null);
                 if (this.getTag().equals(BluetoothFragment.getTitle()))
@@ -90,7 +92,7 @@ public class RuleTypeDialogFragment extends DialogFragment implements View.OnCli
                     intent = WifiTimeActivity.newIntent(getActivity(), null);
                 startActivityForResult(intent, Codes.REQUEST_CODE_CREATE_RULE);
                 break;
-            // Started an activity for Place Picker to select a location
+            // if creating a location rule
             case R.id.text_view_location_rule:
                 if (this.getTag().equals(VolumeFragment.getTitle()))
                     intent = VolumeLocationActivity.newIntent(getActivity(), null);
@@ -112,8 +114,6 @@ public class RuleTypeDialogFragment extends DialogFragment implements View.OnCli
         if (requestCode == Codes.REQUEST_CODE_CREATE_RULE && resultCode == Activity.RESULT_OK) {
             rule = Codes.getRuleCreated(data);
             ruleService.addRule(rule);
-            Log.d("RuleTypeDialogFragment", "getVolumeRules(): " + ruleService.getVolumeRules().toString());
-            Log.d("RuleTypeDialogFragment", "Created rule " + rule.getName() + " with rule type " + rule.getRuleType());
         }
 
         else{

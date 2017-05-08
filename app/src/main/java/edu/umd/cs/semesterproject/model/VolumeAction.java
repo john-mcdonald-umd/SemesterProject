@@ -1,5 +1,6 @@
 package edu.umd.cs.semesterproject.model;
 
+// An action that changes the volume settings of the device.
 public class VolumeAction extends Action {
 
     private int mStartVolume;
@@ -8,11 +9,11 @@ public class VolumeAction extends Action {
     private VolumeMode mEndMode;
 
     public VolumeAction() {
-        super();
+        super(Type.VOLUME);
     }
 
     public VolumeAction(int startVolume, int endVolume, VolumeMode startMode, VolumeMode endMode) {
-        super();
+        super(Type.VOLUME);
 
         mStartVolume = startVolume;
         mEndVolume = endVolume;

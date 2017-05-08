@@ -11,6 +11,7 @@ import edu.umd.cs.semesterproject.model.Rule;
 import edu.umd.cs.semesterproject.model.VolumeAction;
 import edu.umd.cs.semesterproject.util.Codes;
 
+// The fragment used to create Volume Time rules.
 public class VolumeTimeFragment extends BaseTimeFragment {
 
     private final String TAG = "VolumeTimeFragment";

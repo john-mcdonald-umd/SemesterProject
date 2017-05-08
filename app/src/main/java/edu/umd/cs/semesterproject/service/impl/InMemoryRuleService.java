@@ -1,6 +1,6 @@
 package edu.umd.cs.semesterproject.service.impl;
 
-import android.content.Context;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +8,7 @@ import java.util.List;
 import edu.umd.cs.semesterproject.model.Rule;
 import edu.umd.cs.semesterproject.service.RuleService;
 
+// An in memory implementation of RuleService, primarily used for testing.
 public class InMemoryRuleService implements RuleService {
 
     private List<Rule> rules;
@@ -16,6 +17,7 @@ public class InMemoryRuleService implements RuleService {
         this.rules = new ArrayList<>();
     }
 
+    // Add a rule. If a rule already exists with the rule's id, then update the current rule.
     public void addRule(Rule rule) {
         Rule currRule = getRuleById(rule.getId());
         if (currRule == null) {
@@ -94,13 +96,15 @@ public class InMemoryRuleService implements RuleService {
         return getRulesByType(Rule.RuleType.TIME);
     }
 
-    @Override
-    public List<Rule> getHeadphoneRules() {
-        return getAllRulesByActionType(Rule.ActionType.HEADPHONE);
-    }
 
     public void deleteRule(String id){
-        // TODO: implement this later
+        for (int i = 0; i < rules.size(); i++){
+            if (rules.get(i).getId().equals(id)){
+                rules.remove(i);
+                return;
+            }
+        }
+        Log.d("InMemoryRuleService", "Tried to delete rule with id " + id + " but there was no rule with that id.");
     }
 
 }

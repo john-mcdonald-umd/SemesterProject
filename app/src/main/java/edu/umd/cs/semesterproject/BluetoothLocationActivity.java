@@ -9,6 +9,7 @@ import edu.umd.cs.semesterproject.fragment.BluetoothLocationFragment;
 import edu.umd.cs.semesterproject.fragment.BluetoothTimeFragment;
 import edu.umd.cs.semesterproject.util.Codes;
 
+// Activity that holds the fragment for creating Bluetoooth Location Rules
 public class BluetoothLocationActivity extends SingleFragmentActivity {
 
     @Override

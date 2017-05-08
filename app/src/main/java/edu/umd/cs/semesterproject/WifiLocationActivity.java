@@ -8,10 +8,7 @@ import android.support.v4.app.Fragment;
 import edu.umd.cs.semesterproject.fragment.WifiLocationFragment;
 import edu.umd.cs.semesterproject.util.Codes;
 
-/**
- * Created by James on 5/7/2017.
- */
-
+// Activity that holds the fragment for creating a Wifi Location Rule
 public class WifiLocationActivity extends SingleFragmentActivity {
 
     @Override

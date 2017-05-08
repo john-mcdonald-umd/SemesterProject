@@ -2,6 +2,7 @@ package edu.umd.cs.semesterproject.model;
 
 import java.io.Serializable;
 
+// A simple time class for encapsulating hours and minutes.
 public class Time implements Serializable{
 
     private int mHour;

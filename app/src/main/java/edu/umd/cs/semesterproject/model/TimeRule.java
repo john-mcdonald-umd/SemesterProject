@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+// A rule that is triggered on changes in time.
+// Has a start Time and end Time and a list of days that it executes on.
 public class TimeRule extends Rule {
 
     private Time mStartTime;
@@ -16,7 +18,7 @@ public class TimeRule extends Rule {
 
     @Override
     public String getConditions() {
-        return mStartTime.getHour() + ":" + mStartTime.getMinute() + " - " + mEndTime.getHour() + ":" + mEndTime.getMinute();
+        return mStartTime.getHour() + ":" + String.format("%02d", mStartTime.getMinute()) + " - " + mEndTime.getHour() + ":" + String.format("%02d", mEndTime.getMinute());
     }
 
     public TimeRule(String name, boolean isEnabled, Time startTime, Time endTime, List<Day> days) {
@@ -28,12 +30,12 @@ public class TimeRule extends Rule {
         mDays = days;
     }
 
-    public TimeRule(String name, boolean isEnabled, int startMinute, int startHour, int endMinute, int endHour, List<Day> days) {
+    public TimeRule(String name, boolean isEnabled, int startHour, int startMinute, int endHour, int endMinute, List<Day> days) {
         super(name, isEnabled);
 
         this.setRuleType(RuleType.TIME);
         mStartTime = new Time(startHour, startMinute);
-        mEndTime = new Time(startHour, startMinute);
+        mEndTime = new Time(endHour, endMinute);
         mDays = days;
     }
 

@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import edu.umd.cs.semesterproject.fragment.VolumeTimeFragment;
 import edu.umd.cs.semesterproject.util.Codes;
 
+// Activity that holds the fragment for creating a Volume Time Rule
 public class VolumeTimeActivity extends SingleFragmentActivity {
 
     @Override

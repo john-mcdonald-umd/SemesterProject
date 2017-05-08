@@ -12,6 +12,7 @@ import edu.umd.cs.semesterproject.model.BluetoothAction;
 import edu.umd.cs.semesterproject.model.Rule;
 import edu.umd.cs.semesterproject.model.WifiAction;
 
+// The fragment used for the Wifi tab in the TabLayout
 public class WifiFragment extends BaseFragment {
 
     private static final String TITLE = "Wifi";
@@ -45,6 +46,7 @@ public class WifiFragment extends BaseFragment {
         }
     }
 
+    // Checks the start and end switches for the Wifi rule to see what they should be switched to when it starts and ends.
     public static Action getAction(View view){
         Switch startSwitch = (Switch) view.findViewById(R.id.start_wifi_switch);
         Switch endSwitch = (Switch) view.findViewById(R.id.end_wifi_switch);

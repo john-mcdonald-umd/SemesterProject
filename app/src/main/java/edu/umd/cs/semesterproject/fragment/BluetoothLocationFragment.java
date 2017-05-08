@@ -8,6 +8,7 @@ import edu.umd.cs.semesterproject.model.Action;
 import edu.umd.cs.semesterproject.model.Rule;
 import edu.umd.cs.semesterproject.util.Codes;
 
+// The fragment that is used for creating Bluetooth Location Rules.
 public class BluetoothLocationFragment extends BaseLocationFragment {
 
     private final String TAG = "BluetoothTimeFragment";

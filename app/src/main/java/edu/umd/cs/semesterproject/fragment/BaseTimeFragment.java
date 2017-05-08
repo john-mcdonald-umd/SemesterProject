@@ -27,6 +27,7 @@ import edu.umd.cs.semesterproject.model.TimeRule;
 import edu.umd.cs.semesterproject.service.RuleService;
 import edu.umd.cs.semesterproject.util.Codes;
 
+// Base fragment for creating Time Rules.
 public abstract class BaseTimeFragment extends Fragment {
 
     private final String TAG = "BluetoothTimeFragment";
@@ -41,8 +42,11 @@ public abstract class BaseTimeFragment extends Fragment {
     CheckBox S, M, T, W, Th, F, Sa;
     protected View view;
 
+    // Gets the action type of the Location Rule. Volume Rules would return Rule.ActionType.VOLUME
     protected abstract Rule.ActionType getActionType();
+    // gets the layout id. VolumeLocationRules and WifiLocationRules have different layouts, for example.
     protected abstract int getLayoutId();
+    // gets the action of the Rule
     protected abstract Action getAction();
 
     @Override
@@ -68,6 +72,7 @@ public abstract class BaseTimeFragment extends Fragment {
         Button endTimeButton = (Button) view.findViewById(R.id.set_end_time_button);
         Button saveButton = (Button) view.findViewById(R.id.save_button);
         Button cancelButton = (Button) view.findViewById(R.id.cancel_button);
+        // Checkboxes, eventually put these in an array.
         S = (CheckBox) view.findViewById(R.id.checkbox_sun);
         M = (CheckBox) view.findViewById(R.id.checkbox_mon);
         T = (CheckBox) view.findViewById(R.id.checkbox_tues);
@@ -76,10 +81,12 @@ public abstract class BaseTimeFragment extends Fragment {
         F = (CheckBox) view.findViewById(R.id.checkbox_fri);
         Sa = (CheckBox) view.findViewById(R.id.checkbox_sat);
 
+        // if creating a new rule.
         if (rule == null) {
             // Set up time rule
             timeRule = new TimeRule(ruleName.getText().toString(), true, 0, 0, 0, 0, null);
         }
+        // if editing a pre-existing rule.
         else{
             startTimeSet = (endTimeSet = true);
             ruleName.setText(rule.getName());
@@ -173,6 +180,7 @@ public abstract class BaseTimeFragment extends Fragment {
         return view;
     }
 
+    // returns a List<TimeRule.Day> based on the state of the checkboxes.
     protected List<TimeRule.Day> parseCheckBoxes(){
         ArrayList<TimeRule.Day> al = new ArrayList<>();
         if (S.isChecked()){

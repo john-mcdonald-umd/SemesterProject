@@ -8,6 +8,7 @@ import edu.umd.cs.semesterproject.model.Action;
 import edu.umd.cs.semesterproject.model.Rule;
 import edu.umd.cs.semesterproject.util.Codes;
 
+// The Fragment used to create Volume Location Rules.
 public class VolumeLocationFragment extends BaseLocationFragment {
 
     private final String TAG = "VolumeLocationFragment";

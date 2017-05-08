@@ -1,15 +1,12 @@
 package edu.umd.cs.semesterproject.model;
 
-/**
- * Created by James on 5/7/2017.
- */
-
+// An action that changes the Wifi settings of the device.
 public class WifiAction extends Action {
 
     private boolean startAction, endAction;
 
     public WifiAction(boolean start, boolean end){
-        super();
+        super(Type.WIFI);
 
         startAction = start;
         endAction = end;

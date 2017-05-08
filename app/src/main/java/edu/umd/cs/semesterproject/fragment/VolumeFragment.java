@@ -14,6 +14,7 @@ import edu.umd.cs.semesterproject.model.Action;
 import edu.umd.cs.semesterproject.model.Rule;
 import edu.umd.cs.semesterproject.model.VolumeAction;
 
+// The fragment used for the Volume tab of the TabLayout.
 public class VolumeFragment extends BaseFragment {
 
     private static final String TITLE = "Volume";
@@ -46,6 +47,10 @@ public class VolumeFragment extends BaseFragment {
         }
     }
 
+    // Returns an action based on the View view.
+    // It will get the start and end volumes from the seekbars.
+    // And will get whether or not to set it to vibrate at the start and end.
+    // The volumes are ratios of SeekBar.Max() / SeekBar.getProgress()
     public static Action getAction(View view){
         SeekBar startVolume = (SeekBar) view.findViewById(R.id.seek_bar_start_volume);
         SeekBar endVolume = (SeekBar) view.findViewById(R.id.seek_bar_end_volume);
@@ -53,8 +58,8 @@ public class VolumeFragment extends BaseFragment {
         Switch endVibrate = (Switch) view.findViewById(R.id.end_volume_vibrate_switch);
 
         VolumeAction volumeAction = new VolumeAction();
-        volumeAction.setStartVolume(startVolume.getProgress());
-        volumeAction.setEndVolume(endVolume.getProgress());
+        volumeAction.setStartVolume(startVolume.getMax() / startVolume.getProgress());
+        volumeAction.setEndVolume(endVolume.getMax() / endVolume.getProgress());
         /* Set modes too, gotta ask john what the modes mean */
 
         return volumeAction;

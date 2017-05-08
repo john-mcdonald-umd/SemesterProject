@@ -1,15 +1,12 @@
 package edu.umd.cs.semesterproject.model;
 
-/**
- * Created by James on 5/7/2017.
- */
-
+// An action that edits the Bluetooth settings.
 public class BluetoothAction extends Action {
 
     private boolean startAction, endAction;
 
     public BluetoothAction(boolean start, boolean end){
-        super();
+        super(Type.VOLUME);
 
         startAction = start;
         endAction = end;

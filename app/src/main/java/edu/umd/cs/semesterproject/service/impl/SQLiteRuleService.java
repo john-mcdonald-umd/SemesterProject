@@ -1,4 +1,4 @@
-package edu.umd.cs.semesterproject.service.impl;
+/*package edu.umd.cs.semesterproject.service.impl;
 
 import android.content.Context;
 
@@ -64,4 +64,4 @@ public class SQLiteRuleService implements RuleService {
     public List<Rule> getHeadphoneRules() {
         return null;
     }
-}
+}*/

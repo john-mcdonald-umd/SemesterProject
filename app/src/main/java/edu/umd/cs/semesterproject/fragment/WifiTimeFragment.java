@@ -8,6 +8,7 @@ import edu.umd.cs.semesterproject.model.Action;
 import edu.umd.cs.semesterproject.model.Rule;
 import edu.umd.cs.semesterproject.util.Codes;
 
+// The Fragment used to create Wifi Time Rules.
 public class WifiTimeFragment extends BaseTimeFragment {
 
     private final String TAG = "WifiTimeFragment";

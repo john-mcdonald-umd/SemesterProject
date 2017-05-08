@@ -9,13 +9,14 @@ import android.view.View;
 
 import edu.umd.cs.semesterproject.adapter.ViewPagerAdapter;
 import edu.umd.cs.semesterproject.fragment.BluetoothFragment;
-import edu.umd.cs.semesterproject.fragment.HeadphoneFragment;
 import edu.umd.cs.semesterproject.fragment.VolumeFragment;
 import edu.umd.cs.semesterproject.fragment.WifiFragment;
 import edu.umd.cs.semesterproject.service.impl.TimeBackgroundService;
 
+// Main activity of the Project. Has the TabLayout which is the main UI
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
+    // basic fields for increments for the alarm to check time intervals
     private final int ONE_MINUTE = 60000;
     private final int TWO_MINUTES = 120000;
     private final int FIVE_MINUTES = 300000;
@@ -24,13 +25,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Toolbar mToolbar;
     private TabLayout mTabLayout;
     private ViewPager mViewPager;
-    //test push
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
 
+        // Start alarm to start checking time rules
         TimeBackgroundService.setTimeAlarm(this, ONE_MINUTE);
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -41,7 +43,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         viewPagerAdapter.addFragment(VolumeFragment.newInstance(), VolumeFragment.getTitle());
         viewPagerAdapter.addFragment(WifiFragment.newInstance(), WifiFragment.getTitle());
         viewPagerAdapter.addFragment(BluetoothFragment.newInstance(), BluetoothFragment.getTitle());
-        viewPagerAdapter.addFragment(HeadphoneFragment.newInstance(), HeadphoneFragment.getTitle());
 
         mViewPager.setAdapter(viewPagerAdapter);
 

@@ -9,6 +9,7 @@ import edu.umd.cs.semesterproject.fragment.BluetoothTimeFragment;
 import edu.umd.cs.semesterproject.fragment.VolumeTimeFragment;
 import edu.umd.cs.semesterproject.util.Codes;
 
+// Activity that holds the fragment for creating Bluetooth Time Rules
 public class BluetoothTimeActivity extends SingleFragmentActivity {
 
     @Override

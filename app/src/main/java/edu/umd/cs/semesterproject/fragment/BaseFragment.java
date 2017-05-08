@@ -17,14 +17,19 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import edu.umd.cs.semesterproject.BluetoothLocationActivity;
+import edu.umd.cs.semesterproject.BluetoothTimeActivity;
 import edu.umd.cs.semesterproject.DependencyFactory;
 import edu.umd.cs.semesterproject.R;
 import edu.umd.cs.semesterproject.VolumeLocationActivity;
 import edu.umd.cs.semesterproject.VolumeTimeActivity;
+import edu.umd.cs.semesterproject.WifiLocationActivity;
+import edu.umd.cs.semesterproject.WifiTimeActivity;
 import edu.umd.cs.semesterproject.model.Rule;
 import edu.umd.cs.semesterproject.service.RuleService;
 import edu.umd.cs.semesterproject.util.Codes;
 
+// The base fragment for tabs in the TabLayout.
 public abstract class BaseFragment extends Fragment implements View.OnClickListener {
 
     private static final String TITLE = "BASE";
@@ -50,6 +55,7 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
         setRetainInstance(true);
     }
 
+    // Gets the rules based on the ActionType of the tab. So the Volume tab would return VolumeRules
     protected abstract List<Rule> getRules();
 
     @Override
@@ -58,23 +64,29 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
 
         View view = inflater.inflate(R.layout.fragment_rule, container, false);
 
+        // get recycler view from layout.
         mRuleRecyclerView = (RecyclerView) view.findViewById(R.id.ruleRecyclerView);
         mRuleRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+        // get floating action bar from layout
         mFloatingActionButton = (FloatingActionButton) view.findViewById(R.id.fab);
         mFloatingActionButton.setOnClickListener(this);
 
+        // get rule service
         ruleService = DependencyFactory.getRuleService(getActivity());
 
+        // create a rule adapter and connect it to the recycler view.
         ruleAdapter = new RuleAdapter(this.getRules());
         mRuleRecyclerView.setAdapter(ruleAdapter);
 
+        // update the UI
         updateUI();
 
         return view;
     }
 
     @Override
+    // Updates the UI because onCreateView() isn't always called with the TabLayout when switching tabs, but onResume() is.
     public void onResume(){
         super.onResume();
 
@@ -82,6 +94,7 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
     }
 
     @Override
+    // called after clicking on a rule to edit it.
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         if (requestCode == Codes.REQUEST_CODE_CREATE_RULE) {
@@ -122,21 +135,34 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
         }
 
         @Override
+        // when clicking on a rule, edits the rule based on its ActionType and RuleType.
         public void onClick(View v) {
             // Get intent for the correct acivity based on the type of rule, then start that activity for result
             Intent intent = null;
-            Rule.RuleType type = rule.getRuleType();
-            if (type.equals(Rule.RuleType.TIME)){
-                intent = VolumeTimeActivity.newIntent(getContext(), rule.getId());
+            Rule.RuleType ruleType = rule.getRuleType();
+            Rule.ActionType actionType = rule.getActionType();
+            if (ruleType.equals(Rule.RuleType.TIME)){
+                if (actionType.equals(Rule.ActionType.VOLUME))
+                    intent = VolumeTimeActivity.newIntent(getContext(), rule.getId());
+                else if (actionType.equals(Rule.ActionType.BLUETOOTH))
+                    intent = BluetoothTimeActivity.newIntent(getContext(), rule.getId());
+                else if (actionType.equals(Rule.ActionType.WIFI))
+                    intent = WifiTimeActivity.newIntent(getContext(), rule.getId());
                 startActivityForResult(intent, Codes.REQUEST_CODE_CREATE_RULE);
             }
-            else if (type.equals(Rule.RuleType.LOCATION)){
-                intent = VolumeLocationActivity.newIntent(getContext(), rule.getId());
+            else if (ruleType.equals(Rule.RuleType.LOCATION)){
+                if (actionType.equals(Rule.ActionType.VOLUME))
+                    intent = VolumeLocationActivity.newIntent(getContext(), rule.getId());
+                if (actionType.equals(Rule.ActionType.BLUETOOTH))
+                    intent = BluetoothLocationActivity.newIntent(getContext(), rule.getId());
+                if (actionType.equals(Rule.ActionType.WIFI))
+                    intent = WifiLocationActivity.newIntent(getContext(), rule.getId());
                 startActivityForResult(intent, Codes.REQUEST_CODE_CREATE_RULE);
             }
         }
 
         @Override
+        // connects the enable switch to the rule.
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
             if(isChecked) {
                 rule.setEnabled(true);

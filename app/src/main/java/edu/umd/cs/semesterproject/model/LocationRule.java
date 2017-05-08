@@ -1,5 +1,7 @@
 package edu.umd.cs.semesterproject.model;
 
+// A rule that is triggered by location changes.
+// Has a longitude, latitude, and radius that it checks.
 public class LocationRule extends Rule {
 
     private double mLatitude;

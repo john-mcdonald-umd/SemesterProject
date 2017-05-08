@@ -8,7 +8,7 @@ import android.support.v4.app.Fragment;
 import edu.umd.cs.semesterproject.fragment.VolumeLocationFragment;
 import edu.umd.cs.semesterproject.util.Codes;
 
-
+// Activity that holds the fragment for creating a Volume Location Rule
 public class VolumeLocationActivity extends SingleFragmentActivity {
 
     @Override
