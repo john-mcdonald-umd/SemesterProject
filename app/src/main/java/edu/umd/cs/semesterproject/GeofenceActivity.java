@@ -49,6 +49,8 @@ public class GeofenceActivity extends AppCompatActivity implements
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        Log.d(TAG, "GeofenceActivity onCreate()");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_geofence);
 
@@ -58,13 +60,13 @@ public class GeofenceActivity extends AppCompatActivity implements
 
         button = (Button) findViewById(R.id.geofence_button);
 
+        // Retrieves the information for the geofence from the intent
         Intent intent = getIntent();
 
         double lat = intent.getDoubleExtra("lat", 0);
         double lng = intent.getDoubleExtra("lng", 0);
         String id = intent.getStringExtra("id");
         int radius = intent.getIntExtra("radius", 1);
-
 
         geofence = new Geofence.Builder()
                 // Set the request ID of the geofence. This is a string to identify this
@@ -113,13 +115,13 @@ public class GeofenceActivity extends AppCompatActivity implements
     // Create GoogleApiClient instance
     private void createGoogleApi() {
         Log.d(TAG, "createGoogleApi()");
-        //if ( googleApiClient == null ) {
+        if ( googleApiClient == null ) {
             googleApiClient = new GoogleApiClient.Builder( this )
                     .addConnectionCallbacks( this )
                     .addOnConnectionFailedListener( this )
                     .addApi( LocationServices.API )
                     .build();
-        //}
+        }
     }
 
     public void addGeofencesButtonHandler(View view) {
@@ -149,10 +151,11 @@ public class GeofenceActivity extends AppCompatActivity implements
         Log.d(TAG, "added geofence");
 
         finish();
-
     }
 
     private GeofencingRequest getGeofencingRequest() {
+
+        Log.d(TAG, "getGeofencingRequest");
         GeofencingRequest.Builder builder = new GeofencingRequest.Builder();
 
         // The INITIAL_TRIGGER_ENTER flag indicates that geofencing service should trigger a
@@ -168,6 +171,8 @@ public class GeofenceActivity extends AppCompatActivity implements
     }
 
     private PendingIntent getGeofencePendingIntent() {
+
+        Log.d(TAG, "getGeofencePendingIntent");
         // Reuse the PendingIntent if we already have it.
         if (mGeofencePendingIntent != null) {
             return mGeofencePendingIntent;
@@ -180,6 +185,7 @@ public class GeofenceActivity extends AppCompatActivity implements
 
     @Override
     protected void onStart() {
+        Log.d(TAG, "GeofenceActivity onStart()");
         super.onStart();
 
         // Call GoogleApiClient connection when starting the Activity
@@ -188,6 +194,7 @@ public class GeofenceActivity extends AppCompatActivity implements
 
     @Override
     protected void onStop() {
+        Log.d(TAG, "GeofenceActivity onStop()");
         super.onStop();
 
         // Disconnect GoogleApiClient when stopping Activity
