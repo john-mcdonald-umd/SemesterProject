@@ -5,6 +5,9 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -12,8 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-
-        <service android:name=".service.impl.GeofenceTransitionIntentService" />
+        <service android:name=".service.impl.GeofenceTransitionIntentService"
+            android:exported="true"/>
 
         <activity
             android:name=".MainActivity"
@@ -55,8 +58,10 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyD7BCwIUBQkcVho5lbPu6vZ5w89C5y1kIE"/>
 
-        <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-        <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
         <uses-permission android:name="android.permission.INTERNET" />
     </application>
 
