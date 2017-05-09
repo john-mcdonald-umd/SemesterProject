@@ -118,6 +118,7 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
         public RuleHolder(View v){
             super(v);
             v.setOnClickListener(this);
+            v.setOnLongClickListener(this);
             name = (TextView) v.findViewById(R.id.list_item_rule_name);
             conditions = (TextView) v.findViewById(R.id.list_item_rule_conditions);
             mSwitch = (Switch) v.findViewById(R.id.list_item_rule_enabled);

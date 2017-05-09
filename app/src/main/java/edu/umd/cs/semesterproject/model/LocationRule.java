@@ -22,7 +22,7 @@ public class LocationRule extends Rule {
         super(name, isEnabled);
 
         this.setRuleType(RuleType.LOCATION);
-        mPlaceName = placeName;
+        this.placeName = placeName;
         mLatitude = latitude;
         mLongitude = longitude;
         mRadius = radius;

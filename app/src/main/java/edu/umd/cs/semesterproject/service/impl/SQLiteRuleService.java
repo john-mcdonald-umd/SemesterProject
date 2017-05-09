@@ -571,7 +571,7 @@ public class SQLiteRuleService implements RuleService {
 
         ContentValues contentValues = new ContentValues();
         contentValues.put(DbSchema.LocationRuleTable.Columns.RULE_ID, locationRule.getId());
-        contentValues.put(DbSchema.LocationRuleTable.Columns.LOCATION_NAME, locationRule.getLocationName());
+        contentValues.put(DbSchema.LocationRuleTable.Columns.LOCATION_NAME, locationRule.getPlaceName());
         contentValues.put(DbSchema.LocationRuleTable.Columns.LATITUDE, locationRule.getLatitude());
         contentValues.put(DbSchema.LocationRuleTable.Columns.LONGITUDE, locationRule.getLongitude());
         contentValues.put(DbSchema.LocationRuleTable.Columns.RADIUS, locationRule.getRadius());
@@ -679,7 +679,7 @@ public class SQLiteRuleService implements RuleService {
             String actionType = getString(getColumnIndex(DbSchema.RuleTable.Columns.ACTION_TYPE));
             int isEnabled = getInt(getColumnIndex(DbSchema.RuleTable.Columns.IS_ENABLED));
 
-            String locationName = getString(getColumnIndex(DbSchema.LocationRuleTable.Columns.LOCATION_NAME));
+            String placeName = getString(getColumnIndex(DbSchema.LocationRuleTable.Columns.LOCATION_NAME));
             double latitude = getDouble(getColumnIndex(DbSchema.LocationRuleTable.Columns.LATITUDE));
             double longitude = getDouble(getColumnIndex(DbSchema.LocationRuleTable.Columns.LONGITUDE));
             double radius = getDouble(getColumnIndex(DbSchema.LocationRuleTable.Columns.RADIUS));
@@ -690,6 +690,7 @@ public class SQLiteRuleService implements RuleService {
             locationRule.setRuleType(Rule.RuleType.valueOf(ruleType));
             locationRule.setActionType(Rule.ActionType.valueOf(actionType));
             locationRule.setEnabled(isEnabled == 1);
+            locationRule.setPlaceName(placeName);
             locationRule.setLatitude(latitude);
             locationRule.setLongitude(longitude);
             locationRule.setRadius(radius);
