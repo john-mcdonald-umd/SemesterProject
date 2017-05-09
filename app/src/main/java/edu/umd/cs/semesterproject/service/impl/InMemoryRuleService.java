@@ -60,6 +60,11 @@ public class InMemoryRuleService implements RuleService {
         return newRules;
     }
 
+    @Override
+    public List<Rule> getAllRulesByRuleType(Rule.RuleType ruleType) {
+        return null;
+    }
+
     private List<Rule> getRulesByType(Rule.RuleType ruleType){
         List<Rule> newRules = new ArrayList<Rule>();
 

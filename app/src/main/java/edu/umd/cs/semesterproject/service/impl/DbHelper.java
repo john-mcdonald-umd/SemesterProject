@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DbHelper extends SQLiteOpenHelper {
 
     private static final String DB_NAME = "semester_project";
-    private static final int DB_VERSION = 3;
+    private static final int DB_VERSION = 7;
 
     public static final String _ID = "_id";
 
@@ -37,6 +37,7 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final String CREATE_TABLE_LOCATION_RULES = "CREATE TABLE " + DbSchema.LocationRuleTable.NAME + " ("
             + _ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + DbSchema.LocationRuleTable.Columns.RULE_ID + " TEXT, "
+            + DbSchema.LocationRuleTable.Columns.LOCATION_NAME + " TEXT,"
             + DbSchema.LocationRuleTable.Columns.LATITUDE + " INTEGER, "
             + DbSchema.LocationRuleTable.Columns.LONGITUDE + " INTEGER, "
             + DbSchema.LocationRuleTable.Columns.RADIUS + " INTEGER, "
@@ -89,6 +90,7 @@ public class DbHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_TABLE_RULES);
         db.execSQL(CREATE_TABLE_TIME_RULES);
+        db.execSQL(CREATE_TABLE_LOCATION_RULES);
         db.execSQL(CREATE_TABLE_VOLUMES);
         db.execSQL(CREATE_TABLE_WIFIS);
         db.execSQL(CREATE_TABLE_BLUETOOTHS);

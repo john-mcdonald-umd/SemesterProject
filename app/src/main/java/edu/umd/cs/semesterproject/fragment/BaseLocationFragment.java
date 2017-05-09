@@ -82,7 +82,7 @@ public abstract class BaseLocationFragment extends Fragment {
         // if creating new rule.
         if (rule == null) {
             // Set up location rule
-            locationRule = new LocationRule(ruleName.getText().toString(), true, 0, 0, 0);
+            locationRule = new LocationRule(ruleName.getText().toString(), true, "", 0, 0, 0);
             enabled_switch.setChecked(true);
         }
         // if editing a pre-existing rule.

@@ -35,6 +35,7 @@ public class DbSchema {
 
         public static final class Columns {
             public static final String RULE_ID = "rule_id";
+            public static final String LOCATION_NAME = "location_name";
             public static final String LATITUDE = "latitude";
             public static final String LONGITUDE = "longitude";
             public static final String RADIUS = "radius";

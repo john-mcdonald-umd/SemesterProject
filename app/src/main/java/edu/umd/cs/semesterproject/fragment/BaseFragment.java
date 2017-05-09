@@ -107,7 +107,7 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
         }
     }
 
-    private class RuleHolder extends RecyclerView.ViewHolder implements View.OnClickListener, CompoundButton.OnCheckedChangeListener{
+    private class RuleHolder extends RecyclerView.ViewHolder implements View.OnClickListener, CompoundButton.OnCheckedChangeListener, View.OnLongClickListener{
 
         private Rule rule;
         private TextView name, conditions;
@@ -164,6 +164,15 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
             } else {
                 rule.setEnabled(false);
             }
+        }
+
+        @Override
+        public boolean onLongClick(View v) {
+            ruleService.deleteRule(rule.getId());
+
+            updateUI();
+
+            return true;
         }
     }
 
