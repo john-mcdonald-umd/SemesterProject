@@ -7,6 +7,7 @@ public class LocationRule extends Rule {
     private double mLatitude;
     private double mLongitude;
     private double mRadius;
+    private String placeName;
 
     public LocationRule() {
         super();
@@ -14,7 +15,7 @@ public class LocationRule extends Rule {
 
     @Override
     public String getConditions() {
-        return mLatitude + "," + mLongitude;
+        return placeName;
     }
 
     public LocationRule(String name, boolean isEnabled, double latitude, double longitude, double radius) {
@@ -40,6 +41,14 @@ public class LocationRule extends Rule {
 
     public double getLongitude(){
         return mLongitude;
+    }
+
+    public String getPlaceName(){
+        return placeName;
+    }
+
+    public void setPlaceName(String n){
+        placeName = n;
     }
 
     public void setRadius(double rad){
