@@ -10,8 +10,9 @@
     <string name="tab_name_headphones">Headphones</string>
 
     <!-- Time Fragment -->
-    <string name="choose_start_time">Start Time</string>
-    <string name="choose_end_time">End Time</string>
+    <string name="start_time_hint">Start Time</string>
+    <string name="end_time_hint">End Time</string>
+    <string name="times_label">Select Times</string>
     <string name="sun_label">S</string>
     <string name="mon_label">M</string>
     <string name="tues_label">T</string>

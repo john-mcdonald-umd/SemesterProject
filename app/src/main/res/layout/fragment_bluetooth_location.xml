@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
 
-    <include layout="@layout/fragment_rule_name"/>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <include layout="@layout/fragment_bluetooth"/>
+        <include layout="@layout/fragment_rule_name"/>
 
-    <include layout="@layout/fragment_location"/>
+        <include layout="@layout/fragment_bluetooth"/>
 
-    <include layout="@layout/fragment_save_cancel"/>
+        <include layout="@layout/fragment_location"/>
 
-</LinearLayout>
+        <include layout="@layout/fragment_save_cancel"/>
+
+    </LinearLayout>
+</ScrollView>
