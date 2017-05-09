@@ -10,37 +10,35 @@ import edu.umd.cs.semesterproject.model.LocationRule;
 import edu.umd.cs.semesterproject.model.Rule;
 import edu.umd.cs.semesterproject.util.Codes;
 
-// The Fragment used to create Wifi Location Rules.
-public class WifiLocationFragment extends BaseLocationFragment {
+public class ReminderLocationFragment extends BaseLocationFragment {
 
-    private final String TAG = "WifiLocationFragment";
+    private final String TAG = "ReminderLocationFragment";
 
     public static Fragment newInstance(String userID){
         Bundle bundle = new Bundle();
         bundle.putString(Codes.RULE_ID, userID);
-        WifiLocationFragment ruleFragment = new WifiLocationFragment();
+        ReminderLocationFragment ruleFragment = new ReminderLocationFragment();
         ruleFragment.setArguments(bundle);
         return ruleFragment;
     }
 
     @Override
     protected Rule.ActionType getActionType() {
-        return Rule.ActionType.WIFI;
+        return Rule.ActionType.REMINDER;
     }
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_wifi_location;
+        return R.layout.fragment_reminder_location;
     }
 
     @Override
     protected void setupSpecificLayout(View view, LocationRule rule) {
-        WifiFragment.setupSpecificLayout(view, rule);
+        ReminderFragment.setupSpecificLayout(view, rule);
     }
 
     @Override
     protected Action getAction() {
-        return WifiFragment.getAction(view);
+        return ReminderFragment.getAction(view);
     }
-
 }

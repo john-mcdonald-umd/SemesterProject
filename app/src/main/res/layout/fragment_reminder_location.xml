@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include layout="@layout/fragment_rule_name"/>
+
+        <include layout="@layout/fragment_reminder"/>
+
+        <include layout="@layout/fragment_location"/>
+
+        <include layout="@layout/fragment_save_cancel"/>
+
+
+    </LinearLayout>
+</ScrollView>

@@ -43,7 +43,7 @@ public class GeofenceActivity extends AppCompatActivity implements
 
     private Geofence geofence;
 
-    private static final long GEO_DURATION = 60 * 60 * 1000;
+    private static final long GEO_DURATION = 5 * 60 * 1000;
 
 
 
@@ -58,7 +58,7 @@ public class GeofenceActivity extends AppCompatActivity implements
         // create GoogleApiClient
         createGoogleApi();
 
-        button = (Button) findViewById(R.id.geofence_button);
+        button = (Button) findViewById(R.id.geofence_button1);
 
         // Retrieves the information for the geofence from the intent
         Intent intent = getIntent();

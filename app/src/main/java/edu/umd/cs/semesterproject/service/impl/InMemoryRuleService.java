@@ -88,7 +88,7 @@ public class InMemoryRuleService implements RuleService {
 
     @Override
     public List<Rule> getReminderRules() {
-        return null;
+        return getAllRulesByActionType(Rule.ActionType.REMINDER);
     }
 
     @Override
