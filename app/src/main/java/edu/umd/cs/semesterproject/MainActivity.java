@@ -1,11 +1,14 @@
 package edu.umd.cs.semesterproject;
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 
 import edu.umd.cs.semesterproject.adapter.ViewPagerAdapter;
@@ -28,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Toolbar mToolbar;
     private TabLayout mTabLayout;
     private ViewPager mViewPager;
+    private final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +57,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mTabLayout = (TabLayout) findViewById(R.id.tabLayout);
         mTabLayout.setupWithViewPager(mViewPager);
 
+        askPermission();
         startService(new Intent(MainActivity.this, ServiceLocation.class));
+    }
+
+    // Asks for permission
+    private void askPermission() {
+        Log.d(TAG, "askPermission()");
+        ActivityCompat.requestPermissions(
+                this,
+                new String[] { Manifest.permission.ACCESS_FINE_LOCATION },
+                999
+        );
     }
 
     @Override
