@@ -61,4 +61,11 @@
     <string name="add_location_button">Add Location</string>
 
     <string name="display_location_label">Selected Location: </string>
+
+    <string name="select_radius_label">Select a Radius Around the Location: </string>
+
+    <string name="meter_label_100">100 Meters</string>
+    <string name="meter_label_50">50 Meters</string>
+    <string name="meter_label_250">250 Meters</string>
+    <string name="meter_label_500">500 Meters</string>
 </resources>
