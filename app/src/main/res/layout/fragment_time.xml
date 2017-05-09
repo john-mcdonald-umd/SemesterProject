@@ -7,21 +7,29 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical"
+        android:padding="@dimen/view_padding">
 
-        <Button
-            android:id="@+id/set_start_time_button"
-            android:layout_width="wrap_content"
+        <TextView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/choose_start_time" />
+            android:paddingBottom="@dimen/view_padding"
+            android:text="@string/times_label"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
 
-        <Button
-            android:id="@+id/set_end_time_button"
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/edit_text_start_time"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/choose_end_time" />
+            android:focusable="false"
+            android:hint="@string/start_time_hint"/>
+
+        <EditText
+            android:id="@+id/edit_text_end_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="false"
+            android:hint="@string/end_time_hint"/>
     </LinearLayout>
 
     <LinearLayout
@@ -29,48 +37,76 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <CheckBox android:id="@+id/checkbox_sun"
+        <ToggleButton
+            android:id="@+id/toggle_button_sun"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/sun_label"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:background="@drawable/toggle_button_selector"
+            android:textColor="@drawable/toggle_button_text_color"
+            android:textOff="@string/sun_label"
+            android:textOn="@string/sun_label"/>
 
-        <CheckBox android:id="@+id/checkbox_mon"
+        <ToggleButton
+            android:id="@+id/toggle_button_mon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/mon_label"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:background="@drawable/toggle_button_selector"
+            android:textColor="@drawable/toggle_button_text_color"
+            android:textOff="@string/mon_label"
+            android:textOn="@string/mon_label"/>
 
-        <CheckBox android:id="@+id/checkbox_tues"
+        <ToggleButton
+            android:id="@+id/toggle_button_tues"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/tues_label"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:background="@drawable/toggle_button_selector"
+            android:textColor="@drawable/toggle_button_text_color"
+            android:textOff="@string/tues_label"
+            android:textOn="@string/tues_label"/>
 
-        <CheckBox android:id="@+id/checkbox_wed"
+        <ToggleButton
+            android:id="@+id/toggle_button_wed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/wed_label"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:background="@drawable/toggle_button_selector"
+            android:textColor="@drawable/toggle_button_text_color"
+            android:textOff="@string/wed_label"
+            android:textOn="@string/wed_label"/>
 
-        <CheckBox android:id="@+id/checkbox_thurs"
+        <ToggleButton
+            android:id="@+id/toggle_button_thurs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/thurs_label"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:background="@drawable/toggle_button_selector"
+            android:textColor="@drawable/toggle_button_text_color"
+            android:textOff="@string/thurs_label"
+            android:textOn="@string/thurs_label"/>
 
-        <CheckBox android:id="@+id/checkbox_fri"
+        <ToggleButton
+            android:id="@+id/toggle_button_fri"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/fri_label"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:background="@drawable/toggle_button_selector"
+            android:textColor="@drawable/toggle_button_text_color"
+            android:textOff="@string/fri_label"
+            android:textOn="@string/fri_label"/>
 
-        <CheckBox android:id="@+id/checkbox_sat"
+        <ToggleButton
+            android:id="@+id/toggle_button_sat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/sat_label"
-            android:layout_weight="1"/>
-
+            android:layout_weight="1"
+            android:background="@drawable/toggle_button_selector"
+            android:textColor="@drawable/toggle_button_text_color"
+            android:textOff="@string/sat_label"
+            android:textOn="@string/sat_label"/>
     </LinearLayout>
+
 
 </LinearLayout>
