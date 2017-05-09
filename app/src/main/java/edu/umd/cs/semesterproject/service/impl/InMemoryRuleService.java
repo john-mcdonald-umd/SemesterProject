@@ -87,6 +87,11 @@ public class InMemoryRuleService implements RuleService {
     }
 
     @Override
+    public List<Rule> getReminderRules() {
+        return null;
+    }
+
+    @Override
     public List<Rule> getLocationRules() {
         return getRulesByType(Rule.RuleType.LOCATION);
     }

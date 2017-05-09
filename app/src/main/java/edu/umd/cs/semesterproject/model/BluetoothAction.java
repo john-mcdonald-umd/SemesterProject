@@ -5,6 +5,10 @@ public class BluetoothAction extends Action {
 
     private boolean startAction, endAction;
 
+    public BluetoothAction() {
+        super(Type.BLUETOOTH);
+    }
+
     public BluetoothAction(boolean start, boolean end){
         super(Type.VOLUME);
 

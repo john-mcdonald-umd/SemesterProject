@@ -5,6 +5,10 @@ public class WifiAction extends Action {
 
     private boolean startAction, endAction;
 
+    public WifiAction() {
+        super(Type.WIFI);
+    }
+
     public WifiAction(boolean start, boolean end){
         super(Type.WIFI);
 

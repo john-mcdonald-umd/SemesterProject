@@ -5,6 +5,10 @@ public class ReminderAction extends Action {
     private String mStartReminder;
     private String mEndReminder;
 
+    public ReminderAction() {
+        super(Type.REMINDER);
+    }
+
     public ReminderAction(String startReminder, String endReminder) {
         super(Type.REMINDER);
 

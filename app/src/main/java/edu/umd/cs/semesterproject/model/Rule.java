@@ -87,6 +87,6 @@ public abstract class Rule implements Serializable {
     }
 
     public enum ActionType {
-        VOLUME, WIFI, BLUETOOTH, REMINDME
+        VOLUME, WIFI, BLUETOOTH, REMINDER
     }
 }
