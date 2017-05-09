@@ -3,12 +3,12 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include layout="@layout/include_rule_name"/>
+    <include layout="@layout/fragment_rule_name"/>
 
     <include layout="@layout/fragment_bluetooth"/>
 
     <include layout="@layout/fragment_location"/>
 
-    <include layout="@layout/include_save_cancel"/>
+    <include layout="@layout/fragment_save_cancel"/>
 
 </LinearLayout>

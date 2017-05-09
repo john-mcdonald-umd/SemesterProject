@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,13 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.Switch;
-import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
-import android.widget.ToggleButton;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -28,32 +23,14 @@ import edu.umd.cs.semesterproject.DependencyFactory;
 import edu.umd.cs.semesterproject.R;
 import edu.umd.cs.semesterproject.model.Action;
 import edu.umd.cs.semesterproject.model.Rule;
-import edu.umd.cs.semesterproject.model.Time;
 import edu.umd.cs.semesterproject.model.TimeRule;
-import edu.umd.cs.semesterproject.model.VolumeAction;
 import edu.umd.cs.semesterproject.service.RuleService;
 import edu.umd.cs.semesterproject.util.Codes;
 
 // Base fragment for creating Time Rules.
-public abstract class BaseTimeFragment extends Fragment implements View.OnClickListener,
-        CompoundButton.OnCheckedChangeListener {
+public abstract class BaseTimeFragment extends Fragment {
 
     private final String TAG = BaseTimeFragment.class.getSimpleName();
-
-    protected TimeRule mTimeRule;
-    protected RuleService mRuleService;
-
-    protected Time mStartTime;
-    protected Time mEndTime;
-
-    protected TextView mIsEnabledTextView;
-    protected Switch mIsEnabledSwitch;
-    protected TextInputEditText mNameEditText;
-    protected EditText mStartTimeEditText;
-    protected EditText mEndTimeEditText;
-    protected ToggleButton mMon, mTues, mWed, mThurs, mFri, mSat, mSun;
-    protected Button mSaveButton;
-    protected Button mCancelButton;
 
     private Rule rule;
     private TimeRule timeRule;
@@ -90,51 +67,21 @@ public abstract class BaseTimeFragment extends Fragment implements View.OnClickL
         // Call to super
         super.onCreateView(inflater, container, savedInstanceState);
 
-//        mIsEnabledTextView = (TextView) view.findViewById(R.id.text_view_enabled);
-//        mIsEnabledTextView.setText("Off");
-//        mIsEnabledSwitch = (Switch) view.findViewById(R.id.switch_enabled);
-//        mIsEnabledSwitch.setOnCheckedChangeListener(this);
-        mNameEditText = (TextInputEditText) view.findViewById(R.id.edit_text_name);
-        mStartTimeEditText = (EditText) view.findViewById(R.id.edit_text_start_time);
-        mStartTimeEditText.setOnClickListener(this);
-        mEndTimeEditText = (EditText) view.findViewById(R.id.edit_text_end_time);
-        mEndTimeEditText.setOnClickListener(this);
-        mMon = (ToggleButton) view.findViewById(R.id.toggle_button_mon);
-        mTues = (ToggleButton) view.findViewById(R.id.toggle_button_tues);
-        mWed = (ToggleButton) view.findViewById(R.id.toggle_button_wed);
-        mThurs = (ToggleButton) view.findViewById(R.id.toggle_button_thurs);
-        mFri = (ToggleButton) view.findViewById(R.id.toggle_button_fri);
-        mSat = (ToggleButton) view.findViewById(R.id.toggle_button_sat);
-        mSun = (ToggleButton) view.findViewById(R.id.toggle_button_sun);
-        mSaveButton = (Button) view.findViewById(R.id.save_button);
-        mSaveButton.setOnClickListener(this);
-        mSaveButton.setEnabled(false);
-        mCancelButton = (Button) view.findViewById(R.id.cancel_button);
-        mCancelButton.setOnClickListener(this);
-
-        if (mTimeRule != null) {
-
-            VolumeAction volumeAction = (VolumeAction) mTimeRule.getAction();
-
-            mIsEnabledTextView.setText(mTimeRule.isEnabled() ? "On" : "Off");
-            mIsEnabledSwitch.setChecked(mTimeRule.isEnabled());
-
-            mNameEditText.setText(mTimeRule.getName());
-
-            mStartTime = mTimeRule.getStartTime();
-            mStartTimeEditText.setText(mTimeRule.getStartTime().toString());
-            mEndTime = mTimeRule.getEndTime();
-            mEndTimeEditText.setText(mTimeRule.getStartTime().toString());
-            mMon.setChecked(mTimeRule.getDays().contains(TimeRule.Day.MON));
-            mTues.setChecked(mTimeRule.getDays().contains(TimeRule.Day.TUES));
-            mWed.setChecked(mTimeRule.getDays().contains(TimeRule.Day.WED));
-            mThurs.setChecked(mTimeRule.getDays().contains(TimeRule.Day.THURS));
-            mFri.setChecked(mTimeRule.getDays().contains(TimeRule.Day.FRI));
-            mSat.setChecked(mTimeRule.getDays().contains(TimeRule.Day.SAT));
-            mSun.setChecked(mTimeRule.getDays().contains(TimeRule.Day.SUN));
-
-            mSaveButton.setEnabled(true);
-        }
+        // Set content view
+        view = inflater.inflate(getLayoutId(), container, false);
+        ruleName = (EditText) view.findViewById(R.id.rule_name);
+        Button startTimeButton = (Button) view.findViewById(R.id.set_start_time_button);
+        Button endTimeButton = (Button) view.findViewById(R.id.set_end_time_button);
+        Button saveButton = (Button) view.findViewById(R.id.save_button);
+        Button cancelButton = (Button) view.findViewById(R.id.cancel_button);
+        // Checkboxes, eventually put these in an array.
+        S = (CheckBox) view.findViewById(R.id.checkbox_sun);
+        M = (CheckBox) view.findViewById(R.id.checkbox_mon);
+        T = (CheckBox) view.findViewById(R.id.checkbox_tues);
+        W = (CheckBox) view.findViewById(R.id.checkbox_wed);
+        Th = (CheckBox) view.findViewById(R.id.checkbox_thurs);
+        F = (CheckBox) view.findViewById(R.id.checkbox_fri);
+        Sa = (CheckBox) view.findViewById(R.id.checkbox_sat);
 
         // if creating a new rule.
         if (rule == null) {
@@ -151,7 +98,7 @@ public abstract class BaseTimeFragment extends Fragment implements View.OnClickL
         }
 
         // Link UI elements
-        mStartTimeEditText.setOnClickListener(new Button.OnClickListener() {
+        startTimeButton.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v){
                 try{
@@ -174,7 +121,7 @@ public abstract class BaseTimeFragment extends Fragment implements View.OnClickL
                 }
             }
         });
-        mEndTimeEditText.setOnClickListener(new Button.OnClickListener() {
+        endTimeButton.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v){
                 try{
@@ -197,7 +144,7 @@ public abstract class BaseTimeFragment extends Fragment implements View.OnClickL
                 }
             }
         });
-        mSaveButton.setOnClickListener(new Button.OnClickListener() {
+        saveButton.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v){
                 try{
@@ -226,7 +173,7 @@ public abstract class BaseTimeFragment extends Fragment implements View.OnClickL
                 }
             }
         });
-        mCancelButton.setOnClickListener(new Button.OnClickListener() {
+        cancelButton.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v){
                 try{
@@ -252,13 +199,13 @@ public abstract class BaseTimeFragment extends Fragment implements View.OnClickL
             al.add(TimeRule.Day.MON);
         }
         if (T.isChecked()){
-            al.add(TimeRule.Day.TUES);
+            al.add(TimeRule.Day.TUE);
         }
         if (W.isChecked()){
             al.add(TimeRule.Day.WED);
         }
         if (Th.isChecked()){
-            al.add(TimeRule.Day.THURS);
+            al.add(TimeRule.Day.THUR);
         }
         if (F.isChecked()){
             al.add(TimeRule.Day.FRI);
@@ -276,11 +223,11 @@ public abstract class BaseTimeFragment extends Fragment implements View.OnClickL
                 S.setChecked(true);
             if (day.equals(TimeRule.Day.MON))
                 M.setChecked(true);
-            if (day.equals(TimeRule.Day.TUES))
+            if (day.equals(TimeRule.Day.TUE))
                 T.setChecked(true);
             if (day.equals(TimeRule.Day.WED))
                 W.setChecked(true);
-            if (day.equals(TimeRule.Day.THURS))
+            if (day.equals(TimeRule.Day.THUR))
                 Th.setChecked(true);
             if (day.equals(TimeRule.Day.FRI))
                 F.setChecked(true);
