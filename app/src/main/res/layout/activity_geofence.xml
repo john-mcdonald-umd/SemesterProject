@@ -3,10 +3,43 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/geofence_button"
+    <TextView
+        android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button"
-        android:onClick="addGeofencesButtonHandler"/>
+        android:text="@string/select_radius_label"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="22sp" />
+
+
+
+    <Button
+        android:id="@+id/geofence_button3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="addGeofencesButtonHandler"
+        android:text="@string/meter_label_50" />
+
+    <Button
+        android:id="@+id/geofence_button2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="addGeofencesButtonHandler"
+        android:text="@string/meter_label_100" />
+
+    <Button
+        android:id="@+id/geofence_button1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="addGeofencesButtonHandler"
+        android:text="@string/meter_label_250" />
+
+    <Button
+        android:id="@+id/geofence_button4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="addGeofencesButtonHandler"
+        android:text="@string/meter_label_500" />
+
+
 </LinearLayout>

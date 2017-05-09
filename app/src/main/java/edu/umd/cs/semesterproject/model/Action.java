@@ -49,6 +49,6 @@ public abstract class Action implements Serializable {
     }
 
     public enum Type{
-        VOLUME, WIFI, BLUETOOTH;
+        VOLUME, WIFI, BLUETOOTH, REMINDER;
     }
 }
