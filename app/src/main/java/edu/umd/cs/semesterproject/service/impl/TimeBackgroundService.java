@@ -2,6 +2,8 @@ package edu.umd.cs.semesterproject.service.impl;
 
 import android.app.AlarmManager;
 import android.app.IntentService;
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothManager;
@@ -20,14 +22,17 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 
 import edu.umd.cs.semesterproject.DependencyFactory;
+import edu.umd.cs.semesterproject.R;
 import edu.umd.cs.semesterproject.model.Action;
 import edu.umd.cs.semesterproject.model.BluetoothAction;
+import edu.umd.cs.semesterproject.model.ReminderAction;
 import edu.umd.cs.semesterproject.model.Rule;
 import edu.umd.cs.semesterproject.model.Time;
 import edu.umd.cs.semesterproject.model.TimeRule;
 import edu.umd.cs.semesterproject.model.VolumeAction;
 import edu.umd.cs.semesterproject.model.WifiAction;
 import edu.umd.cs.semesterproject.service.RuleService;
+import edu.umd.cs.semesterproject.util.Codes;
 import edu.umd.cs.semesterproject.util.DateUtil;
 
 public class TimeBackgroundService extends IntentService {
@@ -182,6 +187,39 @@ public class TimeBackgroundService extends IntentService {
             else{
                 Log.d(TAG, "execute end wifi");
                 wifiManager.setWifiEnabled(wifiAction.getEndAction());
+            }
+        }
+        else if (a.getType() == Action.Type.REMINDER){
+            ReminderAction reminderAction = (ReminderAction) a;
+            if (start_end){
+                if (!reminderAction.getStartReminder().equals("")){
+                    Notification.Builder notificationBuilder = new Notification.Builder(getApplicationContext())
+                            .setTicker(getResources().getString(R.string.reminder_notification))
+                            .setSmallIcon(android.R.drawable.ic_menu_compass)
+                            .setContentTitle(getResources().getString(R.string.reminder_notification))
+                            .setContentText(reminderAction.getStartReminder())
+                            .setAutoCancel(true);
+
+                    Notification notification = notificationBuilder.build();
+
+                    NotificationManager notificationManager = (NotificationManager)this.getSystemService(Context.NOTIFICATION_SERVICE);
+                    notificationManager.notify(Codes.MY_NOTIFICATION_ID, notification);
+                }
+            }
+            else{
+                if (!reminderAction.getEndReminder().equals("")){
+                    Notification.Builder notificationBuilder = new Notification.Builder(getApplicationContext())
+                            .setTicker(getResources().getString(R.string.reminder_notification))
+                            .setSmallIcon(android.R.drawable.ic_menu_compass)
+                            .setContentTitle(getResources().getString(R.string.reminder_notification))
+                            .setContentText(reminderAction.getEndReminder())
+                            .setAutoCancel(true);
+
+                    Notification notification = notificationBuilder.build();
+
+                    NotificationManager notificationManager = (NotificationManager)this.getSystemService(Context.NOTIFICATION_SERVICE);
+                    notificationManager.notify(Codes.MY_NOTIFICATION_ID, notification);
+                }
             }
         }
         else{

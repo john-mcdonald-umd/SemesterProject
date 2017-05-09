@@ -9,6 +9,7 @@ import android.view.View;
 
 import edu.umd.cs.semesterproject.adapter.ViewPagerAdapter;
 import edu.umd.cs.semesterproject.fragment.BluetoothFragment;
+import edu.umd.cs.semesterproject.fragment.ReminderFragment;
 import edu.umd.cs.semesterproject.fragment.VolumeFragment;
 import edu.umd.cs.semesterproject.fragment.WifiFragment;
 import edu.umd.cs.semesterproject.service.impl.TimeBackgroundService;
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         viewPagerAdapter.addFragment(VolumeFragment.newInstance(), VolumeFragment.getTitle());
         viewPagerAdapter.addFragment(WifiFragment.newInstance(), WifiFragment.getTitle());
         viewPagerAdapter.addFragment(BluetoothFragment.newInstance(), BluetoothFragment.getTitle());
+        viewPagerAdapter.addFragment(ReminderFragment.newInstance(), ReminderFragment.getTitle());
 
         mViewPager.setAdapter(viewPagerAdapter);
 

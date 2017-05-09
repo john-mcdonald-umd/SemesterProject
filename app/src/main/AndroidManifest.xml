@@ -46,6 +46,12 @@
         <activity android:name=".WifiLocationActivity">
         </activity>
 
+        <activity android:name=".ReminderTimeActivity">
+        </activity>
+
+        <activity android:name=".ReminderLocationActivity">
+        </activity>
+
         <activity android:name=".GeofenceActivity">
         </activity>
 

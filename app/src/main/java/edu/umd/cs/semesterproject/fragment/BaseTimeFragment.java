@@ -41,6 +41,7 @@ public abstract class BaseTimeFragment extends Fragment {
     private boolean endTimeSet = false;
 
     private EditText ruleName;
+    private EditText startTimeText, endTimeText;
     private Switch enabled_switch;
     private ToggleButton S, M, T, W, Th, F, Sa;
     protected View view;
@@ -74,8 +75,8 @@ public abstract class BaseTimeFragment extends Fragment {
         view = inflater.inflate(getLayoutId(), container, false);
         enabled_switch = (Switch) view.findViewById(R.id.switch_enabled);
         ruleName = (EditText) view.findViewById(R.id.rule_name);
-        EditText startTimeText = (EditText) view.findViewById(R.id.edit_text_start_time);
-        EditText endTimeText = (EditText) view.findViewById(R.id.edit_text_end_time);
+        startTimeText = (EditText) view.findViewById(R.id.edit_text_start_time);
+        endTimeText = (EditText) view.findViewById(R.id.edit_text_end_time);
         Button saveButton = (Button) view.findViewById(R.id.save_button);
         Button cancelButton = (Button) view.findViewById(R.id.cancel_button);
         // Checkboxes, eventually put these in an array.
@@ -116,11 +117,11 @@ public abstract class BaseTimeFragment extends Fragment {
                         @Override
                         public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
                             timeRule.setStartTime(selectedHour, selectedMinute);
+                            startTimeText.setText(String.format("%02d", selectedHour) + ":" + String.format("%02d", selectedMinute));
                         }
                     }, hour, minute, false);
                     mTimePicker.setTitle("Select Start Time");
                     mTimePicker.show();
-
                     startTimeSet = true;
                 } catch (Exception e){
                     Log.e(TAG, e.toString());
@@ -139,6 +140,7 @@ public abstract class BaseTimeFragment extends Fragment {
                         @Override
                         public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
                             timeRule.setEndTime(selectedHour, selectedMinute);
+                            endTimeText.setText(String.format("%02d", selectedHour) + ":" + String.format("%02d", selectedMinute));
                         }
                     }, hour, minute, false);
                     mTimePicker.setTitle("Select End Time");

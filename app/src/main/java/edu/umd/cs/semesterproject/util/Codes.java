@@ -16,6 +16,7 @@ public class Codes {
     public static final String RULE_ID = "RULEID";
     public static final String RULE_CREATED = "RULE_CREATED";
     public static final int PLACE_PICKER_REQUEST = 199;
+    public static final int MY_NOTIFICATION_ID = 10;
 
     public static Rule getRuleCreated(Intent data){
         Serializable result = data.getSerializableExtra(RULE_CREATED);
