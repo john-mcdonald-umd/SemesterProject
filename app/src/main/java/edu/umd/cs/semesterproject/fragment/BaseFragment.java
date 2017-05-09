@@ -125,12 +125,7 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
             rule = r;
             name.setText(r.getName());
             conditions.setText(r.getConditions());
-            if (rule.isEnabled()){
-                mSwitch.setChecked(true);
-            }
-            else{
-                mSwitch.setChecked(false);
-            }
+            mSwitch.setChecked(rule.isEnabled());
             mSwitch.setOnCheckedChangeListener(this);
         }
 

@@ -18,7 +18,7 @@ public class TimeRule extends Rule {
 
     @Override
     public String getConditions() {
-        return mStartTime.getHour() + ":" + String.format("%02d", mStartTime.getMinute()) + " - " + mEndTime.getHour() + ":" + String.format("%02d", mEndTime.getMinute());
+        return String.format("%02d", mStartTime.getHour()) + ":" + String.format("%02d", mStartTime.getMinute()) + " - " + String.format("%02d", mEndTime.getHour()) + ":" + String.format("%02d", mEndTime.getMinute());
     }
 
     public TimeRule(String name, boolean isEnabled, Time startTime, Time endTime, List<Day> days) {
