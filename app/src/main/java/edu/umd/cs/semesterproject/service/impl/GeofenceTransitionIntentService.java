@@ -55,8 +55,10 @@ public class GeofenceTransitionIntentService extends IntentService {
 
         List<Geofence> triggeringGeofences = geofencingEvent.getTriggeringGeofences();
 
-        String geofenceID = triggeringGeofences.get(0).getRequestId();
-        Log.d(TAG, "ID: " + geofenceID);
+        ArrayList<String> listOfIDs = new ArrayList<>();
+        for (Geofence geofence : triggeringGeofences){
+            listOfIDs.add(geofence.getRequestId());
+        }
 
         RuleService ruleService = DependencyFactory.getRuleService(getApplicationContext());
 
@@ -65,14 +67,20 @@ public class GeofenceTransitionIntentService extends IntentService {
 
             Log.d(TAG, "enter");
 
-            executeAction(ruleService.getRuleById(geofenceID).getAction(), true);
+            for (String geofenceID : listOfIDs){
+                if (geofenceID != null)
+                    executeAction(ruleService.getRuleById(geofenceID).getAction(), true);
+            }
         }
         else if ( geoFenceTransition == Geofence.GEOFENCE_TRANSITION_EXIT ) {
 
             Log.d(TAG, "exit");
             // Get the geofence that were triggered
 
-            executeAction(ruleService.getRuleById(geofenceID).getAction(), false);
+            for (String geofenceID : listOfIDs){
+                if (geofenceID != null)
+                    executeAction(ruleService.getRuleById(geofenceID).getAction(), false);
+            }
 
             String geofenceTransitionDetails = getGeofenceTrasitionDetails(geoFenceTransition, triggeringGeofences );
 
