@@ -3,45 +3,43 @@
     <string name="app_name">Semester Project</string>
     <string name="title_activity_main">Rules</string>
 
-    <!-- Menus -->
-    <string name="menu_settings">Settings</string>
-
     <!-- Tab Names -->
     <string name="tab_name_volume">Volume</string>
     <string name="tab_name_wifi">Wifi</string>
     <string name="tab_name_bluetooth">Bluetooth</string>
-    <string name="tab_name_reminder">Reminder</string>
+    <string name="tab_name_headphones">Headphones</string>
 
-    <!-- Dialog -->
-    <string name="time_rule">Time Rule</string>
-    <string name="location_rule">Location Rule</string>
-
-    <!-- Volume Fragment -->
-    <string name="start_volume_label">Active</string>
-    <string name="end_volume_label">Inactive</string>
-    <string-array name="volume_mode_array">
-        <item name="do_not_disturb">Do Not Disturb</item>
-        <item name="alarms_only">Alarms Only</item>
-        <item name="priority_only">Priority Only</item>
-        <item name="off">Off</item>
-    </string-array>
-    <string name="times_label">Start &amp; End Times</string>
-    <string name="start_time_hint">Start time</string>
-    <string name="end_time_hint">End time</string>
-    <string name="days_label">Active Days</string>
+    <!-- Time Fragment -->
+    <string name="start_time_hint">Start Time</string>
+    <string name="end_time_hint">End Time</string>
+    <string name="times_label">Select Times</string>
+    <string name="sun_label">S</string>
     <string name="mon_label">M</string>
     <string name="tues_label">T</string>
     <string name="wed_label">W</string>
     <string name="thurs_label">Th</string>
     <string name="fri_label">F</string>
     <string name="sat_label">Sa</string>
-    <string name="sun_label">S</string>
+
 
     <!-- Basic Fragment -->
     <string name="save_button">Save</string>
     <string name="cancel_button">Cancel</string>
     <string name="rule_name">Rule Name</string>
     <string name="rule_name_hint">My Rule</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Volume Fragment -->
+    <string name="start_volume_label">Set the Volume for when the rule is Active:</string>
+    <string name="vibrate_label">Vibrate</string>
+    <string name="volume_label">Volume</string>
+    <string name="end_volume_label">Set the Volume for when the rule is Inactive</string>
+    <string-array name="volume_array">
+        <item>Normal</item>
+        <item>Silent</item>
+    </string-array>
 
     <!-- Bluetooth Fragment -->
     <string name="start_blutooth_label">Set Bluetooth when the rule is activated:</string>
@@ -51,14 +49,11 @@
     <string name="start_wifi_label">Set Wifi when the rule is activated:</string>
     <string name="end_wifi_label">Set Wifi when the rule is deactivated:</string>
 
+    <!-- Dialog -->
+    <string name="time_rule">Time Rule</string>
+    <string name="location_rule">Location Rule</string>
+
     <string name="add_location_button">Add Location</string>
 
     <string name="display_location_label">Selected Location: </string>
-    <string name="title_activity_volume_time">Volume/Time Rule</string>
-    <string name="menu_delete">Delete</string>
-
-    <!-- DateTime Fragment -->
-    <string name="choose_start_time">Start Time</string>
-    <string name="choose_end_time">End Time</string>
-
 </resources>

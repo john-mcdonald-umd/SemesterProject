@@ -12,8 +12,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.TimePicker;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -32,14 +34,15 @@ public abstract class BaseTimeFragment extends Fragment {
 
     private final String TAG = BaseTimeFragment.class.getSimpleName();
 
-    private Rule rule;
-    private TimeRule timeRule;
+    protected Rule rule;
+    protected TimeRule timeRule;
     /* Some parameters used for setting the start and end times */
     private boolean startTimeSet = false;
     private boolean endTimeSet = false;
 
-    EditText ruleName;
-    CheckBox S, M, T, W, Th, F, Sa;
+    private EditText ruleName;
+    private Switch enabled_switch;
+    private ToggleButton S, M, T, W, Th, F, Sa;
     protected View view;
 
     // Gets the action type of the Location Rule. Volume Rules would return Rule.ActionType.VOLUME
@@ -69,36 +72,39 @@ public abstract class BaseTimeFragment extends Fragment {
 
         // Set content view
         view = inflater.inflate(getLayoutId(), container, false);
+        enabled_switch = (Switch) view.findViewById(R.id.switch_enabled);
         ruleName = (EditText) view.findViewById(R.id.rule_name);
-        Button startTimeButton = (Button) view.findViewById(R.id.set_start_time_button);
-        Button endTimeButton = (Button) view.findViewById(R.id.set_end_time_button);
+        EditText startTimeText = (EditText) view.findViewById(R.id.edit_text_start_time);
+        EditText endTimeText = (EditText) view.findViewById(R.id.edit_text_end_time);
         Button saveButton = (Button) view.findViewById(R.id.save_button);
         Button cancelButton = (Button) view.findViewById(R.id.cancel_button);
         // Checkboxes, eventually put these in an array.
-        S = (CheckBox) view.findViewById(R.id.checkbox_sun);
-        M = (CheckBox) view.findViewById(R.id.checkbox_mon);
-        T = (CheckBox) view.findViewById(R.id.checkbox_tues);
-        W = (CheckBox) view.findViewById(R.id.checkbox_wed);
-        Th = (CheckBox) view.findViewById(R.id.checkbox_thurs);
-        F = (CheckBox) view.findViewById(R.id.checkbox_fri);
-        Sa = (CheckBox) view.findViewById(R.id.checkbox_sat);
+        S = (ToggleButton) view.findViewById(R.id.toggle_button_sun);
+        M = (ToggleButton) view.findViewById(R.id.toggle_button_mon);
+        T = (ToggleButton) view.findViewById(R.id.toggle_button_tues);
+        W = (ToggleButton) view.findViewById(R.id.toggle_button_wed);
+        Th = (ToggleButton) view.findViewById(R.id.toggle_button_thurs);
+        F = (ToggleButton) view.findViewById(R.id.toggle_button_fri);
+        Sa = (ToggleButton) view.findViewById(R.id.toggle_button_sat);
 
         // if creating a new rule.
         if (rule == null) {
             // Set up time rule
             timeRule = new TimeRule(ruleName.getText().toString(), true, 0, 0, 0, 0, null);
+            enabled_switch.setChecked(true);
         }
         // if editing a pre-existing rule.
         else{
             startTimeSet = (endTimeSet = true);
             ruleName.setText(rule.getName());
             timeRule = (TimeRule) rule;
-            setCheckBoxes(timeRule);
+            enabled_switch.setChecked(timeRule.isEnabled());
+            setToggleButtons(timeRule);
             setupSpecificLayout(view, timeRule);
         }
 
         // Link UI elements
-        startTimeButton.setOnClickListener(new Button.OnClickListener() {
+        startTimeText.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v){
                 try{
@@ -121,7 +127,7 @@ public abstract class BaseTimeFragment extends Fragment {
                 }
             }
         });
-        endTimeButton.setOnClickListener(new Button.OnClickListener() {
+        endTimeText.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v){
                 try{
@@ -150,18 +156,14 @@ public abstract class BaseTimeFragment extends Fragment {
                 try{
                     /* If they've set both times */
                     if (startTimeSet && endTimeSet) {
-                        Log.d(TAG, "saveButtonStarted");
                         Intent intent = new Intent();
                         timeRule.setActionType(getActionType());
-                        Log.d(TAG, "got action type");
                         timeRule.setAction(getAction());
-                        Log.d(TAG, "got action");
-                        timeRule.setDays(parseCheckBoxes());
+                        timeRule.setDays(parseToggleButtons());
+                        timeRule.setEnabled(enabled_switch.isChecked());
                         timeRule.setName(ruleName.getText().toString());
                         intent.putExtra(Codes.RULE_CREATED, timeRule);
-                        Log.d(TAG, "about to set result");
                         getActivity().setResult(Activity.RESULT_OK, intent);
-                        Log.d(TAG, "about to finish");
                         getActivity().finish();
                     }
                     else{
@@ -190,7 +192,7 @@ public abstract class BaseTimeFragment extends Fragment {
     }
 
     // returns a List<TimeRule.Day> based on the state of the checkboxes.
-    private List<TimeRule.Day> parseCheckBoxes(){
+    private List<TimeRule.Day> parseToggleButtons(){
         ArrayList<TimeRule.Day> al = new ArrayList<>();
         if (S.isChecked()){
             al.add(TimeRule.Day.SUN);
@@ -217,7 +219,7 @@ public abstract class BaseTimeFragment extends Fragment {
         return al;
     }
 
-    private void setCheckBoxes(TimeRule r){
+    private void setToggleButtons(TimeRule r){
         for (TimeRule.Day day : r.getDays()){
             if (day.equals(TimeRule.Day.SUN))
                 S.setChecked(true);
