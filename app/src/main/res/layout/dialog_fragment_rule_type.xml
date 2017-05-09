@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:text="@string/time_rule"
         android:padding="@dimen/view_padding"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"/>
 
     <Button
         android:id="@+id/text_view_location_rule"
@@ -23,6 +23,6 @@
         android:layout_height="wrap_content"
         android:text="@string/location_rule"
         android:padding="@dimen/view_padding"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"/>
 
 </LinearLayout>
