@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -32,14 +33,15 @@ public abstract class BaseTimeFragment extends Fragment {
 
     private final String TAG = BaseTimeFragment.class.getSimpleName();
 
-    private Rule rule;
-    private TimeRule timeRule;
+    protected Rule rule;
+    protected TimeRule timeRule;
     /* Some parameters used for setting the start and end times */
     private boolean startTimeSet = false;
     private boolean endTimeSet = false;
 
-    EditText ruleName;
-    CheckBox S, M, T, W, Th, F, Sa;
+    private EditText ruleName;
+    private Switch enabled_switch;
+    private CheckBox S, M, T, W, Th, F, Sa;
     protected View view;
 
     // Gets the action type of the Location Rule. Volume Rules would return Rule.ActionType.VOLUME
@@ -69,6 +71,7 @@ public abstract class BaseTimeFragment extends Fragment {
 
         // Set content view
         view = inflater.inflate(getLayoutId(), container, false);
+        enabled_switch = (Switch) view.findViewById(R.id.switch_enabled);
         ruleName = (EditText) view.findViewById(R.id.rule_name);
         Button startTimeButton = (Button) view.findViewById(R.id.set_start_time_button);
         Button endTimeButton = (Button) view.findViewById(R.id.set_end_time_button);
@@ -150,18 +153,14 @@ public abstract class BaseTimeFragment extends Fragment {
                 try{
                     /* If they've set both times */
                     if (startTimeSet && endTimeSet) {
-                        Log.d(TAG, "saveButtonStarted");
                         Intent intent = new Intent();
                         timeRule.setActionType(getActionType());
-                        Log.d(TAG, "got action type");
                         timeRule.setAction(getAction());
-                        Log.d(TAG, "got action");
                         timeRule.setDays(parseCheckBoxes());
+                        timeRule.setEnabled(enabled_switch.isChecked());
                         timeRule.setName(ruleName.getText().toString());
                         intent.putExtra(Codes.RULE_CREATED, timeRule);
-                        Log.d(TAG, "about to set result");
                         getActivity().setResult(Activity.RESULT_OK, intent);
-                        Log.d(TAG, "about to finish");
                         getActivity().finish();
                     }
                     else{

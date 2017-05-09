@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,8 +33,8 @@ import edu.umd.cs.semesterproject.util.Codes;
 public abstract class BaseLocationFragment extends Fragment {
 
     private final String TAG = "BaseLocationFragment";
-    private Rule rule;
-    private LocationRule locationRule;
+    protected Rule rule;
+    protected LocationRule locationRule;
 
     private boolean locationSet = false;
 
@@ -41,6 +42,7 @@ public abstract class BaseLocationFragment extends Fragment {
     private Place place;
     private TextView locationLabel;
     private EditText ruleName;
+    private Switch enabled_switch;
     protected View view;
 
     // Gets the action type of the Location Rule. Volume Rules would return Rule.ActionType.VOLUME
@@ -70,6 +72,7 @@ public abstract class BaseLocationFragment extends Fragment {
 
         // Set content view
         view = inflater.inflate(getLayoutId(), container, false);
+        enabled_switch = (Switch) view.findViewById(R.id.switch_enabled);
         ruleName = (EditText) view.findViewById(R.id.rule_name);
         Button saveButton = (Button) view.findViewById(R.id.save_button);
         Button cancelButton = (Button) view.findViewById(R.id.cancel_button);
@@ -119,6 +122,7 @@ public abstract class BaseLocationFragment extends Fragment {
                         Intent intent = new Intent();
                         locationRule.setActionType(getActionType());
                         locationRule.setAction(getAction());
+                        locationRule.setEnabled(enabled_switch.isChecked());
                         locationRule.setName(ruleName.getText().toString());
                         intent.putExtra(Codes.RULE_CREATED, locationRule);
 

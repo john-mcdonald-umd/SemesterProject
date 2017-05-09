@@ -35,6 +35,10 @@
     <string name="vibrate_label">Vibrate</string>
     <string name="volume_label">Volume</string>
     <string name="end_volume_label">Set the Volume for when the rule is Inactive</string>
+    <string-array name="volume_array">
+        <item>Normal</item>
+        <item>Silent</item>
+    </string-array>
 
     <!-- Bluetooth Fragment -->
     <string name="start_blutooth_label">Set Bluetooth when the rule is activated:</string>
