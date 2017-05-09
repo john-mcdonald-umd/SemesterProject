@@ -63,6 +63,9 @@ public class ServiceLocation extends Service {
     public void onCreate() {
         super.onCreate();
 
+
+
+
         curLocation = getBestLocation();
 
         if (curLocation == null)
@@ -116,7 +119,7 @@ public class ServiceLocation extends Service {
         Location networkLocation = null;
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            Log.d(TAG, "Permission good");
+            //Log.d(TAG, "Permission good");
         }
         else {
             Log.d(TAG, "Permission bad");
