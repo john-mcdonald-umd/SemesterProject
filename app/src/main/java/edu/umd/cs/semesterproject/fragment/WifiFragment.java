@@ -1,5 +1,6 @@
 package edu.umd.cs.semesterproject.fragment;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.Switch;
 
@@ -16,6 +17,7 @@ import edu.umd.cs.semesterproject.model.WifiAction;
 public class WifiFragment extends BaseFragment {
 
     private static final String TITLE = "Wifi";
+    private static final String TAG = WifiFragment.class.getSimpleName();
 
     public static WifiFragment newInstance() {
 
@@ -51,6 +53,7 @@ public class WifiFragment extends BaseFragment {
         Switch startSwitch = (Switch) view.findViewById(R.id.start_wifi_switch);
         Switch endSwitch = (Switch) view.findViewById(R.id.end_wifi_switch);
 
+        Log.d(TAG, "startSwitch: " + startSwitch.isChecked() + ", endSwitch: " + endSwitch.isChecked());
         return new WifiAction(startSwitch.isChecked(), endSwitch.isChecked());
     }
 

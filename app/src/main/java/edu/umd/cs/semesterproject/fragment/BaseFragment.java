@@ -21,6 +21,8 @@ import edu.umd.cs.semesterproject.BluetoothLocationActivity;
 import edu.umd.cs.semesterproject.BluetoothTimeActivity;
 import edu.umd.cs.semesterproject.DependencyFactory;
 import edu.umd.cs.semesterproject.R;
+import edu.umd.cs.semesterproject.ReminderLocationActivity;
+import edu.umd.cs.semesterproject.ReminderTimeActivity;
 import edu.umd.cs.semesterproject.VolumeLocationActivity;
 import edu.umd.cs.semesterproject.VolumeTimeActivity;
 import edu.umd.cs.semesterproject.WifiLocationActivity;
@@ -143,6 +145,8 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
                     intent = BluetoothTimeActivity.newIntent(getContext(), rule.getId());
                 else if (actionType.equals(Rule.ActionType.WIFI))
                     intent = WifiTimeActivity.newIntent(getContext(), rule.getId());
+                else if (actionType.equals(Rule.ActionType.REMINDER))
+                    intent = ReminderTimeActivity.newIntent(getContext(), rule.getId());
                 startActivityForResult(intent, Codes.REQUEST_CODE_CREATE_RULE);
             }
             else if (ruleType.equals(Rule.RuleType.LOCATION)){
@@ -152,6 +156,8 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
                     intent = BluetoothLocationActivity.newIntent(getContext(), rule.getId());
                 if (actionType.equals(Rule.ActionType.WIFI))
                     intent = WifiLocationActivity.newIntent(getContext(), rule.getId());
+                if (actionType.equals(Rule.ActionType.REMINDER))
+                    intent = ReminderLocationActivity.newIntent(getContext(), rule.getId());
                 startActivityForResult(intent, Codes.REQUEST_CODE_CREATE_RULE);
             }
         }

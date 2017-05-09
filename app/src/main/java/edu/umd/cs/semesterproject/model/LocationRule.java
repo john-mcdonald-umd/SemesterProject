@@ -4,10 +4,10 @@ package edu.umd.cs.semesterproject.model;
 // Has a longitude, latitude, and radius that it checks.
 public class LocationRule extends Rule {
 
-    private String mLocationName;
     private double mLatitude;
     private double mLongitude;
     private double mRadius;
+    private String placeName;
 
     public LocationRule() {
         super();
@@ -15,25 +15,17 @@ public class LocationRule extends Rule {
 
     @Override
     public String getConditions() {
-        return mLatitude + ", " + mLongitude;
+        return placeName;
     }
 
-    public LocationRule(String name, boolean isEnabled, String locationName, double latitude, double longitude, double radius) {
+    public LocationRule(String name, boolean isEnabled, String placeName, double latitude, double longitude, double radius) {
         super(name, isEnabled);
 
         this.setRuleType(RuleType.LOCATION);
-        mLocationName = locationName;
+        mPlaceName = placeName;
         mLatitude = latitude;
         mLongitude = longitude;
         mRadius = radius;
-    }
-
-    public String getLocationName() {
-        return mLocationName;
-    }
-
-    public void setLocationName(String locationName) {
-        mLocationName = locationName;
     }
 
     public void setLatitude(double lat){
@@ -50,6 +42,14 @@ public class LocationRule extends Rule {
 
     public double getLongitude(){
         return mLongitude;
+    }
+
+    public String getPlaceName(){
+        return placeName;
+    }
+
+    public void setPlaceName(String n){
+        placeName = n;
     }
 
     public void setRadius(double rad){

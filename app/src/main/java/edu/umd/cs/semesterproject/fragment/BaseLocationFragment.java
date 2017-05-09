@@ -179,6 +179,7 @@ public abstract class BaseLocationFragment extends Fragment {
                 LatLng latLng = place.getLatLng();
                 locationRule.setLatitude(latLng.latitude);
                 locationRule.setLongitude(latLng.longitude);
+                locationRule.setPlaceName(p.getName().toString());
                 /* set radius */
                 locationSet = true;
                 locationLabel.setText("Selected Location: " + p.getName());
