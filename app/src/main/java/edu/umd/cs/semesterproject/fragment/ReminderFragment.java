@@ -2,12 +2,14 @@ package edu.umd.cs.semesterproject.fragment;
 
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Switch;
 
 import java.util.List;
 
 import edu.umd.cs.semesterproject.R;
 import edu.umd.cs.semesterproject.dialog.RuleTypeDialogFragment;
 import edu.umd.cs.semesterproject.model.Action;
+import edu.umd.cs.semesterproject.model.BluetoothAction;
 import edu.umd.cs.semesterproject.model.ReminderAction;
 import edu.umd.cs.semesterproject.model.Rule;
 
@@ -47,18 +49,18 @@ public class ReminderFragment extends BaseFragment{
 
     // Checks the start and end switches for the Bluetooth rule to see what they should be switched to when it starts and ends.
     public static Action getAction(View view){
-        EditText startEditText = (EditText) view.findViewById(R.id.start_reminder_edit_text);
-        EditText endEditText = (EditText) view.findViewById(R.id.end_reminder_edit_text);
+        EditText startReminder = (EditText) view.findViewById(R.id.edit_text_start_reminder);
+        EditText endReminder = (EditText) view.findViewById(R.id.edit_text_end_reminder);
 
-        return new ReminderAction(startEditText.getText().toString(), endEditText.getText().toString());
+        return new ReminderAction(startReminder.getText().toString(), endReminder.getText().toString());
     }
 
     public static void setupSpecificLayout(View view, Rule rule){
-        EditText startEditText = (EditText) view.findViewById(R.id.start_reminder_edit_text);
-        EditText endEditText = (EditText) view.findViewById(R.id.end_reminder_edit_text);
+        EditText startReminder = (EditText) view.findViewById(R.id.edit_text_start_reminder);
+        EditText endReminder = (EditText) view.findViewById(R.id.edit_text_end_reminder);
 
         ReminderAction reminderAction = (ReminderAction) rule.getAction();
-        startEditText.setText(reminderAction.getStartReminder());
-        endEditText.setText(reminderAction.getEndReminder());
+        startReminder.setText(reminderAction.getStartReminder());
+        endReminder.setText(reminderAction.getEndReminder());
     }
 }

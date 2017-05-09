@@ -21,6 +21,11 @@
     <string name="fri_label">F</string>
     <string name="sat_label">Sa</string>
 
+    <!-- Reminder Fragment -->
+    <string name="start_reminder_hint">Start Reminder</string>
+    <string name="end_reminder_hint">End Reminder</string>
+    <string name="reminder_label">Type your reminder messages</string>
+    <string name="reminder_notification">Reminder</string>
 
     <!-- Basic Fragment -->
     <string name="save_button">Save</string>

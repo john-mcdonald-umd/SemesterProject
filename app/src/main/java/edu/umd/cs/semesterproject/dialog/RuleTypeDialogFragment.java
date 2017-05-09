@@ -17,11 +17,14 @@ import edu.umd.cs.semesterproject.BluetoothLocationActivity;
 import edu.umd.cs.semesterproject.BluetoothTimeActivity;
 import edu.umd.cs.semesterproject.DependencyFactory;
 import edu.umd.cs.semesterproject.R;
+import edu.umd.cs.semesterproject.ReminderLocationActivity;
+import edu.umd.cs.semesterproject.ReminderTimeActivity;
 import edu.umd.cs.semesterproject.VolumeLocationActivity;
 import edu.umd.cs.semesterproject.VolumeTimeActivity;
 import edu.umd.cs.semesterproject.WifiLocationActivity;
 import edu.umd.cs.semesterproject.WifiTimeActivity;
 import edu.umd.cs.semesterproject.fragment.BluetoothFragment;
+import edu.umd.cs.semesterproject.fragment.ReminderFragment;
 import edu.umd.cs.semesterproject.fragment.VolumeFragment;
 import edu.umd.cs.semesterproject.fragment.WifiFragment;
 import edu.umd.cs.semesterproject.model.Rule;
@@ -90,6 +93,8 @@ public class RuleTypeDialogFragment extends DialogFragment implements View.OnCli
                     intent = BluetoothTimeActivity.newIntent(getActivity(), null);
                 if (this.getTag().equals(WifiFragment.getTitle()))
                     intent = WifiTimeActivity.newIntent(getActivity(), null);
+                if (this.getTag().equals(ReminderFragment.getTitle()))
+                    intent = ReminderTimeActivity.newIntent(getActivity(), null);
                 startActivityForResult(intent, Codes.REQUEST_CODE_CREATE_RULE);
                 break;
             // if creating a location rule
@@ -100,6 +105,8 @@ public class RuleTypeDialogFragment extends DialogFragment implements View.OnCli
                     intent = BluetoothLocationActivity.newIntent(getActivity(), null);
                 if (this.getTag().equals(WifiFragment.getTitle()))
                     intent = WifiLocationActivity.newIntent(getActivity(), null);
+                if (this.getTag().equals(ReminderFragment.getTitle()))
+                    intent = ReminderLocationActivity.newIntent(getActivity(), null);
                 startActivityForResult(intent, Codes.REQUEST_CODE_CREATE_RULE);
                 break;
         }
