@@ -15,6 +15,7 @@ import java.util.List;
 import android.media.AudioManager;
 import android.net.wifi.WifiManager;
 import android.os.SystemClock;
+import android.os.Vibrator;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
@@ -135,18 +136,25 @@ public class TimeBackgroundService extends IntentService {
         if (a.getType() == Action.Type.VOLUME){
             VolumeAction volumeAction = (VolumeAction) a;
             AudioManager audioManager = (AudioManager) getSystemService(AUDIO_SERVICE);
-            if (start_end){
+            if (start_end) {
                 // execute start action
                 Log.d(TAG, "execute start volume");
-                audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
-                audioManager.setStreamVolume(AudioManager.STREAM_RING, (int) (audioManager.getStreamMaxVolume(AudioManager.STREAM_RING) / volumeAction.getStartVolume()),0);
+                if (volumeAction.getStartMode().equals(VolumeAction.VolumeMode.SILENT)) {
+                    audioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
+                } else {
+                    audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
+                    audioManager.setStreamVolume(AudioManager.STREAM_RING, (audioManager.getStreamMaxVolume(AudioManager.STREAM_RING) / volumeAction.getStartVolume()), 0);
+                }
             }
             else{
                 // execute end action
-                Log.d(TAG, "execute end volume");
-                audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
-                audioManager.setStreamVolume(AudioManager.STREAM_RING, (int) (audioManager.getStreamMaxVolume(AudioManager.STREAM_RING) /  volumeAction.getEndVolume()), 0);
-            }
+                if (volumeAction.getEndMode().equals(VolumeAction.VolumeMode.SILENT)) {
+                    audioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
+                } else {
+                    audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
+                    audioManager.setStreamVolume(AudioManager.STREAM_RING, (audioManager.getStreamMaxVolume(AudioManager.STREAM_RING) / volumeAction.getEndVolume()), 0);
+                }
+                }
         }
         else if (a.getType() == Action.Type.BLUETOOTH){
             BluetoothAction bluetoothAction = (BluetoothAction) a;

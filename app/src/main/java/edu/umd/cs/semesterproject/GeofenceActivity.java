@@ -150,7 +150,6 @@ public class GeofenceActivity extends AppCompatActivity implements
             logSecurityException(securityException);
         }
         Log.d(TAG, "added geofence");
-        Log.d(TAG, LocationServices.GeofencingApi.toString());
 
         finish();
     }

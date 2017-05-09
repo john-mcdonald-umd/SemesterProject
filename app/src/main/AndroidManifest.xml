@@ -13,7 +13,9 @@
         android:theme="@style/AppTheme">
 
 
-        <service android:name=".service.impl.GeofenceTransitionIntentService" />
+        <service android:name=".service.impl.GeofenceTransitionIntentService"
+            android:exported="true" >
+        </service>
 
         <activity
             android:name=".MainActivity"

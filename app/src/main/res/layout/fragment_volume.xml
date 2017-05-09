@@ -10,11 +10,11 @@
         android:id="@+id/start_volume_label"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
-    <Switch
+   <!--  <Switch
         android:text="@string/vibrate_label"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/start_volume_vibrate_switch" />
+        android:id="@+id/start_volume_vibrate_switch" /> -->
 
     <TextView
         android:text="@string/volume_label"
@@ -36,11 +36,11 @@
         android:id="@+id/end_volume_label"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
-    <Switch
+    <!-- <Switch
         android:text="@string/vibrate_label"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/end_volume_vibrate_switch" />
+        android:id="@+id/end_volume_vibrate_switch" /> -->
 
     <TextView
         android:text="@string/volume_label"
