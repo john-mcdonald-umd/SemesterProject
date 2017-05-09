@@ -13,6 +13,7 @@ public interface RuleService {
     List<Rule> getVolumeRules();
     List<Rule> getBluetoothRules();
     List<Rule> getWifiRules();
+    List<Rule> getReminderRules();
     List<Rule> getLocationRules();
     List<Rule> getTimeRules();
     void deleteRule(String id);

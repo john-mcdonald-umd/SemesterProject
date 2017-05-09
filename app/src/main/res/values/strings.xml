@@ -1,7 +1,7 @@
 <resources>
     <!-- Main Headers -->
     <string name="app_name">Semester Project</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_main">Rules</string>
 
     <!-- Tab Names -->
     <string name="tab_name_volume">Volume</string>
