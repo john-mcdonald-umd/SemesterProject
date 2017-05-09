@@ -1,5 +1,6 @@
 package edu.umd.cs.semesterproject;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -12,6 +13,7 @@ import edu.umd.cs.semesterproject.fragment.BluetoothFragment;
 import edu.umd.cs.semesterproject.fragment.ReminderFragment;
 import edu.umd.cs.semesterproject.fragment.VolumeFragment;
 import edu.umd.cs.semesterproject.fragment.WifiFragment;
+import edu.umd.cs.semesterproject.service.impl.ServiceLocation;
 import edu.umd.cs.semesterproject.service.impl.TimeBackgroundService;
 
 // Main activity of the Project. Has the TabLayout which is the main UI
@@ -50,6 +52,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mTabLayout = (TabLayout) findViewById(R.id.tabLayout);
         mTabLayout.setupWithViewPager(mViewPager);
+
+        startService(new Intent(MainActivity.this, ServiceLocation.class));
     }
 
     @Override

@@ -60,6 +60,10 @@
             android:name=".service.impl.TimeBackgroundService"
             android:exported="false"/>
 
+        <service
+            android:name=".service.impl.ServiceLocation"
+            android:exported="false"/>
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyD7BCwIUBQkcVho5lbPu6vZ5w89C5y1kIE"/>
