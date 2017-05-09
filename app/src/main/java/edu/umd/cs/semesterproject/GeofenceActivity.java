@@ -68,6 +68,10 @@ public class GeofenceActivity extends AppCompatActivity implements
         String id = intent.getStringExtra("id");
         int radius = intent.getIntExtra("radius", 1);
 
+        Log.d(TAG, "lat: " + lat);
+        Log.d(TAG, "lng: " + lng);
+        Log.d(TAG, "radius: " + radius);
+
         geofence = new Geofence.Builder()
                 // Set the request ID of the geofence. This is a string to identify this
                 // geofence.
